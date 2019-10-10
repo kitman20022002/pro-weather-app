@@ -1,0 +1,128 @@
+.container--signup {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    text-align: center;
+    justify-self: center;
+    flex-wrap: wrap;
+    z-index: 9999;
+    background: linear-gradient(rgba(35, 43, 85, 0.85), rgba(35, 43, 85, 0.95));
+}
+
+
+.signup__form {
+    margin: auto;
+    width: 40%;
+    flex-wrap: wrap;
+    display: flex;
+    text-align: left;
+
+}
+
+.signup__form label {
+    width: 100%;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 13px;
+    padding-left: 15px;
+    padding-bottom: 10px;
+    color: rgba(255, 255, 255, .7);
+
+}
+
+.signup__form input, .signup__form textarea, .signup__form select {
+    width: 100%;
+    height: 35px;
+    padding-left: 15px;
+    border: none;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, .9);
+}
+
+.signup__form select:focus, .signup__form input:focus, .signup__form textarea:focus {
+    outline: none;
+}
+
+.signup__form textarea {
+    min-height: 100px;
+}
+
+.signup__form input {
+    width: 100%;
+}
+
+.container--signup li {
+    padding-left: 10px;
+    font-size: 18px;
+    margin-top: 20px;
+    text-align: left;
+    text-transform: uppercase;
+    padding-right: 10px;
+    color: white;
+
+}
+
+.nav ul {
+    list-style-type: none;
+}
+
+.nav {
+    width: 20%;
+    flex-wrap: wrap;
+    display: flex;
+}
+
+.signup__form input[type=submit] {
+    background-color: rgba(16, 89, 255, 1);
+    font-size: 13px;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.signup-inactive a {
+    cursor: pointer;
+    text-decoration: none;
+    transition: all .25s ease;
+}
+
+.nav .active {
+    border-bottom: solid 2px #1059FF;
+    padding-bottom: 10px;
+    color: white;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+
+input:hover {
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 830px) {
+    .container--signup .nav, .container--signup .links {
+        width: 100%;
+
+    }
+
+    .links, .container--signup .nav {
+        display: flex;
+    }
+
+    .signup__form {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .container--signup {
+        display: block!important;
+    }
+}

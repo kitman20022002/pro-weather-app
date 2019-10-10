@@ -1,0 +1,83 @@
+/**************************/
+.flex {
+    display: flex;
+}
+
+.space-between {
+    justify-content: space-around;
+}
+
+.align--bottom {
+    align-items: flex-end;
+}
+
+.align--center {
+    align-items: center;
+    vertical-align: center;
+}
+
+.align--left {
+    text-align: left;
+}
+
+.center {
+    text-align: center;
+    justify-content: center;
+}
+
+
+.flex-warp {
+    flex-wrap: wrap;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.list-style--disable {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin: 0;
+}
+/**************************/
+.color--rain-blue {
+    color: #2f57fd;
+}
+
+.color--twitter-blue {
+    color: #50A9E5;
+    font-size: 30px;
+}
+
+.color--light-blue {
+    color: #E0F0FF;
+}
+
+.color--blue {
+    color: #5f84fb;
+}
+
+.color--white {
+    color: white;
+}
+.color--red{
+    color: red;
+}
+
+
+.color--purple{
+    color:#8650f6;
+}
+
+.error{
+    top:50%;
+    left: 0;
+    right: 0;
+    color:white;
+    position: absolute;
+}
+
+.error-message{
+    width: 100%;
+}

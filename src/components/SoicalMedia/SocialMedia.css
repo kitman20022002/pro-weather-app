@@ -1,0 +1,131 @@
+.card__social-media {
+    width: 40%;
+    position: relative;
+}
+
+.card__social-media::after {
+    position: absolute;
+    content: '';
+    right: 0px;
+    top: 10%;
+    background: #ACA4DE;
+    width: 5px;
+    height: 80%;
+    border-radius: 5px;
+}
+
+.card__social-media-post {
+    margin: 30px 0;
+}
+
+.card__social-media-comment {
+    width: 65%;
+    font-size: 14px;
+    color: #293c97;
+}
+
+.card__social-media-link {
+    text-decoration: none;
+}
+
+.card__social-media-header {
+    margin: 0 15px 0 15px !important;
+    font-size: 18px;
+    color: #0c1066;
+    font-weight: 700;
+}
+.card__social-media-header a{
+    font-size: 14px;
+}
+
+/************************/
+.next-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.next__text {
+    letter-spacing: 7px;
+    position: relative;
+    color: #1c1830;
+    font-weight: 900;
+    font-size: 12px;
+    background: transparent;
+    border: none;
+}
+.next__text:focus{
+    outline: none;
+}
+.next__text::before {
+    content: '';
+    position: absolute;
+    right: -15px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid #be3e3e;
+    transition: all .5s;
+    cursor: pointer;
+    top:0px;
+
+}
+
+.next__text:hover {
+    cursor: pointer;
+
+}
+
+.next__text:hover::before {
+    right: -25px;
+    cursor: pointer;
+}
+
+
+.profile-post{
+    font-size: 50px;
+    margin-right: 10px;
+}
+@media only screen and (max-width: 950px) {
+    .card__forecast{
+        width: 70%;
+    }
+    .card__social-media{
+        width: 30%;
+    }
+}
+@media only screen and (max-width: 830px) {
+    .card__social-media-comment{
+        width: 100%;
+    }
+    .card__social-media::after {
+        position: unset;
+    }
+
+    .card__social-media-post {
+        margin: 0px 0;
+        padding: 30px 0;
+    }
+
+    .card__social-media-post p {
+        margin-top: 10px;
+    }
+
+    .card__social-media-header {
+        margin: 0 10px !important;
+    }
+
+    .card__social-media-header a {
+        margin-top: 7px;
+    }
+
+    .card__social-media-post:not(:last-child) {
+        border-bottom: 1px solid black;
+    }
+    .next-container{
+        bottom: -25px;
+    }
+}

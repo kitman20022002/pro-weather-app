@@ -1,0 +1,134 @@
+
+.card__current{
+  width: 100%;
+  position: relative;
+  text-align: left;
+  overflow: hidden;
+  z-index: 0;
+
+}
+
+.card__current-temperature {
+  font-size: 100px;
+  color: white;
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+}
+
+.card__current-weather {
+  font-size: 16px;
+  color: white;
+  letter-spacing: 3px;
+  margin: 0;
+}
+
+.card__current-details {
+  color: white;
+  position: relative;
+  flex: 1 1 auto;
+  align-items: center;
+}
+
+.card__current-details p {
+  font-size: 12px;
+}
+
+.card__current-details:not(:last-child) {
+  border-right: 1px solid white;
+}
+
+.card__current-location {
+  position: absolute;
+  top: 30px;
+  bottom: 0;
+  right: 100px;
+  max-width: 200px;
+}
+
+.card__current-temperature {
+  width: 30%;
+  padding: 70px 20px 70px 40px;
+}
+
+.card__current-details-list {
+  margin: auto;
+  max-width: 300px;
+}
+
+
+.card__current-country {
+  color: white;
+  position: relative;
+  top: 20px;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 5px;
+}
+
+.card__current-country::before {
+  position: absolute;
+  content: '';
+  background: white;
+  width: 70px;
+  height: 4px;
+  bottom: -10px;
+  border-radius: 10px;
+}
+
+
+.forecast-container canvas {
+  font-size: 90px;
+  margin: 20px 0;
+}
+@media only screen and (max-width: 1680px) {
+
+  .card__current-temperature {
+    width: 30%;
+    padding: 30px 10px 30px 40px;
+    font-size: 80px;
+    color: white;
+    margin: 0;
+    font-weight: bold;
+  }
+
+  .forecast-container canvas {
+    font-size: 70px;
+    margin: 20px 0;
+  }
+
+
+  .card__current-location {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 100px;
+  }
+
+  .card__current-country {
+    color: white;
+    position: relative;
+    top: 20px;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 5px;
+  }
+
+}
+
+@media only screen and (max-width: 830px) {
+  .card__current-temperature {
+    width: 100%;
+    padding: 50px 0;
+  }
+
+  .card__current-location {
+    position: unset;
+    text-align: center;
+    margin-bottom: 75px;
+  }
+
+  .card__current-country {
+    top: 0;
+  }
+}

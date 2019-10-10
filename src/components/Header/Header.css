@@ -1,0 +1,114 @@
+header {
+    background-color: #1c1830;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 40px;
+    display: flex;
+}
+
+header h3 {
+    padding: 0;
+    margin: 0;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.icon {
+    width: 150px;
+}
+
+/**********************/
+.menu-container {
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.menu-icon {
+    padding: 8px 24px;
+    font-size: 23px;
+}
+.menu-icon:hover{
+    cursor: pointer;
+}
+/**********************/
+.search-container {
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.search-container input {
+    margin: 15px 30px 15px 10px;
+}
+
+
+.search-box-container {
+    display: inline-block;
+    position: relative;
+}
+
+.search-box-container:after {
+    content: "";
+    background: white;
+    width: 4px;
+    height: 15px;
+    position: absolute;
+    top: 28px;
+    right: 27px;
+    transform: rotate(135deg);
+    box-shadow: 1px 0 #0091c2;
+}
+
+.search-box {
+    color: white;
+    font-size: 16px;
+    background: transparent;
+    width: 5px;
+    height: 5px;
+    padding: 5px;
+    border: solid 3px white;
+    outline: none;
+    border-radius: 35px;
+    box-shadow: 0 1px #0091c2;
+    transition: width 0.5s;
+}
+
+.search-box::placeholder {
+    color: #efefef;
+    opacity: 1;
+    padding-left: 20px;
+}
+
+.search-box::-ms-placeholder {
+    color: #efefef;
+}
+
+.search-box::-ms-input-placeholder {
+    color: #efefef;
+}
+
+.search-box:focus,
+.search-box:valid {
+    width: 250px;
+}
+
+/**********************/
+.card__header-img {
+    position: absolute;
+    width: 100%;
+    border-radius: 20px;
+    z-index: -1;
+    top: 0;
+}
+@media only screen and (max-width: 830px) {
+    .search-box:focus,
+    .search-box:valid {
+        width: 100px;
+    }
+
+    header {
+        position: fixed;
+        z-index: 100;
+    }
+}

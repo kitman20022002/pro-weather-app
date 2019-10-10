@@ -1,0 +1,30 @@
+
+.navigation__items ul{
+  padding: 0;
+}
+
+.navigation__items li{
+  list-style: none;
+
+  font-size: 14px;
+}
+
+.navigation__items .active{
+  border-left:5px solid #8650f6;
+}
+
+.navigation__items li:hover{
+  background-color: rgba(0,0,0,0.05);
+}
+
+
+.navigation__items li a{
+  font-size: 14px;
+  text-decoration: none;
+  padding: 15px 20px;
+  /**ASK**/
+  display: block;
+  color: rgba(0,0,0,0.87);
+}
+
+

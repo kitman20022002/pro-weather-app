@@ -1,0 +1,46 @@
+
+.navigation__items{
+    position: fixed;
+    left:0;
+    top:0px;
+    width: 250px;
+    background: white;
+    height: 100%;
+    z-index: 1;
+    margin-top: 0;
+    transition: all .5s;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+    border-right: 50px solid #8650f6;
+    text-align: left;
+}
+
+.card__nav-close{
+    color:white;
+    position: absolute;
+    top:10px;
+    right: -35px;
+    font-size: 30px;
+}
+
+.card__nav-close:hover{
+    cursor: pointer;
+}
+
+.nav__profile{
+    padding: 30px 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+.nav__profile h3{
+    font-size: 13px;
+    color: black;
+    text-shadow: 0 0 1px rgba(0,0,0,0.1);
+}
+
+
+
+
+@media only screen and (max-width: 830px) {
+    .navigation__items{
+        width: auto;
+    }
+}
