@@ -1,9 +1,11 @@
 import React from "react";
 import './Cardheader.css';
+import DynamicWeather from "../../DynamicWeather/DynamicWeather";
 
 const Cardheader = (props) => {
     return (
         <section className="card__current">
+            <DynamicWeather/>
             <div className="card__current-temperature">
                 <div className="center">
                     <span className="card__current-temperature">{parseInt(props.temp.current.temp_c)}°</span>

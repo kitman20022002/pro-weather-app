@@ -1349,7 +1349,7 @@ class Weather extends React.Component {
                 <Header searchPressCallback={this.handleSearchPress}/>
                 {showCard}
                 <BackGround/>
-                {form}
+                {/*{form}*/}
             </div>
         );
         // const {error, isLoaded, data} = this.state;

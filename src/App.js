@@ -10,7 +10,8 @@ import {connect} from "react-redux";
 
 
 class App extends React.Component {
-
+    //https://rawgit.com/darkskyapp/skycons/master/skycons.js
+    //https://codepen.io/Gerwinnz/pen/RVzrRG
     componentDidMount() {
         loadReCaptcha();
     }
