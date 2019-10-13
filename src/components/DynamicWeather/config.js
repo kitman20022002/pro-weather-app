@@ -23,7 +23,6 @@ export let  temp = 0;
 export let  state = 'day';
 
 // rain
-export let rainColor = 'rgba(255, 255, 255, .4)';
 
 // snow
 export let  snowColor = '';
