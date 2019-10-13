@@ -25,8 +25,6 @@ const Cardheader = (props) => {
             <div className="card__current-location">
                 <p className="card__current-country">{props.temp.location.name }</p>
             </div>
-            <img className="card__header-img" alt="background-img"
-                 src="http://greenfilmnet.org/wp-content/uploads/starry-sky-1030x644.jpg"/>
         </section>
     );
 }

@@ -45,11 +45,61 @@ let imageAssets = {
     }
 };
 
+var randomRange = function(min, max, round)
+{
+    round = round === undefined ? true : false;
+    var val = Math.random() * (max - min) + min;
+    return round ? Math.floor(val) : val;
+};
+
+var rainDrop = function()
+{
+    this.type = 'rain_drop';
+    this.width = 3;
+    this.height = randomRange(15, 25);
+
+    this.x = randomRange(0, canvas.width);
+    this.y = -10;
+
+    this.xVelocity = 0;
+    this.yVelocity = 8;
+};
+
+rainDrop.prototype.draw = function()
+{
+    this.y += this.yVelocity;
+    context.fillStyle = rainColor;
+    context.fillRect(this.x, this.y, this.width, this.height);
+    return true;
+};
+
+
+
+
+
+
 
 class DynamicWeather extends React.Component {
     componentDidMount() {
-        const canvas = this.refs.canvas;
-        const ctx = canvas.getContext("2d");
+        canvas = this.refs.canvas;
+        context = canvas.getContext("2d");
+
+        let cityEl = '';
+        let tempEl = '';
+
+
+        let updateConditions = function (event) {
+
+        };
+
+
+        cityEl = 'Loading clouds...';
+        let self = this;
+        this.preLoadImageAssets(function () {
+            cityEl = 'Dunedin, New Zealand';
+            tempEl = '3&deg;';
+            self.setConditionReady();
+        });
     }
 
     preLoadImageAssets = (callback) => {
@@ -81,6 +131,11 @@ class DynamicWeather extends React.Component {
 
     beginSpawning = () => {
         this.animate();
+
+        timers.rain = setInterval(function()
+        {
+            assets.push(new rainDrop());
+        }, 60);
     };
 
     animate = () => {
@@ -103,21 +158,7 @@ class DynamicWeather extends React.Component {
     render() {
 
 
-        let cityEl = '';
-        let tempEl = '';
 
-
-        let updateConditions = function (event) {
-
-        };
-
-
-        cityEl = 'Loading clouds...';
-        this.preLoadImageAssets(function () {
-            cityEl = 'Dunedin, New Zealand';
-            tempEl = '3&deg;';
-            // this.setConditionReady();
-        });
 
         return (
             <canvas ref="canvas" width="600" height="350" id="canvas" className="canvas day"/>
