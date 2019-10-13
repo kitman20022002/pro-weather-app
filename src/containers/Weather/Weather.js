@@ -1340,7 +1340,7 @@ class Weather extends React.Component {
         }
         data.daily.data = data.daily.data.splice(0, 5);
 
-        let form = !this.props.isAuthenticated ? <FormContainer/> : null;
+        // let form = !this.props.isAuthenticated ? <FormContainer/> : null;
 
         const showCard = this.state.error ? <p className="error">ERROR NOT CITY</p> :
             <Cards data={data} temp={this.state.temp} isLoaded={this.state.isLoaded}/>;

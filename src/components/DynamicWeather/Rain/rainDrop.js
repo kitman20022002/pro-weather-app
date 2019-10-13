@@ -1,15 +1,8 @@
-import * as  config from '../config';
+import randomRange from "../Utility";
 
 let rainColor = 'rgba(255, 255, 255, .4)';
 
-var randomRange = function (min, max, round) {
-    round = round === undefined ? true : false;
-    var val = Math.random() * (max - min) + min;
-    return round ? Math.floor(val) : val;
-};
-
-
-class rainDrop {
+class RainDrop {
     constructor(canvas, context) {
         this.type = 'rain_drop';
         this.width = 3;
@@ -32,4 +25,5 @@ class rainDrop {
     };
 }
 
-export default rainDrop;
+
+export default RainDrop;

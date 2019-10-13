@@ -34,13 +34,13 @@ class FormContainer extends React.Component {
             forms = (<div className="container container--signup">
                 <div className="nav">
                     <ul className="links">
-                        <li className="signin-active signin-inactive"><a onClick={this.changeToSignIn}
+                        <li className="signin-active signin-inactive"><button onClick={this.changeToSignIn}
                                                                          href='#'
                                                                          className={this.state.activeItem === 0 ? 'active btn' : 'btn'}>Sign
-                            in</a></li>
-                        <li className=" signup-active signup-inactive"><a onClick={this.changeToSignUp}
+                            in</button></li>
+                        <li className=" signup-active signup-inactive"><button onClick={this.changeToSignUp}
                                                                           className={this.state.activeItem === 1 ? 'active btn' : 'btn'}>Sign
-                            up </a></li>
+                            up </button></li>
                     </ul>
 
                 </div>
