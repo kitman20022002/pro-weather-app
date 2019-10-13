@@ -54,11 +54,8 @@ class DynamicWeather extends React.Component {
     componentDidMount() {
         canvas = this.refs.canvas;
         context = canvas.getContext("2d");
-
-
-        let updateConditions = function (event) {
-
-        };
+        canvas.className = "canvas sunset";
+        console.log(canvas.className);
 
         let self = this;
         this.preLoadImageAssets(function () {
@@ -154,20 +151,20 @@ class DynamicWeather extends React.Component {
         // assets.push(new Cloud({x: 700}, canvas, context, windSpeed, imageAssets));
         // assets.push(new Cloud({x: 1400}, canvas, context, windSpeed, imageAssets));
 
-        var spawnLeaves = function()
-        {
-            for(var i = 0, n = randomRange(0, 3); i < n; i ++)
-            {
-                assets.push(new BlowingLeaf(canvas, context, imageAssets, windSpeed ));
-            }
-
-            timers.wind = setTimeout(spawnLeaves, randomRange(500, 1500));
-        };
-
-        spawnLeaves();
-
-
-        spawnedClouds = true;
+        // var spawnLeaves = function()
+        // {
+        //     for(var i = 0, n = randomRange(0, 3); i < n; i ++)
+        //     {
+        //         assets.push(new BlowingLeaf(canvas, context, imageAssets, windSpeed ));
+        //     }
+        //
+        //     timers.wind = setTimeout(spawnLeaves, randomRange(500, 1500));
+        // };
+        //
+        // spawnLeaves();
+        //
+        //
+        // spawnedClouds = true;
     };
 
     animate = () => {

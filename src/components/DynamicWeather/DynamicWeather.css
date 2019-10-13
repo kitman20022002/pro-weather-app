@@ -78,13 +78,13 @@
 }
 
 .sunrise {
-    background: -webkit-linear-gradient(top, #82a0bc 0%, #aebebe 50%, #e0ceb0 80%, #ffc19c 100%);
-    background: linear-gradient(top, #82a0bc 0%, #aebebe 50%, #e0ceb0 80%, #ffc19c 100%);
+    background: -webkit-linear-gradient(to bottom, #82a0bc 0%, #aebebe 50%, #e0ceb0 80%, #ffc19c 100%);
+    background: linear-gradient(to bottom, #82a0bc 0%, #aebebe 50%, #e0ceb0 80%, #ffc19c 100%);
 }
 
 .sunset {
-    background: -webkit-linear-gradient(top, #10070c 0%, #2e4557 40%, #91aba8 80%, #ddd8a1 100%);
-    background: linear-gradient(top, #10070c 0%, #2e4557 40%, #91aba8 80%, #ddd8a1 100%);
+    background: -webkit-linear-gradient(to bottom, #10070c 0%, #2e4557 40%, #91aba8 80%, #ddd8a1 100%);
+    background: linear-gradient(to bottom, #10070c 0%, #2e4557 40%, #91aba8 80%, #ddd8a1 100%);
 
 }
 
