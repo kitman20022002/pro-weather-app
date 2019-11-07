@@ -123,6 +123,7 @@ ul li{
     color: white;
     text-transform: uppercase;
     font-weight: 700;
+    width: 30%;
 }
 
 .signup-inactive a {

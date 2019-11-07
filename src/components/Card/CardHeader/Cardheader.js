@@ -2,30 +2,47 @@ import React from "react";
 import './Cardheader.css';
 import DynamicWeather from "../../DynamicWeather/DynamicWeather";
 
-const Cardheader = (props) => {
-    return (
-        <section className="card__current">
-            <DynamicWeather/>
-            <div className="card__current-temperature">
-                <div className="center">
-                    <span className="card__current-temperature">{parseInt(props.temp.current.temp_c)}°</span>
-                    <span className="card__current-weather">{props.data.currently.summary}</span>
+class Cardheader extends React.Component{
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            elementHeight: 0,
+        };
+    }
+
+    getHeight = (element) => {
+        if (element && !this.state.elementHeight) { // need to check that we haven't already set the height or we'll create an infinite render loop
+            this.setState({ elementHeight: element.clientHeight + 100});
+        }
+
+   }
+
+    render() {
+        return (
+            <section className="card__current" ref={this.getHeight}>
+                <DynamicWeather height={parseInt(this.state.elementHeight)}/>
+                <div className="card__current-temperature">
+                    <div className="center">
+                        <span className="card__current-temperature">{parseInt(this.props.temp.current.temp_c)}°</span>
+                        <span className="card__current-weather">{this.props.data.currently.summary}</span>
+                    </div>
+                    <ul className="card__current-details-list flex space-between list-style--disable center">
+                        <li className="card__current-details">
+                            <p>HUMIDITY</p>
+                            <p>{this.props.data.currently.humidity * 100}%</p>
+                        </li>
+                        <li className="card__current-details">
+                            <p>WIND</p>
+                            <p>{this.props.data.currently.windSpeed} m/s</p>
+                        </li>
+                    </ul>
                 </div>
-                <ul className="card__current-details-list flex space-between list-style--disable center">
-                    <li className="card__current-details">
-                        <p>HUMIDITY</p>
-                        <p>{props.data.currently.humidity * 100}%</p>
-                    </li>
-                    <li className="card__current-details">
-                        <p>WIND</p>
-                        <p>{props.data.currently.windSpeed} m/s</p>
-                    </li>
-                </ul>
-            </div>
-            <div className="card__current-location">
-                <p className="card__current-country">{props.temp.location.name }</p>
-            </div>
-        </section>
-    );
+                <div className="card__current-location">
+                    <p className="card__current-country">{this.props.temp.location.name}</p>
+                </div>
+            </section>
+        );
+    }
 }
 export default Cardheader;

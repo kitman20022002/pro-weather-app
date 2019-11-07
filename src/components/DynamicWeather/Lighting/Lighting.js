@@ -23,7 +23,7 @@ class Lightning {
         var nextPointY = 0;
         while (nextPointY < canvas.height) {
             var lastPoint = this.points[this.points.length - 1];
-            nextPointX = lastPoint[0] > this.x ? randomRange(this.x, this.x + 15) : randomRange(this.x + 15, this.x);
+            nextPointX = lastPoint[0] > this.x ? randomRange(this.x, this.x + 35) : randomRange(this.x + 35, this.x);
             nextPointY = lastPoint[1] + randomRange(10, 50);
 
             if (nextPointY > canvas.height) {

@@ -1,15 +1,13 @@
 import React from "react";
 
 import './DynamicWeather.css';
-import Cloud from "./Cloud/Cloud";
+import RainDrop from "./Rain/RainDrop";
+import Lightning from "./Lighting/Lighting";
 import randomRange from "./Utility";
-import BlowingLeaf from "./BlowingLeaf/BlowingLeaf";
 
-let animationId = false;
 let assets = [];
 
 
-let tempEl = false;
 let canvas = false;
 let context = false;
 let timers = {};
@@ -29,11 +27,7 @@ let windDirection = 120;
 let temp = 0;
 let state = 'day';
 
-// rain
-let rainColor = 'rgba(255, 255, 255, .4)';
 
-// snow
-let snowColor = '';
 
 let prefix = 'https://s3.amazonaws.com/gerwins/weather/';
 let imageAssetsLoaded = false;
@@ -48,19 +42,42 @@ let imageAssets = {
     }
 };
 
+
+const weatherMapping = {
+    'clear-day': '',
+    'partly-cloudy-day': 'cloud',
+    'cloudy': 'cloud',
+    'clear-night': '',
+};
+
 /***********************************/
 
 class DynamicWeather extends React.Component {
+    getShowTime(hours) {
+        if (hours === 6) {
+            return 'sunrise';
+        } else if (hours === 18) {
+            return 'sunset';
+        } else if (hours > 6 && hours < 18) {
+            return 'day';
+        } else {
+            return 'night';
+        }
+    }
+
     componentDidMount() {
+
+        const time = this.getShowTime(new Date(1569328703).getHours());
         canvas = this.refs.canvas;
         context = canvas.getContext("2d");
-        canvas.className = "canvas sunset";
-        console.log(canvas.className);
+        canvas.className = "canvas " + time;
 
         let self = this;
         this.preLoadImageAssets(function () {
             self.setConditionReady();
         });
+        self.setConditionReady();
+
     }
 
     preLoadImageAssets = (callback) => {
@@ -119,9 +136,8 @@ class DynamicWeather extends React.Component {
     beginSpawning = () => {
         this.animate();
         //
-        // timers.rain = setInterval(function()
-        // {
-        //     assets.push(new RainDrop(canvas,context));
+        // timers.rain = setInterval(function () {
+        //     assets.push(new RainDrop(canvas, context));
         // }, 60);
 
         // timers.snow = setInterval(function()
@@ -130,21 +146,21 @@ class DynamicWeather extends React.Component {
         // }, 250);
 
 
-        // var spawnLightning = function()
-        // {
-        //     var rand = randomRange(0, 10);
-        //     if(rand > 7)
-        //     {
-        //         timers.secondFlash = setTimeout(function()
-        //         {
-        //             assets.push(new Lightning(canvas,context));
-        //         }, 200);
-        //     }
-        //     assets.push(new Lightning(canvas,context));
-        //     timers.lightning = setTimeout(spawnLightning, randomRange(500, 7000));
-        // };
-        //
-        // spawnLightning();
+        var spawnLightning = function()
+        {
+            var rand = randomRange(0, 10);
+            if(rand > 7)
+            {
+                timers.secondFlash = setTimeout(function()
+                {
+                    assets.push(new Lightning(canvas,context));
+                }, 200);
+            }
+            assets.push(new Lightning(canvas,context));
+            timers.lightning = setTimeout(spawnLightning, randomRange(500, 7000));
+        };
+
+        spawnLightning();
 
 
         // assets.push(new Cloud({x: -400}, canvas, context, windSpeed, imageAssets));
@@ -181,16 +197,13 @@ class DynamicWeather extends React.Component {
         }
 
         // continue
-        animationId = window.requestAnimationFrame(this.animate);
+        window.requestAnimationFrame(this.animate);
     };
 
     render() {
 
-
-
-
         return (
-            <canvas ref="canvas" width="600" height="350" id="canvas" className="canvas day"/>
+            <canvas ref="canvas" width="600" height={this.props.height} id="canvas" className="canvas night"/>
         );
     }
 }
