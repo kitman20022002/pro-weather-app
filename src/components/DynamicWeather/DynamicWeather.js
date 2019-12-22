@@ -22,10 +22,10 @@ let condition = {
 };
 
 let spawnedClouds = false;
-let windSpeed = 30;
-let windDirection = 120;
-let temp = 0;
-let state = 'day';
+// let windSpeed = 30;
+// let windDirection = 120;
+// let temp = 0;
+// let state = 'day';
 
 
 
