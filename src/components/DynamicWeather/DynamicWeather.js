@@ -1,7 +1,6 @@
 import React from "react";
 
 import './DynamicWeather.css';
-import RainDrop from "./Rain/RainDrop";
 import Lightning from "./Lighting/Lighting";
 import randomRange from "./Utility";
 
