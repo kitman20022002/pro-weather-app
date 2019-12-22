@@ -6,8 +6,8 @@ class SnowFlake
     {
         this.type = 'snow_flake';
         this.width = randomRange(10, 30);
-        this.height = this.width;
-        this.windSpeed = this.windSpeed;
+        this.height = randomRange(10, 30);
+        this.windSpeed = windSpeed;
         this.canvas = canvas;
         this.context = context;
 

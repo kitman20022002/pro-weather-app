@@ -1,7 +1,7 @@
 import React from 'react';
 import './Weather.css';
 import axios from 'axios';
-import FormContainer from "../../components/Form/FormContainer/FormContainer";
+
 import Cards from "../../components/Card/Cards";
 import Header from "../../components/Header/Header";
 import BackGround from "../../components/BackGround";

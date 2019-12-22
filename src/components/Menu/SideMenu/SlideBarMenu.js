@@ -1,6 +1,6 @@
 import React from "react";
 import '../../../Animation.css';
-import nav from './SlideBarMenu.css';
+import './SlideBarMenu.css';
 import Backdrop from "../../Backdrop/Backdrop";
 import NavigationItems from "../../Navigation/NavigationItems";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";

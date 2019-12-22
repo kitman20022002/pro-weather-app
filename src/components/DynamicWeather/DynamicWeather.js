@@ -13,15 +13,15 @@ let context = false;
 let timers = {};
 
 // weather params
-let condition = {
-    clouds: true,
-    lightning: false,
-    rain: true,
-    snow: false,
-    wind: false
-};
+// let condition = {
+//     clouds: true,
+//     lightning: false,
+//     rain: true,
+//     snow: false,
+//     wind: false
+// };
 
-let spawnedClouds = false;
+// let spawnedClouds = false;
 // let windSpeed = 30;
 // let windDirection = 120;
 // let temp = 0;
@@ -120,7 +120,7 @@ class DynamicWeather extends React.Component {
         this.pause();
 
         // clear flags
-        spawnedClouds = false;
+        //spawnedClouds = false;
 
         // clear assets
         for (let i = 0, n = assets.length; i < n; i++) {
