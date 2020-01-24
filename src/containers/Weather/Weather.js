@@ -42,6 +42,7 @@ class Weather extends React.Component {
     };
 
     componentDidMount() {
+        //https://svu1ja47fc.execute-api.ap-southeast-2.amazonaws.com/dev/message?city=sydney
         //
         // axios.get('https://api.apixu.com/v1/forecast.json?forecast_days=3&key=1eb8b1de06614af3a3423418171609&q=Paris')
         //     .then((response) => {
