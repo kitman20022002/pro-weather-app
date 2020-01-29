@@ -12,7 +12,7 @@ class Weather extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoaded: true,
+            isLoaded: false,
             data: [],
             hasLogin: false,
             error: false,
@@ -44,21 +44,11 @@ class Weather extends React.Component {
     componentDidMount() {
         //https://svu1ja47fc.execute-api.ap-southeast-2.amazonaws.com/dev/message?city=sydney
         //
-        // axios.get('https://api.apixu.com/v1/forecast.json?forecast_days=3&key=1eb8b1de06614af3a3423418171609&q=Paris')
-        //     .then((response) => {
-        //         }
-        //     );
-
-    }
-
-    render() {
-
-        // DarkSkyApi.apiKey = '149866425056f58cba752a06a3ad025e';
-        // DarkSkyApi.proxy = 'http://localhost:3000';
-        //
-        // DarkSkyApi.loadCurrent()
-        //     .then(result => console.log('fxxk'));
-        //
+        axios.get('https://svu1ja47fc.execute-api.ap-southeast-2.amazonaws.com/dev/pro-weather-app-lambda-dev-hello?city=sydney')
+            .then((response) => {
+                }
+            );
+        //https://svu1ja47fc.execute-api.ap-southeast-2.amazonaws.com/dev/pro-weather-app-lambda-dev-hello?city=sydney
         let data = {
             "latitude": -33.8686,
             "longitude": 151.2094,
@@ -1338,9 +1328,25 @@ class Weather extends React.Component {
             },
             "flags": {"sources": ["cmc", "gfs", "icon", "isd", "madis"], "nearest-station": 1.057, "units": "si"},
             "offset": 10
-        }
+        };
         data.daily.data = data.daily.data.splice(0, 5);
+        this.setState({data: data, isLoaded: true, error: false});
+    }
 
+    render() {
+
+        // DarkSkyApi.apiKey = '149866425056f58cba752a06a3ad025e';
+        // DarkSkyApi.proxy = 'http://localhost:3000';
+        //
+        // DarkSkyApi.loadCurrent()
+        //     .then(result => console.log('fxxk'));
+        //
+        if(!this.state.isLoaded){
+            return null;
+        }
+
+        let data = this.state.data;
+        console.log(data);
         // let form = !this.props.isAuthenticated ? <FormContainer/> : null;
 
         const showCard = this.state.error ? <p className="error">ERROR NOT CITY</p> :

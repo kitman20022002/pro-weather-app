@@ -16,6 +16,9 @@ body {
 .Weather {
     text-align: center;
     border-top:1px solid;
+    height: 100vh;
+    display: flex;
+    align-items: center;
 }
 
 .App-logo {
@@ -64,6 +67,7 @@ body {
     background-color: rgba(255, 255, 255, 0.3);
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
     margin:60px auto 0 auto;
+    min-height: 487px;
 }
 a:visited, a:focus , a:active , a{
     text-decoration: none!important;
@@ -171,6 +175,7 @@ a:visited, a:focus , a:active , a{
     }
     .Weather{
         padding-bottom: 30px;
+        height: unset;
 
     }
     .card__social-media, .card__weather, .card__temperature {

@@ -46,16 +46,16 @@
 @media only screen and (max-width: 500px) {
 
     .card__forecast-day{
-        font-size: 27px;
+        font-size: 20px;
     }
     .forecast-container canvas{
 
         width: 80px;
     }
     .card__forecast-temperature{
-        font-size: 20px;
+        font-size: 15px;
     }
     .card__forecast-summary{
-        font-size: 25px;
+        font-size: 16px;
     }
 }
