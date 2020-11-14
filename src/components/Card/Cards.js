@@ -12,7 +12,7 @@ function Cards(props) {
     if (props.isLoaded) {
         data = (
             <main className="card__main fade-in">
-                <Cardheader data={props.data} temp={props.temp}/>
+                <Cardheader data={props.data}/>
                 <div className="flex detail-info-container flex-warp">
                     <SocialMedia data={props.data}/>
                     <Forecast data={props.data}/>

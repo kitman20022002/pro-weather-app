@@ -3,6 +3,10 @@ import React from "react";
 import './DynamicWeather.css';
 import Lightning from "./Lighting/Lighting";
 import randomRange from "./Utility";
+import RainDrop from "./Rain/rainDrop";
+import SnowFlake from "./Snow/Snow";
+import Cloud from "./Cloud/Cloud";
+import BlowingLeaf from "./BlowingLeaf/BlowingLeaf";
 
 let assets = [];
 
@@ -27,7 +31,6 @@ let timers = {};
 // let state = 'day';
 
 
-
 let prefix = 'https://s3.amazonaws.com/gerwins/weather/';
 let imageAssetsLoaded = false;
 let imageAssets = {
@@ -42,16 +45,23 @@ let imageAssets = {
 };
 
 
-const weatherMapping = {
-    'clear-day': '',
-    'partly-cloudy-day': 'cloud',
-    'cloudy': 'cloud',
-    'clear-night': '',
-};
-
 /***********************************/
 
 class DynamicWeather extends React.Component {
+    constructor(props) {
+        super(props);
+        this.weatherMapping = {
+            'snow': this.spawnSnow,
+            'clear-day': '',
+            'partly-cloudy-day': this.spawnCloud,
+            'cloudy': this.spawnCloud,
+            'clear-night': '',
+            'rain': this.spawnRain,
+            'other': this.spawnLightning,
+            'wind': this.spawnLeaves
+        };
+    }
+
     getShowTime(hours) {
         if (hours === 6) {
             return 'sunrise';
@@ -66,7 +76,7 @@ class DynamicWeather extends React.Component {
 
     componentDidMount() {
 
-        const time = this.getShowTime(new Date(1569328703).getHours());
+        const time = this.getShowTime(new Date(this.props.data.time).getHours());
         canvas = this.refs.canvas;
         context = canvas.getContext("2d");
         canvas.className = "canvas " + time;
@@ -76,7 +86,6 @@ class DynamicWeather extends React.Component {
             self.setConditionReady();
         });
         self.setConditionReady();
-
     }
 
     preLoadImageAssets = (callback) => {
@@ -132,54 +141,49 @@ class DynamicWeather extends React.Component {
         this.beginSpawning();
     };
 
+
+    spawnLightning = () => {
+        var rand = randomRange(0, 10);
+        if (rand > 7) {
+            timers.secondFlash = setTimeout(function () {
+                assets.push(new Lightning(canvas, context));
+            }, 200);
+        }
+        assets.push(new Lightning(canvas, context));
+        timers.lightning = setTimeout(this.spawnLightning, randomRange(500, 7000));
+    };
+
+    spawnRain = () => {
+        timers.rain = setInterval(function () {
+            assets.push(new RainDrop(canvas, context));
+        }, 60);
+    };
+
+    spawnSnow = () => {
+        timers.snow = setInterval(function () {
+            assets.push(new SnowFlake(canvas, context, 1));
+        }, 250);
+    };
+
+    spawnCloud = () => {
+        assets.push(new Cloud({x: -400}, canvas, context, 1, imageAssets));
+        assets.push(new Cloud({x: 700}, canvas, context, 1, imageAssets));
+        assets.push(new Cloud({x: 1400}, canvas, context, 1, imageAssets));
+    };
+
+    spawnLeaves = () => {
+        for (let i = 0, n = randomRange(0, 3); i < n; i++) {
+            assets.push(new BlowingLeaf(canvas, context, imageAssets, 1));
+        }
+        timers.wind = setTimeout(this.spawnLeaves, randomRange(500, 1500));
+    };
+
     beginSpawning = () => {
         this.animate();
-        //
-        // timers.rain = setInterval(function () {
-        //     assets.push(new RainDrop(canvas, context));
-        // }, 60);
 
-        // timers.snow = setInterval(function()
-        // {
-        //     assets.push(new SnowFlake(canvas, context, windSpeed));
-        // }, 250);
+        // this.weatherMapping[this.props.icon]();
 
-
-        var spawnLightning = function()
-        {
-            var rand = randomRange(0, 10);
-            if(rand > 7)
-            {
-                timers.secondFlash = setTimeout(function()
-                {
-                    assets.push(new Lightning(canvas,context));
-                }, 200);
-            }
-            assets.push(new Lightning(canvas,context));
-            timers.lightning = setTimeout(spawnLightning, randomRange(500, 7000));
-        };
-
-        spawnLightning();
-
-
-        // assets.push(new Cloud({x: -400}, canvas, context, windSpeed, imageAssets));
-        // assets.push(new Cloud({x: 700}, canvas, context, windSpeed, imageAssets));
-        // assets.push(new Cloud({x: 1400}, canvas, context, windSpeed, imageAssets));
-
-        // var spawnLeaves = function()
-        // {
-        //     for(var i = 0, n = randomRange(0, 3); i < n; i ++)
-        //     {
-        //         assets.push(new BlowingLeaf(canvas, context, imageAssets, windSpeed ));
-        //     }
-        //
-        //     timers.wind = setTimeout(spawnLeaves, randomRange(500, 1500));
-        // };
-        //
-        // spawnLeaves();
-        //
-        //
-        // spawnedClouds = true;
+        ;
     };
 
     animate = () => {

@@ -7,7 +7,7 @@ const Forecast = (props) => {
 
     const daily = props.data.daily.data.map((item,i) => <ForecastItem key={i} data={item}/>);
     return (
-        <section className="card__forecast flex space-between align--center flex-warp">
+        <section className="card__forecast flex space-between flex-warp">
             {daily}
         </section>
     );

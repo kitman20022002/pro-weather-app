@@ -2,7 +2,7 @@ import React from "react";
 import './Cardheader.css';
 import DynamicWeather from "../../DynamicWeather/DynamicWeather";
 
-class Cardheader extends React.Component{
+class Cardheader extends React.Component {
 
     constructor(props) {
         super(props);
@@ -13,18 +13,20 @@ class Cardheader extends React.Component{
 
     getHeight = (element) => {
         if (element && !this.state.elementHeight) { // need to check that we haven't already set the height or we'll create an infinite render loop
-            this.setState({ elementHeight: element.clientHeight + 100});
+            this.setState({elementHeight: element.clientHeight + 100});
         }
 
-   }
+    };
 
     render() {
+
         return (
             <section className="card__current" ref={this.getHeight}>
-                <DynamicWeather height={parseInt(this.state.elementHeight)}/>
+                <DynamicWeather data={this.props.data} height={parseInt(this.state.elementHeight)}/>
                 <div className="card__current-temperature">
                     <div className="center">
-                        <span className="card__current-temperature">{parseInt(this.props.temp.current.temp_c)}°</span>
+                        <span
+                            className="card__current-temperature">{parseInt(this.props.data.currently.temperature)}°</span>
                         <span className="card__current-weather">{this.props.data.currently.summary}</span>
                     </div>
                     <ul className="card__current-details-list flex space-between list-style--disable center">
@@ -39,10 +41,11 @@ class Cardheader extends React.Component{
                     </ul>
                 </div>
                 <div className="card__current-location">
-                    <p className="card__current-country">{this.props.temp.location.name}</p>
+                    <p className="card__current-country">{this.props.data.timezone}</p>
                 </div>
             </section>
         );
     }
 }
+
 export default Cardheader;
