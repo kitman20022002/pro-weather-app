@@ -41,15 +41,19 @@ class Weather extends React.Component {
         }
     };
 
-    componentDidMount() {
+    async componentDidMount() {
         //https://svu1ja47fc.execute-api.ap-southeast-2.amazonaws.com/dev/message?city=sydney
-        //
-        axios.get('https://svu1ja47fc.execute-api.ap-southeast-2.amazonaws.com/dev/pro-weather-app-lambda-dev-hello?city=sydney')
-            .then((response) => {
-                }
-            );
+
+        let config = {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                "Content-Type": "application/json"
+            }
+        };
+
+        let result  = await axios.get('https://x71dhcp1x1.execute-api.ap-southeast-2.amazonaws.com/default/pro-weather-app-lambda-dev-hello?city=sydney',config);
         //https://svu1ja47fc.execute-api.ap-southeast-2.amazonaws.com/dev/pro-weather-app-lambda-dev-hello?city=sydney
-        let data = {
+        //let data = {
             "latitude": -33.8686,
             "longitude": 151.2094,
             "timezone": "Australia/Sydney",
@@ -1346,8 +1350,6 @@ class Weather extends React.Component {
         }
 
         let data = this.state.data;
-        console.log(data);
-        // let form = !this.props.isAuthenticated ? <FormContainer/> : null;
 
         const showCard = this.state.error ? <p className="error">ERROR NOT CITY</p> :
             <Cards data={data} temp={this.state.temp} isLoaded={this.state.isLoaded}/>;
@@ -1356,19 +1358,9 @@ class Weather extends React.Component {
                 <Header searchPressCallback={this.handleSearchPress}/>
                 {showCard}
                 <BackGround/>
-                {/*{form}*/}
             </div>
         );
-        // const {error, isLoaded, data} = this.state;
-        // if (error) {
-        //     return <div>Error: {error.message}</div>;
-        // } else if (!isLoaded) {
-        //     return <div>Loading...</div>;
-        // } else {
-        //     return (
-        //
-        //     );
-        // }
+
     }
 }
 
