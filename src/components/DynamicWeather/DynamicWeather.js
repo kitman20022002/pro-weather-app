@@ -7,6 +7,7 @@ import RainDrop from "./Rain/rainDrop";
 import SnowFlake from "./Snow/Snow";
 import Cloud from "./Cloud/Cloud";
 import BlowingLeaf from "./BlowingLeaf/BlowingLeaf";
+import Sun from "./Sun/Sun";
 
 let assets = [];
 
@@ -63,6 +64,7 @@ class DynamicWeather extends React.Component {
     }
 
     getShowTime(hours) {
+        console.log(hours);
         if (hours === 6) {
             return 'sunrise';
         } else if (hours === 18) {
@@ -76,7 +78,7 @@ class DynamicWeather extends React.Component {
 
     componentDidMount() {
 
-        const time = this.getShowTime(new Date(this.props.data.time).getHours());
+        const time = this.getShowTime(new Date(this.props.data.currently.time).getUTCHours());
         canvas = this.refs.canvas;
         context = canvas.getContext("2d");
         canvas.className = "canvas " + time;
@@ -178,12 +180,16 @@ class DynamicWeather extends React.Component {
         timers.wind = setTimeout(this.spawnLeaves, randomRange(500, 1500));
     };
 
+    spawnSun() {
+        assets.push(new Sun(canvas, context));
+    }
+
     beginSpawning = () => {
         this.animate();
 
         // this.weatherMapping[this.props.icon]();
-
-        ;
+        this.spawnSun();
+        //this.spawnSnow();
     };
 
     animate = () => {
@@ -203,8 +209,8 @@ class DynamicWeather extends React.Component {
         window.requestAnimationFrame(this.animate);
     };
 
-    render() {
 
+    render() {
         return (
             <canvas ref="canvas" width="600" height={this.props.height} id="canvas" className="canvas night"/>
         );
