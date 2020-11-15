@@ -67,6 +67,7 @@
     z-index: -1;
     border-radius: 20px;
     position: absolute;
+    min-height: 550px;
 }
 
 .night{

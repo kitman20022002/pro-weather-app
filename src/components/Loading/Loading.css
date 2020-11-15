@@ -1,0 +1,33 @@
+.loading-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.multi-ripple {
+    width: 2.6rem;
+    height: 2.6rem;
+    margin: 2rem;
+}
+.multi-ripple div {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 0.3rem solid #979fd0;
+    animation: 1.5s ripple infinite;
+}
+.multi-ripple div:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+@keyframes ripple {
+    from {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 0;
+    }
+}

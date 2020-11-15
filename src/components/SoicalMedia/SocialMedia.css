@@ -1,6 +1,7 @@
 .card__social-media {
     width: 40%;
     position: relative;
+    min-height: 250px;
 }
 
 .card__social-media::after {
@@ -84,7 +85,10 @@
     cursor: pointer;
 }
 
-
+.social-media-profile__img{
+    border-radius: 50%;
+    margin-right: 30px;
+}
 .profile-post{
     font-size: 50px;
     margin-right: 10px;
