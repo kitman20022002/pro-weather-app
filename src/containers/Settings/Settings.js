@@ -29,20 +29,17 @@ class Settings extends React.Component {
             <div className="flex">
                 <div className="logo-bar">
                     <NavLink to='/'>
-                    <img src={logo} className="icon--small" alt="Kitman Yiu Weather"/>
+                        <img src={logo} className="icon--small" alt="Kitman Yiu Weather"/>
                     </NavLink>
                 </div>
                 <nav>
                     <h1 className="center header--settings">Settings</h1>
                     <ul>
                         <li>Personal Settings</li>
-                        <li>Dashboard</li>
                         <li>Account</li>
                         <li>Connected App</li>
                         <li>Billing</li>
                         <li>Email Notification</li>
-                        <li>Export</li>
-
                     </ul>
                 </nav>
                 <div className='setting-main'>
@@ -53,29 +50,24 @@ class Settings extends React.Component {
                             </label>
                             <input type="text" name='firstName' value={this.state.firstName}
                                    onChange={this.handleChange}/>
-                            <label>
-                                Email:
-                            </label>
-                            <input type="text" name='email' value={this.state.email} onChange={this.handleChange}/>
+                            {/*<label>*/}
+                            {/*Email:*/}
+                            {/*</label>*/}
+                            {/*<input type="text" name='email' value={this.state.email} onChange={this.handleChange}/>*/}
                             <label>
                                 Username:
                             </label>
                             <input type="password" name='password' value={this.state.password}
                                    onChange={this.handleChange}/>
                             <label>
-                                Pick your favorite flavor:
+                                Select Default Country:
                             </label>
-
                             <select name='value' value={this.state.value} onChange={this.handleChange}>
                                 <option value="grapefruit">Grapefruit</option>
                                 <option value="lime">Lime</option>
                                 <option value="coconut">Coconut</option>
                                 <option value="mango">Mango</option>
                             </select>
-                            <label>
-                                Essay:
-                            </label>`
-                            <textarea name='comments' value={this.state.comments} onChange={this.handleChange}/>
 
                             <input type="submit" value="Save Value"/>
                         </form>

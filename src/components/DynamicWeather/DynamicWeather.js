@@ -61,6 +61,8 @@ class DynamicWeather extends React.Component {
             'other': this.spawnLightning,
             'wind': this.spawnLeaves
         };
+        this.state = { width: 0, height: 0 };
+        this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
 
     getShowTime(hours) {
@@ -76,6 +78,15 @@ class DynamicWeather extends React.Component {
         }
     }
 
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateWindowDimensions);
+    }
+
+    updateWindowDimensions() {
+        this.setState({ width: window.innerWidth, height: window.innerHeight });
+    }
+
     componentDidMount() {
 
         const time = this.getShowTime(new Date(this.props.data.currently.time).getUTCHours());
@@ -88,6 +99,9 @@ class DynamicWeather extends React.Component {
             self.setConditionReady();
         });
         self.setConditionReady();
+
+        this.updateWindowDimensions();
+        window.addEventListener('resize', this.updateWindowDimensions);
     }
 
     preLoadImageAssets = (callback) => {
@@ -188,14 +202,14 @@ class DynamicWeather extends React.Component {
         this.animate();
 
         // this.weatherMapping[this.props.icon]();
-        this.spawnSun();
-        //this.spawnSnow();
+        //this.spawnSun();
+        this.spawnSnow();
     };
 
     animate = () => {
         // clear
         context.clearRect(0, 0, canvas.width, canvas.height);
-
+        console.log("c: " , canvas.height);
         // draw each asset, if false, remove particle from assets
         for (let i = 0, n = assets.length; i < n; i++) {
             if (!assets[i].draw()) {
@@ -205,14 +219,13 @@ class DynamicWeather extends React.Component {
             }
         }
 
-        // continue
         window.requestAnimationFrame(this.animate);
     };
 
 
     render() {
         return (
-            <canvas ref="canvas" width="600" height={this.props.height} id="canvas" className="canvas night"/>
+            <canvas ref="canvas" width={this.state.width} height={this.state.height} id="canvas" className="canvas night"/>
         );
     }
 }

@@ -7,6 +7,7 @@ import Logout from "./containers/Auth/Logout/Logout";
 import {loadReCaptcha} from 'react-recaptcha-google'
 import * as action from "./store/actions";
 import {connect} from "react-redux";
+import Login from "./components/Login/Login";
 
 class App extends React.Component {
     //https://rawgit.com/darkskyapp/skycons/master/skycons.js
@@ -18,7 +19,8 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <Route path="/" exact component={Weather}/>
+                <Route path="/" exact component={Login}/>
+                <Route path="/dashboard" exact component={Weather}/>
                 <Route path="/settings" exact component={Settings}/>
                 <Route path="/logout" exact component={Logout}/>
             </div>

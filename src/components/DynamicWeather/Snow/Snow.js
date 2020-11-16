@@ -32,7 +32,7 @@ class SnowFlake
         this.context.fillStyle = 'rgba(255, 255, 255, ' + this.opacity + ')';
         this.context.fill();
 
-        if (this.y > this.canvas.height) {
+        if (this.y > this.canvas.height + 100) {
             this.xVelocity = 0;
             this.yVelocity = 0;
             this.settled++;
