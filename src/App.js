@@ -23,6 +23,7 @@ class App extends React.Component {
                 <Route path="/dashboard" exact component={Weather}/>
                 <Route path="/settings" exact component={Settings}/>
                 <Route path="/logout" exact component={Logout}/>
+                <Route path="/login" component={Login}/>
             </div>
         );
     }

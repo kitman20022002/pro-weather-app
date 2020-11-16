@@ -49,15 +49,14 @@ export const auth = (email, password, isSignup) => {
         };
         let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCA09BIX4hedS0NTjmoC2oaQ_CmD8KWIA4';
         if (!isSignup) {
-            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCA09BIX4hedS0NTjmoC2oaQ_CmD8KWIA4';
+            url = 'http://localhost:8080/api/v1/users/signIn';
         }
         axios.post(url, authData).then(response => {
-            const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
-            localStorage.setItem('token', response.data.idToken);
-            localStorage.setItem('expirationDate', expirationDate);
-            localStorage.setItem('userId', response.data.localId);
-            dispatch(authSuccess(response.data.idToken, response.data.localId, response.data.displayName));
-            dispatch(checkAuthTimeout(response.data.expiresIn));
+            const expirationDate = new Date(new Date().getTime() + 10000 * 1000);
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('userId', response.data.user._id);
+            dispatch(authSuccess(response.data.token, response.data.user._id, response.data.user.firstName));
+            dispatch(checkAuthTimeout(expirationDate));
         }).catch(err => {
             console.log(err);
             dispatch(authFail(err));

@@ -132,7 +132,7 @@ class Login extends React.Component {
     render() {
         const {history} = this.props;
         if (this.props.isAuth) {
-            history.goBack();
+            history.push("/dashboard");
             return <div></div>;
         }
 
@@ -176,7 +176,7 @@ class Login extends React.Component {
                                     passwords</p>}
                                 <div className="login-fotpas" onClick={this.props.openModal}>Forgot Password?</div>
                                 <Link to='/dashboard' className="switchSignup"><p>Login</p></Link>
-                                {/*<button className="submit-btn login-btn" onClick={this.handleSubmit}>Login</button>*/}
+                                <button className="submit-btn login-btn" onClick={this.handleSubmit}>Login</button>
                                 <div className="other-signup-field">
 
                                 </div>
