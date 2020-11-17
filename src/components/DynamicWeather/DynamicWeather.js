@@ -66,7 +66,6 @@ class DynamicWeather extends React.Component {
     }
 
     getShowTime(hours) {
-        console.log(hours);
         if (hours === 6) {
             return 'sunrise';
         } else if (hours === 18) {
@@ -209,7 +208,6 @@ class DynamicWeather extends React.Component {
     animate = () => {
         // clear
         context.clearRect(0, 0, canvas.width, canvas.height);
-        console.log("c: " , canvas.height);
         // draw each asset, if false, remove particle from assets
         for (let i = 0, n = assets.length; i < n; i++) {
             if (!assets[i].draw()) {

@@ -1,9 +1,10 @@
 import React from 'react';
 import './Settings.css';
 import '../../App.css';
-
+import {connect} from "react-redux";
 import logo from '../../img/weather_small.png';
 import {NavLink} from "react-router-dom";
+import {updateUser} from '../../api/user';
 
 class Settings extends React.Component {
 
@@ -11,17 +12,29 @@ class Settings extends React.Component {
         super(props);
         this.state = {
             firstName: 'coconut',
-            comments: 'sdf',
-            email: 'dsfd',
-            password: 'dsf',
-            value: 'grapefruit'
+            lastName: 'dd',
+            password: '1234567',
+            city: 'Sydney',
+            profile_img: 'https://pbs.twimg.com/profile_images/3128016790/d41f7c7ca1662ea737cc7073e0901706_normal.png',
         };
         this.handleChange = this.handleChange.bind(this);
         // this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange = (e) => {
+
         this.setState({[e.target.name]: e.target.value});
+    };
+
+    updateUser = (e) => {
+        e.preventDefault();
+        let data = {
+            'name': {'firstName': this.state.firstName, 'lastName': this.state.lastName},
+            'password': this.state.password,
+            'city': this.state.city,
+            'profile_img': this.state.profile_img,
+        };
+        updateUser(this.props.userId, data);
     };
 
     render() {
@@ -69,7 +82,7 @@ class Settings extends React.Component {
                                 <option value="mango">Mango</option>
                             </select>
 
-                            <input type="submit" value="Save Value"/>
+                            <input type="submit" value="Save Value" onClick={this.updateUser}/>
                         </form>
                     </div>
                 </div>
@@ -78,4 +91,14 @@ class Settings extends React.Component {
     }
 }
 
-export default Settings
+const mapStateToProps = (state) => {
+    return {
+        error: state.auth.error,
+        isAuth: state.auth.token !== null,
+        userId: state.auth.userId,
+        token: state.auth.token,
+    }
+};
+
+const mapDispatchToProps = dispatch => ({});
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);

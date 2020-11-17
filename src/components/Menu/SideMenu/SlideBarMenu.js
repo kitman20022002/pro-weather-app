@@ -4,7 +4,7 @@ import './SlideBarMenu.css';
 import Backdrop from "../../Backdrop/Backdrop";
 import NavigationItems from "../../Navigation/NavigationItems";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTimes,faCircle} from "@fortawesome/free-solid-svg-icons/index";
+import {faTimes, faCircle} from "@fortawesome/free-solid-svg-icons/index";
 import {connect} from "react-redux";
 
 const SlideBarMenu = (props) => {
@@ -15,9 +15,10 @@ const SlideBarMenu = (props) => {
     return (
         <div>
             <Backdrop show={props.open} click={props.closed}/>
-            <nav className={attachedClass.join(' ')} >
-                <div className="nav__profile flex align--center" >
-                    <FontAwesomeIcon icon={faCircle} className="profile color--light-blue"/>
+            <nav className={attachedClass.join(' ')}>
+                <div className="nav__profile flex align--center">
+
+                    <img src={props.profileImg} alt={"profile-img"}/>
                     <h3>{props.profileName}</h3>
                 </div>
                 <NavigationItems/>
@@ -28,7 +29,9 @@ const SlideBarMenu = (props) => {
 };
 
 const mapStateToProps = state => {
+    console.log(state);
     return {
+        profileImg: state.auth.profileImg,
         profileName: state.auth.profileName
     };
 };

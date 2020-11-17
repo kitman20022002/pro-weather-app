@@ -5,6 +5,7 @@ const initialState = {
     token: null,
     userId: null,
     profileName: null,
+    profileImg: null,
     error: null,
     loading: false,
     authRedirectPath: '/',
@@ -18,6 +19,7 @@ const authSuccess = (state, action) => {
     return updateObject(state, {
         token: action.idToken,
         profileName: action.displayName === "" ? "Kitman Yiu" : action.displayName,
+        profileImg: action.profileImg,
         userId: action.userId,
         error: null,
         loading: false,

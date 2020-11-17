@@ -7,11 +7,12 @@ export const authStart = () => {
     };
 };
 
-export const authSuccess = (token, userId, displayName) => {
+export const authSuccess = (token, userId, displayName, profileImg) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
         idToken: token,
         userId: userId,
+        profileImg: profileImg,
         displayName: displayName
     };
 };
@@ -55,7 +56,10 @@ export const auth = (email, password, isSignup) => {
             const expirationDate = new Date(new Date().getTime() + 10000 * 1000);
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('userId', response.data.user._id);
-            dispatch(authSuccess(response.data.token, response.data.user._id, response.data.user.firstName));
+            localStorage.setItem('firstName', response.data.user.firstName);
+            localStorage.setItem('profile_img', response.data.user.profile_img);
+
+            dispatch(authSuccess(response.data.token, response.data.user._id, response.data.user.firstName,response.data.user.profile_img));
             dispatch(checkAuthTimeout(expirationDate));
         }).catch(err => {
             console.log(err);
@@ -65,6 +69,7 @@ export const auth = (email, password, isSignup) => {
 };
 
 export const authCheckState = () => {
+
     return dispatch => {
         const token = localStorage.getItem('token');
         if (!token) {
@@ -75,7 +80,9 @@ export const authCheckState = () => {
                 dispatch(logout());
             } else {
                 const userId = localStorage.getItem('userId');
-                dispatch(authSuccess(token, userId));
+                const firstName  = localStorage.getItem('firstName');
+                const profile_img = localStorage.getItem('profile_img');
+                dispatch(authSuccess(token, userId,firstName, profile_img));
                 dispatch(checkAuthTimeout(expirationDate.getTime() - new Date().getTime()));
             }
             dispatch(authSuccess());

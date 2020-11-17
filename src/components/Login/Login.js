@@ -121,9 +121,11 @@ class Login extends React.Component {
                 return "Server Error";
         }
     };
+
     closeModal = () => {
         this.props.closeModal();
     };
+
     handleSubmitForgetMessage = async () => {
         this.setState({checkForget: true});
         await axios.post('abc' + `/api/v1/users/forget${this.state.email.value}`);
@@ -175,10 +177,8 @@ class Login extends React.Component {
                                 <p className="color--red error-message">We have sent an email for you to reset your
                                     passwords</p>}
                                 <div className="login-fotpas" onClick={this.props.openModal}>Forgot Password?</div>
-                                <Link to='/dashboard' className="switchSignup"><p>Login</p></Link>
                                 <button className="submit-btn login-btn" onClick={this.handleSubmit}>Login</button>
                                 <div className="other-signup-field">
-
                                 </div>
                             </form>
                             <div className="switchToSignup">
