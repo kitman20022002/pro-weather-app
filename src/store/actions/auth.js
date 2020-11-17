@@ -24,9 +24,9 @@ export const authFail = (error) => {
     };
 };
 export const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expirationDate');
-    localStorage.removeItem('userId');
+    // localStorage.removeItem('token');
+    // localStorage.removeItem('expirationDate');
+    // localStorage.removeItem('userId');
     return {
         type: actionTypes.AUTH_LOGOUT
     };
@@ -72,20 +72,23 @@ export const authCheckState = () => {
 
     return dispatch => {
         const token = localStorage.getItem('token');
+
         if (!token) {
+            console.log('ac');
             dispatch(logout());
         } else {
-            const expirationDate = new Date(localStorage.getItem('expirationDate'));
-            if (expirationDate <= new Date()) {
-                dispatch(logout());
-            } else {
+
+            //const expirationDate = new Date(localStorage.getItem('expirationDate'));
+            // if (expirationDate <= new Date()) {
+            //    // dispatch(logout());
+            // } else {
                 const userId = localStorage.getItem('userId');
                 const firstName  = localStorage.getItem('firstName');
                 const profile_img = localStorage.getItem('profile_img');
                 dispatch(authSuccess(token, userId,firstName, profile_img));
-                dispatch(checkAuthTimeout(expirationDate.getTime() - new Date().getTime()));
-            }
-            dispatch(authSuccess());
+               // dispatch(checkAuthTimeout(expirationDate.getTime() - new Date().getTime()));
+            //}
+            //dispatch(authSuccess());
         }
     }
 };

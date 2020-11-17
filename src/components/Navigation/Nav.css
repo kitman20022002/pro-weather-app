@@ -5,8 +5,8 @@
 
 .navigation__items li{
   list-style: none;
-
   font-size: 14px;
+  animation: all .25s ease-in-out;
 }
 
 .navigation__items .active{
@@ -15,6 +15,7 @@
 
 .navigation__items li:hover{
   background-color: rgba(0,0,0,0.05);
+  border-left: 5px solid #8650f6;
 }
 
 

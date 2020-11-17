@@ -7,7 +7,10 @@ const weatherMapping = {
     'clear-day': 'CLEAR_DAY',
     'partly-cloudy-day': 'PARTLY_CLOUDY_DAY',
     'cloudy': 'CLOUDY',
-    'rain' : 'RAIN'
+    'rain' : 'RAIN',
+    'wind' : 'WIND',
+    'fog' : 'FOG',
+    'snow' : 'SNOW'
 };
 
 const dayMapping = {
@@ -32,7 +35,7 @@ const dayMapping = {
 // FOG
 const ForecastItem = (props) => (
     <div className="forecast-container align--center">
-        <h2 className="card__forecast-day">{dayMapping[moment.unix(props.data.time * 1000).day()]}</h2>
+        <h2 className="card__forecast-day">{dayMapping[moment.unix(props.data.time).day()]}</h2>
         <ReactAnimatedWeather
             icon={weatherMapping[props.data.icon]}
             color={'#8650f6'}

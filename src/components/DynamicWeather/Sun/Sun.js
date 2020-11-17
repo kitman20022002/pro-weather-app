@@ -1,11 +1,9 @@
-import randomRange from "../Utility";
-
 class Sun {
-    constructor(canvas, context) {
+    constructor(canvas, context, y) {
         this.canvas = canvas;
         this.context = context;
-        this.y = 300;
-        this.yVelocity = 1;
+        this.y = y;
+        this.yVelocity = 5;
     }
 
     draw = function () {
@@ -14,7 +12,7 @@ class Sun {
         }
 
         this.context.beginPath();
-        this.context.arc(0, this.y, 50, 0, 2 * Math.PI);
+        this.context.arc(0, this.y, 100, 0, 50 * Math.PI);
         this.context.fillStyle = 'rgba(243, 210, 1, ' + 1 + ')';
         this.context.fill();
 

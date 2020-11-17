@@ -38,9 +38,9 @@ class Twitter extends React.Component {
                     <a href="http://www.kitmanyiu.com" className="color--blue social-media-link">#{this.props.searchKey.replace(/ /g,'')}weather</a>
                 </div>
                 {!this.state.isLoaded ? <Loading/> :
-                    this.state.data.statuses.slice(0, 2).map((status) => {
+                    this.state.data.statuses.slice(0, 2).map((status ,id) => {
                         return (
-                            <div className="card__social-media-post">
+                            <div className="card__social-media-post" key={id}>
                                 <div className="flex align--left align--center flex-warp">
                                     <img src={status.user.profile_image_url_https} alt="Avatar" className={"social-media-profile__img"}/>
                                     <p className="card__social-media-comment">{status.text}</p>

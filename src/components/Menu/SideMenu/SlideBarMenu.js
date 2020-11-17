@@ -6,6 +6,7 @@ import NavigationItems from "../../Navigation/NavigationItems";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTimes, faCircle} from "@fortawesome/free-solid-svg-icons/index";
 import {connect} from "react-redux";
+import { authCheckState } from "../../../store/actions/auth"
 
 const SlideBarMenu = (props) => {
     let attachedClass = ['close', 'navigation__items'];
@@ -17,7 +18,6 @@ const SlideBarMenu = (props) => {
             <Backdrop show={props.open} click={props.closed}/>
             <nav className={attachedClass.join(' ')}>
                 <div className="nav__profile flex align--center">
-
                     <img src={props.profileImg} alt={"profile-img"}/>
                     <h3>{props.profileName}</h3>
                 </div>
@@ -29,11 +29,11 @@ const SlideBarMenu = (props) => {
 };
 
 const mapStateToProps = state => {
-    console.log(state);
     return {
         profileImg: state.auth.profileImg,
         profileName: state.auth.profileName
     };
 };
 
-export default connect(mapStateToProps)(SlideBarMenu);
+
+export default connect(mapStateToProps, null)(SlideBarMenu);

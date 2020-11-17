@@ -41,15 +41,14 @@ class Settings extends React.Component {
         return (
             <div className="flex">
                 <div className="logo-bar">
-                    <NavLink to='/'>
+                    <NavLink to='/dashboard'>
                         <img src={logo} className="icon--small" alt="Kitman Yiu Weather"/>
                     </NavLink>
                 </div>
                 <nav>
                     <h1 className="center header--settings">Settings</h1>
                     <ul>
-                        <li>Personal Settings</li>
-                        <li>Account</li>
+                        <li>Personal Settings and Account</li>
                         <li>Connected App</li>
                         <li>Billing</li>
                         <li>Email Notification</li>
@@ -58,6 +57,7 @@ class Settings extends React.Component {
                 <div className='setting-main'>
                     <div className="container--main">
                         <form className="setting__form" onSubmit={this.props.submitForm}>
+                            <h2>Account</h2>
                             <label>
                                 Name:
                             </label>
@@ -70,10 +70,16 @@ class Settings extends React.Component {
                             <label>
                                 Username:
                             </label>
-                            <input type="password" name='password' value={this.state.password}
+                            <input type="text" name='username' value={this.state.lastName}
                                    onChange={this.handleChange}/>
                             <label>
-                                Select Default Country:
+                                Password:
+                            </label>
+                            <input type="password" name='password' value={this.state.password}
+                                   onChange={this.handleChange}/>
+                            <h2>Settings</h2>
+                            <label>
+                                Default City:
                             </label>
                             <select name='value' value={this.state.value} onChange={this.handleChange}>
                                 <option value="grapefruit">Grapefruit</option>
@@ -81,7 +87,6 @@ class Settings extends React.Component {
                                 <option value="coconut">Coconut</option>
                                 <option value="mango">Mango</option>
                             </select>
-
                             <input type="submit" value="Save Value" onClick={this.updateUser}/>
                         </form>
                     </div>

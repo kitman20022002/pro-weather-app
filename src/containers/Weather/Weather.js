@@ -56,7 +56,6 @@ class Weather extends React.Component {
                 <BackGround/>
             </div>
         );
-
     }
 }
 

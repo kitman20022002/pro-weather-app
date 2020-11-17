@@ -8,6 +8,7 @@ import SnowFlake from "./Snow/Snow";
 import Cloud from "./Cloud/Cloud";
 import BlowingLeaf from "./BlowingLeaf/BlowingLeaf";
 import Sun from "./Sun/Sun";
+import moment from "moment";
 
 let assets = [];
 
@@ -53,19 +54,20 @@ class DynamicWeather extends React.Component {
         super(props);
         this.weatherMapping = {
             'snow': this.spawnSnow,
-            'clear-day': '',
-            'partly-cloudy-day': this.spawnCloud,
-            'cloudy': this.spawnCloud,
-            'clear-night': '',
-            'rain': this.spawnRain,
-            'other': this.spawnLightning,
-            'wind': this.spawnLeaves
+            'clear-day': [this.spawnSun],
+            'partly-cloudy-day': [this.spawnSun, this.spawnCloud],
+            'cloudy': [this.spawnCloud],
+            'clear-night': [''],
+            'rain': [this.spawnRain],
+            'other': [this.spawnLightning],
+            'wind': [this.spawnLeaves]
         };
-        this.state = { width: 0, height: 0 };
+        this.state = {width: 0, height: 0};
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
 
     getShowTime(hours) {
+        hours = parseInt(hours);
         if (hours === 6) {
             return 'sunrise';
         } else if (hours === 18) {
@@ -83,12 +85,12 @@ class DynamicWeather extends React.Component {
     }
 
     updateWindowDimensions() {
-        this.setState({ width: window.innerWidth, height: window.innerHeight });
+        this.setState({width: window.innerWidth, height: window.innerHeight});
     }
 
     componentDidMount() {
+        const time = this.getShowTime(moment.unix(this.props.data.currently.time).format('h'));
 
-        const time = this.getShowTime(new Date(this.props.data.currently.time).getUTCHours());
         canvas = this.refs.canvas;
         context = canvas.getContext("2d");
         canvas.className = "canvas " + time;
@@ -194,15 +196,17 @@ class DynamicWeather extends React.Component {
     };
 
     spawnSun() {
-        assets.push(new Sun(canvas, context));
+        assets.push(new Sun(canvas, context, 700));
     }
 
     beginSpawning = () => {
         this.animate();
-
-        // this.weatherMapping[this.props.icon]();
-        //this.spawnSun();
-        this.spawnSnow();
+        const weather = this.weatherMapping[this.props.data.currently.icon];
+        weather.map((item) => {
+            {
+                item()
+            }
+        });
     };
 
     animate = () => {
@@ -223,7 +227,8 @@ class DynamicWeather extends React.Component {
 
     render() {
         return (
-            <canvas ref="canvas" width={this.state.width} height={this.state.height} id="canvas" className="canvas night"/>
+            <canvas ref="canvas" width={980} height={580} id="canvas"
+                    className="canvas night"/>
         );
     }
 }

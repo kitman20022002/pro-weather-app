@@ -14,6 +14,8 @@ class App extends React.Component {
     //https://codepen.io/Gerwinnz/pen/RVzrRG
     componentDidMount() {
         loadReCaptcha();
+        // this.props.onTryAutoSettings();
+        this.props.onTryAutoSignup();
     }
 
     render() {
@@ -31,7 +33,8 @@ class App extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onTryAutoSignup: () => dispatch(action.authCheckState())
+        // onTryAutoSettings: () => dispatch(action.getSettings()),
+        onTryAutoSignup: () => dispatch(action.authCheckState()),
     };
 };
 export default withRouter(connect(null, mapDispatchToProps)(App));
