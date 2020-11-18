@@ -13,7 +13,6 @@ class NavigationItems  extends React.Component{
     render() {
         return (
             <ul>
-                <NavigationItem link="/" exact>Home</NavigationItem>
                 <NavigationItem link="/settings">Settings</NavigationItem>
                 <NavigationItem link="/logout">Logout</NavigationItem>
             </ul>

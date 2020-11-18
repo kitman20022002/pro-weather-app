@@ -18,7 +18,7 @@ const authStart = (state, action) => {
 const authSuccess = (state, action) => {
     return updateObject(state, {
         token: action.idToken,
-        profileName: action.displayName === "" ? "Kitman Yiu" : action.displayName,
+        profileName: action.username === "" ? "Kitman Yiu" : action.username,
         profileImg: action.profileImg,
         userId: action.userId,
         error: null,
@@ -34,6 +34,13 @@ const authLogout = (state, action) => {
     return updateObject(state, {token: null, userId: null});
 };
 
+const updateUserLocal = (state, action) => {
+    return updateObject(state, {
+        profileName: action.data.username === "" ? "Kitman Yiu" : action.data.username,
+        profileImg: action.data.profile_img,
+    });
+};
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.AUTH_START:
@@ -44,6 +51,8 @@ const reducer = (state = initialState, action) => {
             return authFail(state, action);
         case actionTypes.AUTH_LOGOUT:
             return authLogout(state, action);
+        case actionTypes.UPDATE_USER_LOCAL:
+            return updateUserLocal(state, action);
         default:
             return state;
     }
