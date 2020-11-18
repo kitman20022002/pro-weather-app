@@ -2,7 +2,6 @@ import React from "react";
 import Twitter from "./Twitter/Twitter";
 import Facebook from "./Faceboook/Facebook";
 import "./SocialMedia.css";
-import axios from "axios";
 
 
 

@@ -57,7 +57,7 @@ class DynamicWeather extends React.Component {
             'clear-day': [this.spawnSun],
             'partly-cloudy-day': [this.spawnSun, this.spawnCloud],
             'cloudy': [this.spawnCloud],
-            'clear-night': [''],
+            'clear-night': [this.spawnSun,this.spawnCloud],
             'rain': [this.spawnRain],
             'other': [this.spawnLightning],
             'wind': [this.spawnLeaves]
@@ -67,6 +67,7 @@ class DynamicWeather extends React.Component {
     }
 
     getShowTime(hours) {
+
         hours = parseInt(hours);
         if (hours === 6) {
             return 'sunrise';
@@ -89,7 +90,7 @@ class DynamicWeather extends React.Component {
     }
 
     componentDidMount() {
-        const time = this.getShowTime(moment.unix(this.props.data.currently.time).format('h'));
+        const time = this.getShowTime(moment.unix(this.props.data.currently.time).format('H'));
 
         canvas = this.refs.canvas;
         context = canvas.getContext("2d");
@@ -184,8 +185,8 @@ class DynamicWeather extends React.Component {
 
     spawnCloud = () => {
         assets.push(new Cloud({x: -400}, canvas, context, 1, imageAssets));
-        assets.push(new Cloud({x: 700}, canvas, context, 1, imageAssets));
-        assets.push(new Cloud({x: 1400}, canvas, context, 1, imageAssets));
+       assets.push(new Cloud({x: 700}, canvas, context, 1, imageAssets));
+       assets.push(new Cloud({x: 1400}, canvas, context, 1, imageAssets));
     };
 
     spawnLeaves = () => {

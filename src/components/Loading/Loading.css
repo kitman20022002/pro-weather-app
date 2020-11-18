@@ -8,7 +8,7 @@
     height: 2.6rem;
     margin: 2rem;
 }
-.multi-ripple div {
+.multi-ripple span {
     position: absolute;
     width: 2rem;
     height: 2rem;
@@ -16,7 +16,7 @@
     border: 0.3rem solid #979fd0;
     animation: 1.5s ripple infinite;
 }
-.multi-ripple div:nth-child(2) {
+.multi-ripple span:nth-child(2) {
     animation-delay: 0.5s;
 }
 

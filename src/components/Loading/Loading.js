@@ -4,8 +4,8 @@ import './Loading.css';
 const Loading = () => (
     <div className={"loading-container"}>
         <div className="multi-ripple">
-            <div/>
-            <div/>
+            <span/>
+            <span/>
         </div>
     </div>
 );

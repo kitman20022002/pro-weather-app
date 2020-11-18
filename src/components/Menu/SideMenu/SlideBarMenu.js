@@ -4,9 +4,8 @@ import './SlideBarMenu.css';
 import Backdrop from "../../Backdrop/Backdrop";
 import NavigationItems from "../../Navigation/NavigationItems";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTimes, faCircle} from "@fortawesome/free-solid-svg-icons/index";
+import {faTimes} from "@fortawesome/free-solid-svg-icons/index";
 import {connect} from "react-redux";
-import { authCheckState } from "../../../store/actions/auth"
 
 const SlideBarMenu = (props) => {
     let attachedClass = ['close', 'navigation__items'];
