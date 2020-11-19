@@ -153,13 +153,11 @@ form{
     animation: 0s ease 0s 1 normal none running none;
     outline: none;
     padding: 12px;
-    border-radius: 4px;
+    border-radius: 10px;
+    border: 0;
 }
 
-.Signup-form-field > input:enabled:hover{
-    border-color: rgb(0, 143, 180);
-    border-width: 1px
-}
+
 
 .Signup-form-alert{
     display: block;

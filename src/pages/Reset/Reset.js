@@ -1,13 +1,13 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import './Login.css';
+import './Reset.css';
 import {connect} from "react-redux";
 import * as action from "../../store/actions";
-import Loader from "../Loader/Loader";
-import Backdrop from "../Backdrop/Backdrop";
-import Modal from '../Modal/Modal';
+import Loader from "../../components/Loader/Loader";
+import Backdrop from "../../components/Backdrop/Backdrop";
+import Modal from '../../components/Modal/Modal';
 import axios from 'axios';
-import DynamicWeather from "../DynamicWeather/DynamicWeather";
+import DynamicWeather from "../../components/DynamicWeather/DynamicWeather";
 import {getWeather} from "../../api/weatherapi";
 
 
@@ -155,7 +155,7 @@ class Login extends React.Component {
 
                     <div className="Signup flex flex__column">
                         <div className="title-box">
-                            <p>Sign In</p>
+                            <p>Reset Password</p>
                         </div>
                         <div className="Signup-body">
                             <form className="Signup-form flex flex__column">
@@ -165,19 +165,15 @@ class Login extends React.Component {
                                            value={this.state.email.value}
                                            onChange={this.onChange}></input>
                                 </div>
-                                <div className="Signup-form-field flex flex__column">
-                                    <label htmlFor="password">Password: </label>
-                                    <input name="password" type="password" placeholder="Password"
-                                           value={this.state.password.value} className={this.state.password.cssClass}
-                                           onChange={this.onChange}></input>
-                                </div>
                                 {!!this.props.error &&
                                 <p className="color--red error-message">{this.getErrorMessage(this.props.error.request.status)}</p>}
                                 {this.state.checkForget &&
                                 <p className="color--red error-message">We have sent an email for you to reset your
                                     passwords</p>}
-                                <div className="login-fotpas" onClick={this.props.openModal}>Forgot Password?</div>
-                                <button className="submit-btn login-btn" onClick={this.handleSubmit}>Login</button>
+                                <button className="submit-btn login-btn" onClick={this.handleSubmit}>Submit</button>
+                                <div className="login-fotpas" onClick={this.props.openModal}><Link to='/login'
+                                                                                                   className="switchSignup">Go
+                                    back -></Link></div>
                                 <div className="other-signup-field">
                                 </div>
                             </form>

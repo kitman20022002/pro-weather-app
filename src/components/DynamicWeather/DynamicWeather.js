@@ -202,12 +202,12 @@ class DynamicWeather extends React.Component {
 
     beginSpawning = () => {
         this.animate();
-        const weather = this.weatherMapping[this.props.data.currently.icon];
-        weather.map((item) => {
-            {
-                item()
-            }
-        });
+        // const weather = this.weatherMapping[this.props.data.currently.icon];
+        // weather.map((item) => {
+        //     {
+        //         item()
+        //     }
+        // });
     };
 
     animate = () => {
