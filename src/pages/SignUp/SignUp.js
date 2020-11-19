@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import './Reset.css';
+import './SignUp.css';
 import {connect} from "react-redux";
 import * as action from "../../store/actions";
 import Loader from "../../components/Loader/Loader";
@@ -9,10 +9,9 @@ import Modal from '../../components/Modal/Modal';
 import axios from 'axios';
 import DynamicWeather from "../../components/DynamicWeather/DynamicWeather";
 import {getWeather} from "../../api/weatherapi";
-import {forgotPassword} from "../../api/user";
 
 
-class Reset extends React.Component {
+class SignUp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -61,6 +60,10 @@ class Reset extends React.Component {
         this.setState({data: result.data, isLoaded: true, error: false});
     }
 
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.onAuth(this.state.email.value, this.state.password.value);
+    };
 
     checkValidity(value, rules) {
         let isValid = true;
@@ -123,12 +126,14 @@ class Reset extends React.Component {
         this.props.closeModal();
     };
 
-    handleSubmitForgetMessage = async () => {
-        this.setState({checkForget: true});
-        await forgotPassword({'email': this.state.email.value});
-    };
 
     render() {
+        const {history} = this.props;
+        if (this.props.isAuth) {
+            history.push("/dashboard");
+            return <div></div>;
+        }
+
         let loader = (
             <div>
                 <Backdrop show={true}/>
@@ -146,7 +151,7 @@ class Reset extends React.Component {
 
                     <div className="Signup flex flex__column">
                         <div className="title-box">
-                            <p>Reset Password</p>
+                            <p>Sign Up</p>
                         </div>
                         <div className="Signup-body">
                             <form className="Signup-form flex flex__column">
@@ -156,23 +161,24 @@ class Reset extends React.Component {
                                            value={this.state.email.value}
                                            onChange={this.onChange}></input>
                                 </div>
+                                <div className="Signup-form-field flex flex__column">
+                                    <label htmlFor="password">Password: </label>
+                                    <input name="password" type="password" placeholder="Password"
+                                           value={this.state.password.value} className={this.state.password.cssClass}
+                                           onChange={this.onChange}></input>
+                                </div>
                                 {!!this.props.error &&
                                 <p className="color--red error-message">{this.getErrorMessage(this.props.error.request.status)}</p>}
                                 {this.state.checkForget &&
                                 <p className="color--red error-message">We have sent an email for you to reset your
                                     passwords</p>}
-                                <button className="submit-btn login-btn" onClick={this.handleSubmitForgetMessage
-                                }>Submit
-                                </button>
-                                <div className="login-fotpas" onClick={this.props.openModal}><Link to='/login'
-                                                                                                   className="switchSignup">Go
-                                    back -></Link></div>
+                                <button className="submit-btn login-btn" onClick={this.handleSubmit}>Sign Up</button>
                                 <div className="other-signup-field">
                                 </div>
                             </form>
                             <div className="switchToSignup">
                                 <p>Don't have an account ?</p>
-                                <Link to='/sign-up' className="switchSignup"><p>Sign Up</p></Link>
+                                <Link to='/login' className="switchSignup"><p>Sign In</p></Link>
                             </div>
                         </div>
                     </div>
@@ -182,4 +188,19 @@ class Reset extends React.Component {
     }
 }
 
-export default Reset;
+const mapStateToProps = state => {
+    return {
+        loading: state.auth.loading,
+        error: state.auth.error,
+        isAuth: state.auth.token !== null,
+    };
+};
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (email, password) => dispatch(action.auth(email, password, true)),
+        // authFBSuccess: (user, email, images, firstName, lastName, ID, accessToken) => dispatch(action.socialFBAuth(user, email, images, firstName, lastName, ID, accessToken)),
+        // authGoogleSuccess: (user, email, images, firstName, lastName, ID, accessToken) => dispatch(action.socialGoogleAuth(user, email, images, firstName, lastName, ID, accessToken)),
+        // socialLogin: (user, userId, token) => dispatch(action.googleAuthLogin(user, userId, token)),
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

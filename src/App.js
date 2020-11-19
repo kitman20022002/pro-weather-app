@@ -8,6 +8,8 @@ import {loadReCaptcha} from 'react-recaptcha-google'
 import * as action from "./store/actions";
 import {connect} from "react-redux";
 import Login from "./pages/Login/Login";
+
+import SignUp from "./pages/SignUp/SignUp";
 import Reset from "./pages/Reset/Reset";
 
 class App extends React.Component {
@@ -24,6 +26,7 @@ class App extends React.Component {
             <div>
                 <Route path="/" exact component={Login}/>
                 <Route path="/reset" exact component={Reset}/>
+                <Route path="/sign-up" exact component={SignUp}/>
                 <Route path="/dashboard" exact component={Weather}/>
                 <Route path="/settings" exact component={Settings}/>
                 <Route path="/logout" exact component={Logout}/>

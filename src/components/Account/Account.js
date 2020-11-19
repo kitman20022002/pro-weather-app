@@ -52,7 +52,6 @@ class Account extends React.Component {
 
     render() {
         return (
-
             <div className="container--main">
                 <form className="setting__form" onSubmit={this.props.submitForm}>
                     <h2>Account</h2>
@@ -116,7 +115,6 @@ class Account extends React.Component {
                     <button onClick={this.closeModal}>OK</button>
                 </Modal>
             </div>
-
         )
     }
 }

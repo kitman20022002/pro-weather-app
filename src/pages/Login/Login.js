@@ -126,11 +126,6 @@ class Login extends React.Component {
         this.props.closeModal();
     };
 
-    handleSubmitForgetMessage = async () => {
-        this.setState({checkForget: true});
-        await axios.post('abc' + `/api/v1/users/forget${this.state.email.value}`);
-    };
-
     render() {
         const {history} = this.props;
         if (this.props.isAuth) {
