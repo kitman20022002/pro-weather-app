@@ -30,7 +30,7 @@ ul li {
     padding: 15px 10px;
 }
 
-ul li:hover{
+.setting-main ul li:hover{
     cursor: pointer;
     background: #DDEBFE;
     padding: 15px 10px;

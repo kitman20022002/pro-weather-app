@@ -123,7 +123,8 @@ class Reset extends React.Component {
         this.props.closeModal();
     };
 
-    handleSubmitForgetMessage = async () => {
+    handleSubmitForgetMessage = async (e) => {
+        e.preventDefault();
         this.setState({checkForget: true});
         await forgotPassword({'email': this.state.email.value});
     };
@@ -150,20 +151,24 @@ class Reset extends React.Component {
                         </div>
                         <div className="Signup-body">
                             <form className="Signup-form flex flex__column">
+                                {!this.state.checkForget &&
                                 <div className="Signup-form-field flex flex__column">
                                     <label htmlFor="email">Email: </label>
                                     <input name="email" placeholder="Email" className={this.state.email.cssClass}
                                            value={this.state.email.value}
                                            onChange={this.onChange}></input>
                                 </div>
+                                }
                                 {!!this.props.error &&
                                 <p className="color--red error-message">{this.getErrorMessage(this.props.error.request.status)}</p>}
                                 {this.state.checkForget &&
-                                <p className="color--red error-message">We have sent an email for you to reset your
+                                <p className="color--white error-message">We have sent an email for you to reset your
                                     passwords</p>}
-                                <button className="submit-btn login-btn" onClick={this.handleSubmitForgetMessage
-                                }>Submit
-                                </button>
+
+                                {!this.state.checkForget &&
+                                <button className="submit-btn login-btn"
+                                        onClick={this.handleSubmitForgetMessage}>Submit</button>
+                                }
                                 <div className="login-fotpas" onClick={this.props.openModal}><Link to='/login'
                                                                                                    className="switchSignup">Go
                                     back -></Link></div>
