@@ -65,7 +65,7 @@ class Account extends React.Component {
                         </label>
                         <div className={"avatar-details__container"}>
                             <img src={this.props.profileImg} alt={"profile_img"}/>
-                            <button onChange={uploadImg}>Upload</button>
+                            <input type="file" onChange={uploadImg} name={"Upload"}/>
                             <button className={"grey"}>Remove</button>
                         </div>
                     </div>
