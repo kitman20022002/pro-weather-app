@@ -50,8 +50,10 @@ class Account extends React.Component {
         this.setState({'modalShow': false});
     };
 
-    uploadImg = () => {
-        uploadImg();
+    uploadImg = async (selectorFiles) => {
+        let res = await uploadImg(selectorFiles);
+        this.setState({profile_img: res.data[0].location});
+        this.props.updateUserLocal({'profile_img': res.data[0].location, 'username': this.state.username});
     };
 
     render() {
@@ -65,7 +67,9 @@ class Account extends React.Component {
                         </label>
                         <div className={"avatar-details__container"}>
                             <img src={this.props.profileImg} alt={"profile_img"}/>
-                            <input type="file" onChange={uploadImg} name={"Upload"}/>
+                            <input type="file" onChange={(e) => {
+                                this.uploadImg(e.target.files)
+                            }} name={"Upload"} multiple/>
                             <button className={"grey"}>Remove</button>
                         </div>
                     </div>

@@ -20,6 +20,8 @@ export const forgotPassword = (data) => {
     return axios.patch('http://localhost:8080/api/v1/users/me', data, config);
 };
 
-export const uploadImg = () => {
-
+export const uploadImg = async (selectorFiles) => {
+    let data = new FormData();
+    data.append("photos", selectorFiles[0]);
+    return await axios.post('http://localhost:8080/api/v1/upload', data);
 };
