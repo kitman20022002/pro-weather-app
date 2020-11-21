@@ -2,7 +2,7 @@ import React from 'react';
 import './Account.css';
 import '../../App.css';
 import {connect} from "react-redux";
-import {updateUser} from '../../api/user';
+import {updateUser, uploadImg} from '../../api/user';
 import Modal from "../../components/Modal/Modal";
 import {updateUserLocal} from "../../store/actions/auth";
 
@@ -50,6 +50,10 @@ class Account extends React.Component {
         this.setState({'modalShow': false});
     };
 
+    uploadImg = () => {
+        uploadImg();
+    };
+
     render() {
         return (
             <div className="container--main">
@@ -61,7 +65,7 @@ class Account extends React.Component {
                         </label>
                         <div className={"avatar-details__container"}>
                             <img src={this.props.profileImg} alt={"profile_img"}/>
-                            <button>Upload</button>
+                            <button onChange={uploadImg}>Upload</button>
                             <button className={"grey"}>Remove</button>
                         </div>
                     </div>

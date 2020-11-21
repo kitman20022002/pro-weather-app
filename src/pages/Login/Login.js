@@ -48,7 +48,8 @@ class Login extends React.Component {
             checkForget: false,
             checked: true,
             images: "",
-            data: {}
+            data: {},
+            loading: true,
         };
         this.loadDefaultData();
         this.modalClose = this.closeModal.bind(this);
@@ -57,7 +58,7 @@ class Login extends React.Component {
     async loadDefaultData() {
         let result = await getWeather("sydney");
         result.data.daily.data = result.data.daily.data.splice(0, 5);
-        this.setState({data: result.data, isLoaded: true, error: false});
+        this.setState({data: result.data, loading: false, error: false});
     }
 
     handleSubmit = (e) => {
@@ -139,15 +140,12 @@ class Login extends React.Component {
                 <Loader/>
             </div>
         );
-        if (!this.state.isLoaded) {
-            return <div></div>;
-        }
+
         return (
             <div>
-                <DynamicWeather data={this.state.data} height={parseInt(1080)}/>
+               {this.state.loading ?  <img className={'background__img'} src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqFUoOzaBd_QpPk6HpTIOZZYXdqVUQJur72g&usqp=CAU'} alt={'bg'}/>
+                    : <DynamicWeather data={this.state.data} height={parseInt(1080)}/>}
                 <div className="Signup__Container SignIn">
-                    {!!this.props.loading && loader}
-
                     <div className="Signup flex flex__column">
                         <div className="title-box">
                             <p>Sign In</p>
@@ -171,7 +169,9 @@ class Login extends React.Component {
                                 {this.state.checkForget &&
                                 <p className="color--red error-message">We have sent an email for you to reset your
                                     passwords</p>}
-                                <div className="login-fotpas" onClick={this.props.openModal}><Link to='/reset' className="switchSignup">Forgot Password?</Link></div>
+                                <div className="login-fotpas" onClick={this.props.openModal}><Link to='/reset'
+                                                                                                   className="switchSignup">Forgot
+                                    Password?</Link></div>
                                 <button className="submit-btn login-btn" onClick={this.handleSubmit}>Login</button>
                                 <div className="other-signup-field">
                                 </div>

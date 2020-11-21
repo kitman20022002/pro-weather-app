@@ -24,9 +24,10 @@ export const authFail = (error) => {
     };
 };
 export const logout = () => {
-    // localStorage.removeItem('token');
-    // localStorage.removeItem('expirationDate');
-    // localStorage.removeItem('userId');
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('username');
+    localStorage.removeItem('profile_img');
     return {
         type: actionTypes.AUTH_LOGOUT
     };
@@ -74,7 +75,6 @@ export const authCheckState = () => {
         const token = localStorage.getItem('token');
 
         if (!token) {
-            console.log('ac');
             dispatch(logout());
         } else {
 

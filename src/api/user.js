@@ -19,3 +19,7 @@ export const forgotPassword = (data) => {
     };
     return axios.patch('http://localhost:8080/api/v1/users/me', data, config);
 };
+
+export const uploadImg = () => {
+
+};

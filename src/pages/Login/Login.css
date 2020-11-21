@@ -373,3 +373,8 @@ form {
 .other-signup-field p, .other-signup-field span, .Signup-form-field a, .switchToLogin p, .switchToSignup p, .title-box p {
     color: #fff;
 }
+
+.background__img{
+    width: 100%;
+    height: auto;
+}
