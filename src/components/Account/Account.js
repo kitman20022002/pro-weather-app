@@ -10,13 +10,14 @@ class Account extends React.Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             firstName: 'coconut',
             lastName: 'dd',
             username: props.profileName,
             password: props.password,
             city: 'Sydney',
-            profile_img: 'https://pbs.twimg.com/profile_images/3128016790/d41f7c7ca1662ea737cc7073e0901706_normal.png',
+            profile_img: props.profileImg === null ? 'https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png' : props.profileImg,
             modalShow: false
         };
         this.handleChange = this.handleChange.bind(this);
@@ -50,6 +51,14 @@ class Account extends React.Component {
         this.setState({'modalShow': false});
     };
 
+    removeProfileImg = async (e) => {
+        e.preventDefault();
+        const data = {'profile_img': ''};
+        this.setState(data);
+        this.props.updateUserLocal(data);
+        await updateUser(this.props.userId, data, this.props.token);
+    };
+
     uploadImg = async (selectorFiles) => {
         let res = await uploadImg(selectorFiles);
         this.setState({profile_img: res.data[0].location});
@@ -66,11 +75,13 @@ class Account extends React.Component {
                             Avatar:
                         </label>
                         <div className={"avatar-details__container"}>
-                            <img src={this.props.profileImg} alt={"profile_img"}/>
+                            <img src={this.state.profile_img} alt={"profile_img"}/>
                             <input type="file" onChange={(e) => {
                                 this.uploadImg(e.target.files)
                             }} name={"Upload"} multiple/>
-                            <button className={"grey"}>Remove</button>
+                            <button type="button" className={"grey"}
+                                    onClick={(e) => (this.removeProfileImg(e))}>Remove
+                            </button>
                         </div>
                     </div>
                     <label>

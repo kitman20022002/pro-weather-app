@@ -61,7 +61,7 @@ export const auth = (email, password, isSignup) => {
             localStorage.setItem('profile_img', response.data.user.profile_img);
 
             dispatch(authSuccess(response.data.token, response.data.user._id, response.data.user.username, response.data.user.profile_img));
-            dispatch(checkAuthTimeout(expirationDate));
+            //dispatch(checkAuthTimeout(expirationDate));
         }).catch(err => {
             console.log(err);
             dispatch(authFail(err));

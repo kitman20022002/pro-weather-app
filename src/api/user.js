@@ -7,7 +7,8 @@ export const updateUser = (id, data, token) => {
             "Content-Type": "application/json"
         }
     };
-    return axios.patch('http://localhost:8080/api/v1/users/me', data, config);
+
+    return axios.patch('http://localhost:8080/api/v1/users/me', {...data, 'token': token}, config);
 };
 
 export const forgotPassword = (data) => {
