@@ -48,7 +48,7 @@ class Form extends React.Component {
         const formData = {...this.state.data};
         for (let dat in formData) {
             const isValid = this.checkValidity(this.state.data[dat].value, this.state.data[dat].validation);
-            formData.data[dat].valid = isValid;
+            formData[dat].valid = isValid;
             if (isValid === false) {
                 shouldSubmit = false;
             }
