@@ -17,7 +17,7 @@ class Account extends React.Component {
             username: props.profileName,
             password: props.password,
             city: 'Sydney',
-            profile_img: props.profileImg === null ? 'https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png' : props.profileImg,
+            profile_img: props.profileImg,
             modalShow: false
         };
         this.handleChange = this.handleChange.bind(this);
@@ -45,6 +45,8 @@ class Account extends React.Component {
 
     deleteUser = async (e) => {
         e.preventDefault();
+        //show modal
+        //delete user
     };
 
     closeModal = () => {
