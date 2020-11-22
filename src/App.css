@@ -86,3 +86,8 @@
 button:focus{
     outline: 0;
 }
+
+
+.flex__column {
+    flex-direction: column;
+}

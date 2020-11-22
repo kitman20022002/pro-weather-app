@@ -1,5 +1,6 @@
 import React from "react";
 import Input from "../Input/Input";
+import './Form.css';
 import {connect} from "react-redux";
 
 class Form extends React.Component {
@@ -79,7 +80,7 @@ class Form extends React.Component {
 
     render() {
         return (
-            <form className="Signup-form flex flex__column" onSubmit={this.handleSubmit}>
+            <form className="form--default  flex flex__column" onSubmit={this.handleSubmit}>
                 {Object.keys(this.state.data).map((element, index) => {
                     return (<Input key={index}
                                    name={element}

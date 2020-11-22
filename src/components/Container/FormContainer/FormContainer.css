@@ -1,0 +1,54 @@
+.form-container--outer {
+    position: fixed;
+    top: 18px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.form-container--default {
+    position: absolute;
+    left: 50%;
+    top: 54%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    max-width: 400px;
+    height: auto;
+    width: 350px;
+    border: none;
+    background-color: hsla(0, 0%, 100%, .23);
+    opacity: 1;
+    animation: eAJKHT .4s ease 0s 1 normal none running;
+    padding: 0 50px;
+    border-radius: 10px;
+    flex-direction: column;
+}
+
+/**************************/
+/***** Clean up **********/
+/**************************/
+.form-container--default .title-box {
+    min-height: 0px;
+    line-height: 0;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    position: relative;
+    border-bottom: 1px solid rgb(246, 248, 253);
+    flex-grow: 1;
+    color: rgb(41, 43, 50);
+    font-family: museo-regular, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.15px;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 15px 0;
+    overflow: hidden;
+}
+
+.form-container--default .title-box p {
+    color: #fff;
+    width: 100%;
+}

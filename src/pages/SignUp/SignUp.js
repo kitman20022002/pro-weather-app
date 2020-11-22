@@ -6,6 +6,7 @@ import * as action from "../../store/actions";
 import DynamicWeather from "../../components/DynamicWeather/DynamicWeather";
 import {getWeather} from "../../api/weatherapi";
 import Form from "../../components/Form/Form/Form";
+import FormContainer from "../../components/Container/FormContainer/FormContainer";
 
 
 class SignUp extends React.Component {
@@ -74,20 +75,15 @@ class SignUp extends React.Component {
                                            src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqFUoOzaBd_QpPk6HpTIOZZYXdqVUQJur72g&usqp=CAU'}
                                            alt={'bg'}/>
                     : <DynamicWeather data={this.state.data} height={parseInt(1080)}/>}
-                <div className="Signup__Container SignIn">
-                    <div className="Signup flex flex__column">
-                        <div className="title-box">
-                            <p>Sign Up</p>
-                        </div>
-                        <div className="Signup-body">
-                            <Form data={this.state.formData} formSubmit={this.handleSubmit} btnText={"Sign Up"}/>
-                            <div className="switchToSignup">
-                                <p>Don't have an account ?</p>
-                                <Link to='/login' className="switchSignup"><p>Sign In</p></Link>
-                            </div>
+                <FormContainer text={"Sign Up"}>
+                    <div className="Signup-body">
+                        <Form data={this.state.formData} formSubmit={this.handleSubmit} btnText={"Sign Up"}/>
+                        <div className="switchToSignup">
+                            <p>Don't have an account ?</p>
+                            <Link to='/login' className="switchSignup"><p>Sign In</p></Link>
                         </div>
                     </div>
-                </div>
+                </FormContainer>
             </div>
         )
     }

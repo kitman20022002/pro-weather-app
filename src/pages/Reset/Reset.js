@@ -5,6 +5,7 @@ import DynamicWeather from "../../components/DynamicWeather/DynamicWeather";
 import {getWeather} from "../../api/weatherapi";
 import {forgotPassword} from "../../api/user";
 import Form from "../../components/Form/Form/Form";
+import FormContainer from "../../components/Container/FormContainer/FormContainer";
 
 
 class Reset extends React.Component {
@@ -56,29 +57,24 @@ class Reset extends React.Component {
                                            src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqFUoOzaBd_QpPk6HpTIOZZYXdqVUQJur72g&usqp=CAU'}
                                            alt={'bg'}/>
                     : <DynamicWeather data={this.state.data} height={parseInt(1080)}/>}
-                <div className="Signup__Container SignIn">
-                    <div className="Signup flex flex__column">
-                        <div className="title-box">
-                            <p>Reset Password</p>
+                <FormContainer text={"Reset Password"}>
+                    <div className="Signup-body">
+                        {this.state.checkForget ?
+                            <p className="color--white">We have sent an email for you to reset your
+                                passwords</p>
+                            :
+                            <Form data={this.state.formData} formSubmit={this.handleSubmitForgetMessage}
+                                  btnText={"Login"}/>
+                        }
+                        <div className="login-fotpas">
+                            <Link to='/login' className="switchSignup">Go back -></Link>
                         </div>
-                        <div className="Signup-body">
-                            {this.state.checkForget ?
-                                <p className="color--white">We have sent an email for you to reset your
-                                    passwords</p>
-                                :
-                                <Form data={this.state.formData} formSubmit={this.handleSubmitForgetMessage}
-                                      btnText={"Login"}/>
-                            }
-                            <div className="login-fotpas">
-                                <Link to='/login' className="switchSignup">Go back -></Link>
-                            </div>
-                            <div className="switchToSignup">
-                                <p>Don't have an account ?</p>
-                                <Link to='/sign-up' className="switchSignup"><p>Sign Up</p></Link>
-                            </div>
+                        <div className="switchToSignup">
+                            <p>Don't have an account ?</p>
+                            <Link to='/sign-up' className="switchSignup"><p>Sign Up</p></Link>
                         </div>
                     </div>
-                </div>
+                </FormContainer>
             </div>
         )
     }

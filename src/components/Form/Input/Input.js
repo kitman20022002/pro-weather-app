@@ -8,7 +8,7 @@ class Input extends React.Component {
 
     render() {
         return (
-            <div className="Signup-form-field flex flex__column">
+            <div className="flex flex__column form--group">
                 <label htmlFor={this.props.name}>{this.props.label}: </label>
                 <input name={this.props.name} type={this.props.type} placeholder={this.props.placeholder}
                        value={this.state.value} className={this.state.cssClass}
