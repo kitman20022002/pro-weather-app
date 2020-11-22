@@ -39,7 +39,7 @@ class Account extends React.Component {
             'token': this.props.token
         };
         this.setState({'modalShow': true});
-        let result = await updateUser(this.props.userId, data, this.props.token);
+       await updateUser(this.props.userId, data, this.props.token);
         this.props.updateUserLocal({'profile_img': this.state.profile_img, 'username': this.state.username});
     };
 

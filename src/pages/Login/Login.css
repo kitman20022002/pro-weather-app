@@ -360,7 +360,7 @@ form {
     text-align: center;
     white-space: nowrap;
     text-overflow: ellipsis;
-    padding: 15px 40%;
+    padding: 15px 0;
     overflow: hidden;
 
 }

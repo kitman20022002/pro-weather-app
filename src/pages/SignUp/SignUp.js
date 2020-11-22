@@ -3,56 +3,52 @@ import {Link} from 'react-router-dom';
 import './SignUp.css';
 import {connect} from "react-redux";
 import * as action from "../../store/actions";
-import Loader from "../../components/Loader/Loader";
-import Backdrop from "../../components/Backdrop/Backdrop";
-import Modal from '../../components/Modal/Modal';
-import axios from 'axios';
 import DynamicWeather from "../../components/DynamicWeather/DynamicWeather";
 import {getWeather} from "../../api/weatherapi";
+import Form from "../../components/Form/Form/Form";
 
 
 class SignUp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: {
-                elementConfig: {
-                    placeholder: 'kitmanwork@gmail.com'
+            formData: {
+                email: {
+                    elementConfig: {
+                        placeholder: 'Email'
+                    },
+                    validation: {
+                        required: true,
+                        isEmail: true
+                    },
+                    errorMessage: {
+                        email: "Not valid Email",
+                        required: 'Email is required',
+                    },
+                    valid: true,
+                    value: '',
+                    cssClass: '',
                 },
-                validation: {
-                    required: true,
-                    isEmail: true
+                password: {
+                    elementConfig: {
+                        placeholder: 'Password'
+                    },
+                    validation: {
+                        required: true,
+                    },
+                    errorMessage: {
+                        required: 'Password is required',
+                    },
+                    valid: true,
+                    value: '',
+                    cssClass: '',
                 },
-                errorMessage: {
-                    email: "Not valid Email",
-                    required: 'Email is required',
-                },
-                valid: false,
-                value: '',
-                cssClass: '',
-            },
-            password: {
-                elementConfig: {
-                    placeholder: 'kitmanwork@gmail.com'
-                },
-                validation: {
-                    required: true,
-                },
-                errorMessage: {
-                    required: 'Password is required',
-                },
-                valid: false,
-                value: '',
-                cssClass: '',
             },
             checkForget: false,
-            checked: true,
-            images: "",
             data: {},
-            loading:true,
+            loading: true,
         };
         this.loadDefaultData();
-        this.modalClose = this.closeModal.bind(this);
     }
 
     async loadDefaultData() {
@@ -61,89 +57,22 @@ class SignUp extends React.Component {
         this.setState({data: result.data, loading: false, error: false});
     }
 
-    handleSubmit = (e) => {
-        e.preventDefault();
-        this.props.onAuth(this.state.email.value, this.state.password.value);
+    handleSubmit = (data) => {
+        this.props.onAuth(data.email.value, data.password.value);
     };
-
-    checkValidity(value, rules) {
-        let isValid = true;
-        if (!rules) {
-            return true;
-        }
-
-        if (rules.required) {
-            isValid = value.trim() !== '' && isValid;
-        }
-
-        if (rules.minLength) {
-            isValid = value.length >= rules.minLength && isValid
-        }
-
-        if (rules.maxLength) {
-            isValid = value.length <= rules.maxLength && isValid
-        }
-
-        if (rules.isEmail) {
-            const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-            isValid = pattern.test(value) && isValid
-        }
-
-        if (rules.isNumeric) {
-            const pattern = /^\d+$/;
-            isValid = pattern.test(value) && isValid
-        }
-
-        return isValid;
-    }
-
-    onChange = (e) => {
-        const updatedFormElement = {
-            ...this.state[e.target.name]
-        };
-
-        let isValid = this.checkValidity(e.target.value, updatedFormElement.validation);
-        if (!isValid) {
-            updatedFormElement.cssClass = 'color--red';
-        } else {
-            updatedFormElement.cssClass = '';
-        }
-        updatedFormElement.value = e.target.value;
-        this.setState({[e.target.name]: updatedFormElement});
-    };
-
-    getErrorMessage = (message) => {
-        switch (message) {
-            case 400:
-                return "Incorrect Username or password";
-            case 401:
-                return "Incorrect Username or password";
-            default:
-                return "Server Error";
-        }
-    };
-
-    closeModal = () => {
-        this.props.closeModal();
-    };
-
 
     render() {
         const {history} = this.props;
         if (this.props.isAuth) {
             history.push("/dashboard");
-            return <div></div>;
+            return <div/>;
         }
 
-        let loader = (
-            <div>
-                <Backdrop show={true}/>
-                <Loader/>
-            </div>
-        );
         return (
             <div>
-                {this.state.loading ?  <img className={'background__img'} src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqFUoOzaBd_QpPk6HpTIOZZYXdqVUQJur72g&usqp=CAU'} alt={'bg'}/>
+                {this.state.loading ? <img className={'background__img'}
+                                           src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqFUoOzaBd_QpPk6HpTIOZZYXdqVUQJur72g&usqp=CAU'}
+                                           alt={'bg'}/>
                     : <DynamicWeather data={this.state.data} height={parseInt(1080)}/>}
                 <div className="Signup__Container SignIn">
                     <div className="Signup flex flex__column">
@@ -151,28 +80,7 @@ class SignUp extends React.Component {
                             <p>Sign Up</p>
                         </div>
                         <div className="Signup-body">
-                            <form className="Signup-form flex flex__column">
-                                <div className="Signup-form-field flex flex__column">
-                                    <label htmlFor="email">Email: </label>
-                                    <input name="email" placeholder="Email" className={this.state.email.cssClass}
-                                           value={this.state.email.value}
-                                           onChange={this.onChange}></input>
-                                </div>
-                                <div className="Signup-form-field flex flex__column">
-                                    <label htmlFor="password">Password: </label>
-                                    <input name="password" type="password" placeholder="Password"
-                                           value={this.state.password.value} className={this.state.password.cssClass}
-                                           onChange={this.onChange}></input>
-                                </div>
-                                {!!this.props.error &&
-                                <p className="color--red error-message">{this.getErrorMessage(this.props.error.request.status)}</p>}
-                                {this.state.checkForget &&
-                                <p className="color--red error-message">We have sent an email for you to reset your
-                                    passwords</p>}
-                                <button className="submit-btn login-btn" onClick={this.handleSubmit}>Sign Up</button>
-                                <div className="other-signup-field">
-                                </div>
-                            </form>
+                            <Form data={this.state.formData} formSubmit={this.handleSubmit} btnText={"Sign Up"}/>
                             <div className="switchToSignup">
                                 <p>Don't have an account ?</p>
                                 <Link to='/login' className="switchSignup"><p>Sign In</p></Link>

@@ -6,8 +6,8 @@ import Header from "../../components/Header/Header";
 import BackGround from "../../components/BackGround";
 import '../../App.css';
 import {connect} from "react-redux";
-import Loading from "../../components/Loading/Loading";
 import {getWeather} from "../../api/weatherapi";
+import LoaderWeather from "../../components/LoaderWeather/LoaderWeather";
 
 class Weather extends React.Component {
     constructor(props) {
@@ -52,7 +52,7 @@ class Weather extends React.Component {
         return (
             <div className="Weather">
                 <Header searchPressCallback={this.handleSearchPress} />
-                {!this.state.isLoaded ? <div className="error"><Loading/></div> : showCard}
+                {!this.state.isLoaded ? <div className="error"><LoaderWeather/></div> : showCard}
                 <BackGround/>
             </div>
         );

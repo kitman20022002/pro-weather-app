@@ -6,9 +6,13 @@
 }
 
 nav {
-    background-color: #FAF6F8;
+    background-color: #e6e6e6;
     width: 25%;
     min-height: 100vh;
+}
+
+nav ul{
+    padding: 0 20px;
 }
 
 .setting-main {

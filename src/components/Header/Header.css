@@ -52,12 +52,11 @@ header h3 {
     content: "";
     background: white;
     width: 4px;
-    height: 15px;
+    height: 12px;
     position: absolute;
-    top: 28px;
+    top: 31px;
     right: 27px;
     transform: rotate(135deg);
-    box-shadow: 1px 0 #0091c2;
 }
 
 .search-box {

@@ -22,11 +22,12 @@ class Twitter extends React.Component {
     }
 
     render() {
+
         return (
             <section>
                 <div className="card__social-media-header flex align--bottom flex-warp">
                     <FontAwesomeIcon icon={faTwitter} className="color--twitter-blue"/>
-                    <h2 className="card__social-media-header">Twiiter Feed</h2>
+                    <h2 className="card__social-media-header">Twitter Feed</h2>
                     <a href="http://www.kitmanyiu.com"
                        className="color--blue social-media-link">#{this.props.searchKey.replace(/ /g, '')}weather</a>
                 </div>

@@ -4,10 +4,7 @@ import '../../App.css';
 import {connect} from "react-redux";
 import logo from '../../img/weather_small.png';
 import {NavLink} from "react-router-dom";
-import {updateUser} from '../../api/user';
-import Modal from "../../components/Modal/Modal";
 import {updateUserLocal} from "../../store/actions/auth";
-import axios from 'axios';
 import Account from "../../components/Account/Account";
 import Payment from "../../components/Payment/Payment";
 

@@ -4,6 +4,10 @@
     min-height: 250px;
 }
 
+.card__social-media .loading-container {
+    min-height: 150px;
+}
+
 .card__social-media::after {
     position: absolute;
     content: '';
@@ -35,7 +39,8 @@
     color: #0c1066;
     font-weight: 700;
 }
-.card__social-media-header a{
+
+.card__social-media-header a {
     font-size: 14px;
 }
 
@@ -57,9 +62,11 @@
     background: transparent;
     border: none;
 }
-.next__text:focus{
+
+.next__text:focus {
     outline: none;
 }
+
 .next__text::before {
     content: '';
     position: absolute;
@@ -71,7 +78,7 @@
     border-left: 10px solid #be3e3e;
     transition: all .5s;
     cursor: pointer;
-    top:0px;
+    top: 0px;
 
 }
 
@@ -85,26 +92,31 @@
     cursor: pointer;
 }
 
-.social-media-profile__img{
+.social-media-profile__img {
     border-radius: 50%;
     margin-right: 30px;
 }
-.profile-post{
+
+.profile-post {
     font-size: 50px;
     margin-right: 10px;
 }
+
 @media only screen and (max-width: 950px) {
-    .card__forecast{
+    .card__forecast {
         width: 70%;
     }
-    .card__social-media{
+
+    .card__social-media {
         width: 30%;
     }
 }
+
 @media only screen and (max-width: 830px) {
-    .card__social-media-comment{
+    .card__social-media-comment {
         width: 100%;
     }
+
     .card__social-media::after {
         position: unset;
     }
@@ -129,7 +141,8 @@
     .card__social-media-post:not(:last-child) {
         border-bottom: 1px solid black;
     }
-    .next-container{
+
+    .next-container {
         bottom: -25px;
     }
 }
