@@ -1,14 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import './Login.css';
-import {connect} from "react-redux";
-import * as action from "../../store/actions";
+import './Forgot.css';
 import DynamicWeather from "../../components/DynamicWeather/DynamicWeather";
 import {getWeather} from "../../api/weatherapi";
+import {forgotPassword} from "../../api/user";
 import Form from "../../components/Form/Form/Form";
 import FormContainer from "../../components/Container/FormContainer/FormContainer";
 
-class Login extends React.Component {
+
+class Forgot extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -22,68 +22,53 @@ class Login extends React.Component {
                         isEmail: true
                     },
                     errorMessage: {
-                        email: "Email invalid",
+                        email: "Not valid Email",
                         required: 'Email is required',
                     },
                     valid: true,
                     value: '',
                     cssClass: '',
-                    error: '',
-                    type: 'input'
-                },
-                password: {
-                    elementConfig: {
-                        placeholder: 'Password'
-                    },
-                    validation: {
-                        required: true,
-                    },
-                    errorMessage: {
-                        required: 'Password is required',
-                    },
-                    valid: true,
-                    value: '',
-                    cssClass: '',
-                    error: '',
-                    type: 'password'
+                    error: ''
                 },
             },
+            checkForget: false,
             data: {},
             loading: true,
         };
         this.loadDefaultData();
     }
 
-
     async loadDefaultData() {
         let result = await getWeather("sydney");
         result.data.daily.data = result.data.daily.data.splice(0, 5);
-        this.setState({data: result.data, loading: false, error: false});
+        this.setState({data: result.data, loading: true, error: false});
     }
 
-    handleSubmit = (data, token = null) => {
-        this.props.onAuth(data.email.value, data.password.value, token);
+    handleSubmitForgetMessage = async (data) => {
+        let res = await forgotPassword({'email': data.email.value});
+        if (res) {
+            this.setState({checkForget: true});
+        }
     };
 
     render() {
-        const {history} = this.props;
-        if (this.props.isAuth) {
-            history.push("/dashboard");
-            return <div/>;
-        }
-
         return (
             <div>
                 {this.state.loading ? <img className={'background__img'}
                                            src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqFUoOzaBd_QpPk6HpTIOZZYXdqVUQJur72g&usqp=CAU'}
                                            alt={'bg'}/>
                     : <DynamicWeather data={this.state.data} height={parseInt(1080)}/>}
-                <FormContainer text={"Sign In"}>
+                <FormContainer text={"Reset Password"}>
                     <div className="Signup-body">
-                        <Form data={this.state.formData} formSubmit={this.handleSubmit} btnText={"Login"}
-                              validate={this.props.authFailTimes > 2}/>
-                        <div className="login-fotpas" onClick={this.props.openModal}>
-                            <Link to='/reset' className="switchSignup">Forgot Password?</Link>
+                        {this.state.checkForget ?
+                            <p className="color--white">We have sent an email for you to reset your
+                                passwords</p>
+                            :
+                            <Form data={this.state.formData} formSubmit={this.handleSubmitForgetMessage}
+                                  btnText={"Login"}/>
+                        }
+                        <div className="login-fotpas">
+                            <Link to='/login' className="switchSignup">Go back -></Link>
                         </div>
                         <div className="switchToSignup">
                             <p>Don't have an account ?</p>
@@ -96,15 +81,4 @@ class Login extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        isAuth: state.auth.token !== null,
-        authFailTimes: state.auth.authFailTimes
-    };
-};
-const mapDispatchToProps = dispatch => {
-    return {
-        onAuth: (email, password, token) => dispatch(action.auth(email, password, false, token)),
-    };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Forgot;

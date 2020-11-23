@@ -9,6 +9,7 @@ const initialState = {
     error: null,
     loading: false,
     authRedirectPath: '/',
+    authFailTimes: 0
 };
 
 const authStart = (state, action) => {
@@ -23,11 +24,12 @@ const authSuccess = (state, action) => {
         userId: action.userId,
         error: null,
         loading: false,
+        authFailTimes: 0
     });
 
 };
 const authFail = (state, action) => {
-    return updateObject(state, {error: action.error, loading: false});
+    return updateObject(state, {error: action.error, loading: false, authFailTimes: action.authFailTimes});
 };
 
 const authLogout = (state, action) => {

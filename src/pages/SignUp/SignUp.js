@@ -64,8 +64,8 @@ class SignUp extends React.Component {
         this.setState({data: result.data, loading: false, error: false});
     }
 
-    handleSubmit = (data) => {
-        this.props.onAuth(data.email.value, data.password.value);
+    handleSubmit = (data, token) => {
+        this.props.onAuth(data.email.value, data.password.value, token);
     };
 
     render() {
@@ -100,12 +100,12 @@ const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
         error: state.auth.error,
-        isAuth: state.auth.token !== null,
+        isAuth: state.auth.token !== null
     };
 };
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password) => dispatch(action.auth(email, password, true)),
+        onAuth: (email, password, token) => dispatch(action.auth(email, password, true, token)),
         // authFBSuccess: (user, email, images, firstName, lastName, ID, accessToken) => dispatch(action.socialFBAuth(user, email, images, firstName, lastName, ID, accessToken)),
         // authGoogleSuccess: (user, email, images, firstName, lastName, ID, accessToken) => dispatch(action.socialGoogleAuth(user, email, images, firstName, lastName, ID, accessToken)),
         // socialLogin: (user, userId, token) => dispatch(action.googleAuthLogin(user, userId, token)),

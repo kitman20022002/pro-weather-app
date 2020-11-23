@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
 
+let failTime = 0;
 export const authStart = () => {
     return {
         type: actionTypes.AUTH_START,
@@ -21,6 +22,7 @@ export const authFail = (error) => {
     return {
         type: actionTypes.AUTH_FAIL,
         error: error,
+        authFailTimes: failTime += 1
     };
 };
 export const logout = () => {
@@ -41,14 +43,17 @@ export const checkAuthTimeout = (expirationTime) => {
     };
 };
 
-export const auth = (email, password, isSignup) => {
+export const auth = (email, password, isSignup, token = null) => {
     return dispatch => {
         dispatch(authStart());
-        const authData = {
+        let authData = {
             email: email,
             password: password,
             returnSecureToken: true
         };
+        if (token !== null) {
+            authData = {...authData, token};
+        }
         let url = 'http://localhost:8080/api/v1/users/signUp';
         if (!isSignup) {
             url = 'http://localhost:8080/api/v1/users/signIn';
@@ -64,7 +69,6 @@ export const auth = (email, password, isSignup) => {
             dispatch(authSuccess(response.data.token, response.data.user._id, response.data.user.username, img));
             //dispatch(checkAuthTimeout(expirationDate));
         }).catch(err => {
-            console.log(err);
             dispatch(authFail(err));
         });
     };

@@ -9,6 +9,8 @@ class Form extends React.Component {
         super(props);
         this.state = {
             data: this.props.data,
+            validated: false,
+            recaptchaToken: ''
         };
         this.onLoadRecaptcha = this.onLoadRecaptcha.bind(this);
         this.verifyCallback = this.verifyCallback.bind(this);
@@ -23,10 +25,7 @@ class Form extends React.Component {
 
     verifyCallback(recaptchaToken) {
         // Here you will get the final recaptchaToken!!!
-        if (recaptchaToken) {
-
-        }
-        console.log(recaptchaToken, "<= your recaptcha token")
+        this.setState({'validated': true, 'recaptchaToken': recaptchaToken});
     }
 
     onLoadRecaptcha() {
@@ -91,8 +90,14 @@ class Form extends React.Component {
         }
 
         this.setState({data: formData});
-        if (shouldSubmit) {
-            this.props.formSubmit(this.state.data);
+        if (this.props.validate) {
+            if (shouldSubmit && this.state.validated) {
+                this.props.formSubmit(this.state.data, this.state.recaptchaToken);
+            }
+        } else {
+            if (shouldSubmit) {
+                this.props.formSubmit(this.state.data, null);
+            }
         }
     };
 
@@ -120,7 +125,6 @@ class Form extends React.Component {
         return (
             <form className="form--default  flex flex__column" onSubmit={this.handleSubmit}>
                 {Object.keys(this.state.data).map((element, index) => {
-                    console.log(this.state.data[element]);
                     return (<Input key={index}
                                    name={element}
                                    label={element.charAt(0).toUpperCase() + element.slice(1)}
