@@ -7,7 +7,6 @@ import DynamicWeather from "../../components/DynamicWeather/DynamicWeather";
 import {getWeather} from "../../api/weatherapi";
 import Form from "../../components/Form/Form/Form";
 import FormContainer from "../../components/Container/FormContainer/FormContainer";
-import {ReCaptcha} from 'react-recaptcha-google'
 
 class SignUp extends React.Component {
     constructor(props) {
