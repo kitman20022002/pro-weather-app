@@ -18,6 +18,17 @@ export const forgotPassword = (data) => {
             "Content-Type": "application/json"
         }
     };
+    return axios.post('http://localhost:8080/api/v1/users/forgot-password', data, config);
+};
+
+
+export const resetPassword = (data) => {
+    let config = {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            "Content-Type": "application/json"
+        }
+    };
     return axios.post('http://localhost:8080/api/v1/users/reset-password', data, config);
 };
 

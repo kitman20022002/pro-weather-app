@@ -83,7 +83,7 @@ class Login extends React.Component {
                         <Form data={this.state.formData} formSubmit={this.handleSubmit} btnText={"Login"}
                               validate={this.props.authFailTimes > 2}/>
                         <div className="login-fotpas" onClick={this.props.openModal}>
-                            <Link to='/reset' className="switchSignup">Forgot Password?</Link>
+                            <Link to='/forgot' className="switchSignup">Forgot Password?</Link>
                         </div>
                         <div className="switchToSignup">
                             <p>Don't have an account ?</p>

@@ -58,14 +58,14 @@ class Forgot extends React.Component {
                                            src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqFUoOzaBd_QpPk6HpTIOZZYXdqVUQJur72g&usqp=CAU'}
                                            alt={'bg'}/>
                     : <DynamicWeather data={this.state.data} height={parseInt(1080)}/>}
-                <FormContainer text={"Reset Password"}>
+                <FormContainer text={"Forgot Password"}>
                     <div className="Signup-body">
                         {this.state.checkForget ?
                             <p className="color--white">We have sent an email for you to reset your
                                 passwords</p>
                             :
                             <Form data={this.state.formData} formSubmit={this.handleSubmitForgetMessage}
-                                  btnText={"Login"}/>
+                                  btnText={"Submit"}/>
                         }
                         <div className="login-fotpas">
                             <Link to='/login' className="switchSignup">Go back -></Link>
