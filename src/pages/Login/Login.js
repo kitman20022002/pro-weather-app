@@ -22,12 +22,14 @@ class Login extends React.Component {
                         isEmail: true
                     },
                     errorMessage: {
-                        email: "Not valid Email",
+                        email: "Email invalid",
                         required: 'Email is required',
                     },
                     valid: true,
                     value: '',
                     cssClass: '',
+                    error: '',
+                    type: 'input'
                 },
                 password: {
                     elementConfig: {
@@ -42,6 +44,8 @@ class Login extends React.Component {
                     valid: true,
                     value: '',
                     cssClass: '',
+                    error: '',
+                    type: 'password'
                 },
             },
             data: {},

@@ -28,6 +28,7 @@ class Reset extends React.Component {
                     valid: true,
                     value: '',
                     cssClass: '',
+                    error: ''
                 },
             },
             checkForget: false,

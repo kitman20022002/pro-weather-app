@@ -2,44 +2,79 @@ import React from "react";
 import Input from "../Input/Input";
 import './Form.css';
 import {connect} from "react-redux";
+import {ReCaptcha} from "react-recaptcha-google";
 
 class Form extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: this.props.data
+            data: this.props.data,
         };
+        this.onLoadRecaptcha = this.onLoadRecaptcha.bind(this);
+        this.verifyCallback = this.verifyCallback.bind(this);
     }
 
-    checkValidity(value, rules) {
+    componentDidMount() {
+        if (this.captchaDemo) {
+            console.log("started, just a second...");
+            this.captchaDemo.reset();
+        }
+    }
+
+    verifyCallback(recaptchaToken) {
+        // Here you will get the final recaptchaToken!!!
+        if (recaptchaToken) {
+
+        }
+        console.log(recaptchaToken, "<= your recaptcha token")
+    }
+
+    onLoadRecaptcha() {
+        if (this.captchaDemo) {
+            this.captchaDemo.reset();
+        }
+    }
+
+    checkValidity(value, rules, errorMessage) {
+        let errorMsg = '';
         let isValid = true;
         if (!rules) {
             return true;
         }
 
-        if (rules.required) {
-            isValid = value.trim() !== '' && isValid;
+        if (rules.min) {
+            if (!(value.length >= rules.min && isValid)) {
+                errorMsg = errorMessage.min;
+            }
         }
 
-        if (rules.minLength) {
-            isValid = value.length >= rules.minLength && isValid
-        }
-
-        if (rules.maxLength) {
-            isValid = value.length <= rules.maxLength && isValid
+        if (rules.max) {
+            if (!(value.length <= rules.max && isValid)) {
+                errorMsg = errorMessage.max;
+            }
         }
 
         if (rules.isEmail) {
             const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-            isValid = pattern.test(value) && isValid
+            if (!(pattern.test(value) && isValid)) {
+                errorMsg = errorMessage.email
+            }
         }
 
         if (rules.isNumeric) {
             const pattern = /^\d+$/;
-            isValid = pattern.test(value) && isValid
+            if (!(pattern.test(value) && isValid)) {
+                errorMsg = errorMessage.isNumeric
+            }
         }
 
-        return isValid;
+        if (rules.required) {
+            if (!(value.trim() !== '' && isValid)) {
+                errorMsg = errorMessage.required;
+            }
+        }
+
+        return errorMsg;
     }
 
     handleSubmit = (e) => {
@@ -47,12 +82,14 @@ class Form extends React.Component {
         let shouldSubmit = true;
         const formData = {...this.state.data};
         for (let dat in formData) {
-            const isValid = this.checkValidity(this.state.data[dat].value, this.state.data[dat].validation);
-            formData[dat].valid = isValid;
-            if (isValid === false) {
+            const errorMsg = this.checkValidity(this.state.data[dat].value, this.state.data[dat].validation, this.state.data[dat].errorMessage);
+            formData[dat].valid = errorMsg === '';
+            formData[dat].error = errorMsg;
+            if (errorMsg !== '') {
                 shouldSubmit = false;
             }
         }
+
         this.setState({data: formData});
         if (shouldSubmit) {
             this.props.formSubmit(this.state.data);
@@ -64,6 +101,7 @@ class Form extends React.Component {
             ...this.state.data
         };
         updatedFormElement[e.target.name].value = e.target.value;
+        updatedFormElement[e.target.name].valid = true;
         this.setState({data: updatedFormElement});
     };
 
@@ -82,6 +120,7 @@ class Form extends React.Component {
         return (
             <form className="form--default  flex flex__column" onSubmit={this.handleSubmit}>
                 {Object.keys(this.state.data).map((element, index) => {
+                    console.log(this.state.data[element]);
                     return (<Input key={index}
                                    name={element}
                                    label={element.charAt(0).toUpperCase() + element.slice(1)}
@@ -90,12 +129,24 @@ class Form extends React.Component {
                                    value={this.state.data[element].value}
                                    cssClass={this.state.data[element].cssClass}
                                    valid={this.state.data[element].valid}
+                                   error={this.state.data[element].error}
                                    onChange={this.onChange}
                         />
                     )
                 })}
                 {!!this.props.error &&
                 <p className="color--red error-message">{this.getErrorMessage(this.props.error.request.status)}</p>}
+                {this.props.validate && <ReCaptcha
+                    ref={(el) => {
+                        this.captchaDemo = el;
+                    }}
+                    size="normal"
+                    data-theme="dark"
+                    render="explicit"
+                    sitekey="6LcKzbwUAAAAACf9O0wojDUqc0EM-r4RX-xqDR5E"
+                    onloadCallback={this.onLoadRecaptcha}
+                    verifyCallback={this.verifyCallback}
+                />}
                 <button type={"submit"} className="submit-btn login-btn"
                         onClick={this.handleSubmit}>{this.props.btnText}</button>
             </form>

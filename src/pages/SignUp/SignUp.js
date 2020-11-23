@@ -7,7 +7,7 @@ import DynamicWeather from "../../components/DynamicWeather/DynamicWeather";
 import {getWeather} from "../../api/weatherapi";
 import Form from "../../components/Form/Form/Form";
 import FormContainer from "../../components/Container/FormContainer/FormContainer";
-
+import {ReCaptcha} from 'react-recaptcha-google'
 
 class SignUp extends React.Component {
     constructor(props) {
@@ -29,6 +29,8 @@ class SignUp extends React.Component {
                     valid: true,
                     value: '',
                     cssClass: '',
+                    error: '',
+                    type: 'input'
                 },
                 password: {
                     elementConfig: {
@@ -36,13 +38,17 @@ class SignUp extends React.Component {
                     },
                     validation: {
                         required: true,
+                        min: 7
                     },
                     errorMessage: {
                         required: 'Password is required',
+                        min: 'Password is minimum length is 7',
                     },
                     valid: true,
                     value: '',
                     cssClass: '',
+                    error: '',
+                    type: 'password'
                 },
             },
             checkForget: false,
@@ -51,6 +57,7 @@ class SignUp extends React.Component {
         };
         this.loadDefaultData();
     }
+
 
     async loadDefaultData() {
         let result = await getWeather("sydney");
@@ -77,7 +84,8 @@ class SignUp extends React.Component {
                     : <DynamicWeather data={this.state.data} height={parseInt(1080)}/>}
                 <FormContainer text={"Sign Up"}>
                     <div className="Signup-body">
-                        <Form data={this.state.formData} formSubmit={this.handleSubmit} btnText={"Sign Up"}/>
+                        <Form data={this.state.formData} formSubmit={this.handleSubmit} btnText={"Sign Up"}
+                              validate={true}/>
                         <div className="switchToSignup">
                             <p>Don't have an account ?</p>
                             <Link to='/login' className="switchSignup"><p>Sign In</p></Link>
