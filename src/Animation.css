@@ -27,6 +27,9 @@
     top: 0;
     z-index: -1;
     margin: auto;
+    width: 100%;
+    background: red;
+    min-height: 1100px;
 }
 
 .waveWrapperInner {

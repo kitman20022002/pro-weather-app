@@ -52,7 +52,7 @@ class Weather extends React.Component {
         return (
             <div className="Weather">
                 <Header searchPressCallback={this.handleSearchPress} />
-                {!this.state.isLoaded ? <div className="error"><LoaderWeather/></div> : showCard}
+                {!this.state.isLoaded ? <div className="loading--fixed"><LoaderWeather/></div> : showCard}
                 <BackGround/>
             </div>
         );

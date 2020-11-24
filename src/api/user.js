@@ -1,4 +1,5 @@
 import axios from "axios";
+import config from '../config/config';
 
 export const updateUser = (id, data, token) => {
     let config = {
@@ -8,7 +9,7 @@ export const updateUser = (id, data, token) => {
         }
     };
 
-    return axios.patch('http://localhost:8080/api/v1/users/me', {...data, 'token': token}, config);
+    return axios.patch(config.api.backend_api + '/api/v1/users/me', {...data, 'token': token}, config);
 };
 
 export const forgotPassword = (data) => {
@@ -18,7 +19,7 @@ export const forgotPassword = (data) => {
             "Content-Type": "application/json"
         }
     };
-    return axios.post('http://localhost:8080/api/v1/users/forgot-password', data, config);
+    return axios.post(config.api.backend_api + '/api/v1/users/forgot-password', data, config);
 };
 
 
@@ -29,11 +30,11 @@ export const resetPassword = (data) => {
             "Content-Type": "application/json"
         }
     };
-    return axios.post('http://localhost:8080/api/v1/users/reset-password', data, config);
+    return axios.post(config.api.backend_api + '/api/v1/users/reset-password', data, config);
 };
 
 export const uploadImg = async (selectorFiles) => {
     let data = new FormData();
     data.append("photos", selectorFiles[0]);
-    return await axios.post('http://localhost:8080/api/v1/upload', data);
+    return await axios.post(config.api.backend_api + '/api/v1/upload', data);
 };

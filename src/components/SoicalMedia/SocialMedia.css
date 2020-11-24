@@ -11,7 +11,7 @@
 .card__social-media::after {
     position: absolute;
     content: '';
-    right: 0px;
+    right: 20px;
     top: 10%;
     background: #ACA4DE;
     width: 5px;
@@ -101,7 +101,6 @@
     font-size: 50px;
     margin-right: 10px;
 }
-
 @media only screen and (max-width: 950px) {
     .card__forecast {
         width: 70%;

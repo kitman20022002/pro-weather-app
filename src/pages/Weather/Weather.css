@@ -17,6 +17,7 @@ body {
     text-align: center;
     border-top:1px solid;
     height: 100vh;
+    min-height: 800px;
     display: flex;
     align-items: center;
 }

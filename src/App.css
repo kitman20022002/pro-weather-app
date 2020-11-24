@@ -91,3 +91,12 @@ button:focus{
 .flex__column {
     flex-direction: column;
 }
+
+
+.loading--fixed{
+    top:50%;
+    left: 0;
+    right: 0;
+    color:white;
+    position: fixed;
+}

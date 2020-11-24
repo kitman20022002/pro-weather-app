@@ -3,7 +3,7 @@ import React from "react";
 import './DynamicWeather.css';
 import Lightning from "./Lighting/Lighting";
 import randomRange from "./Utility";
-import RainDrop from "./Rain/rainDrop";
+import RainDrop from "./Rain/RainDrop";
 import SnowFlake from "./Snow/Snow";
 import Cloud from "./Cloud/Cloud";
 import BlowingLeaf from "./BlowingLeaf/BlowingLeaf";

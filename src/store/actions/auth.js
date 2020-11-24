@@ -1,5 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
+import configuation from '../../config/config';
+
 
 let failTime = 0;
 export const authStart = () => {
@@ -54,9 +56,9 @@ export const auth = (email, password, isSignup, token = null) => {
         if (token !== null) {
             authData = {...authData, token};
         }
-        let url = 'http://localhost:8080/api/v1/users/signUp';
+        let url = configuation.api.backend_api + '/api/v1/users/signUp';
         if (!isSignup) {
-            url = 'http://localhost:8080/api/v1/users/signIn';
+            url = configuation.api.backend_api + '/api/v1/users/signIn';
         }
         axios.post(url, authData).then(response => {
             const img = !response.data.user.profile_img ? 'https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png' : response.data.user.profile_img;

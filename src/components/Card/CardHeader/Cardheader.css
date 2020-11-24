@@ -6,6 +6,7 @@
   overflow: hidden;
   z-index: 0;
   min-height: 300px;
+  display: flex;
 }
 
 .card__current-temperature {
@@ -47,7 +48,6 @@
 }
 
 .card__current-temperature {
-  width: 50%;
   padding: 70px 20px 70px 40px;
 }
 
@@ -82,10 +82,14 @@
   margin: 20px 0;
 }
 @media only screen and (max-width: 1680px) {
-
+  .card__main{
+    margin: 0px auto 0 auto;
+  }
+  .card__current{
+    min-height: 250px;
+  }
   .card__current-temperature {
-    width: 30%;
-    padding: 10px 10px 10px 40px;
+    padding: 50px 20px 50px 40px;
     font-size: 80px;
     color: white;
     margin: 0;
@@ -97,13 +101,6 @@
     margin: 20px 0;
   }
 
-
-  .card__current-location {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 100px;
-  }
 
   .card__current-country {
     color: white;
