@@ -34,6 +34,7 @@ class Forgot extends React.Component {
             checkForget: false,
             data: {},
             loading: true,
+            error: false
         };
         this.loadDefaultData();
     }
@@ -45,9 +46,14 @@ class Forgot extends React.Component {
     }
 
     handleSubmitForgetMessage = async (data) => {
-        let res = await forgotPassword({'email': data.email.value});
-        if (res) {
-            this.setState({checkForget: true});
+        try {
+            let res = await forgotPassword({'email': data.email.value});
+            if (res) {
+                this.setState({checkForget: true, error:false});
+            }
+        } catch (e) {
+            console.log(e);
+            this.setState({error: true});
         }
     };
 
@@ -67,6 +73,7 @@ class Forgot extends React.Component {
                             <Form data={this.state.formData} formSubmit={this.handleSubmitForgetMessage}
                                   btnText={"Submit"}/>
                         }
+                        {this.state.error ? <p className="color--white">Sorry we cannot find your email address</p> : ''}
                         <div className="login-fotpas">
                             <Link to='/login' className="switchSignup">Go back -></Link>
                         </div>

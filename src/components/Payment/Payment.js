@@ -32,7 +32,7 @@ class Payment extends React.Component {
         return (
             <div>
                 <StripeCheckout
-                    name={"df"}
+                    name={"WEATHS"}
                     description={""}
                     amount={convertToStripePayment(10)}
                     token={onToken(10, "as", function () {

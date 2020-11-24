@@ -7,6 +7,7 @@ import DynamicWeather from "../../components/DynamicWeather/DynamicWeather";
 import {getWeather} from "../../api/weatherapi";
 import Form from "../../components/Form/Form/Form";
 import FormContainer from "../../components/Container/FormContainer/FormContainer";
+import logo from "../../img/weather.png";
 
 class SignUp extends React.Component {
     constructor(props) {
@@ -82,6 +83,9 @@ class SignUp extends React.Component {
                                            alt={'bg'}/>
                     : <DynamicWeather data={this.state.data} height={parseInt(1080)}/>}
                 <FormContainer text={"Sign Up"}>
+                    <div className={"login-img__container"}>
+                        <img src={logo} alt={"weaths"} className={"login_img"}/>
+                    </div>
                     <div className="Signup-body">
                         <Form data={this.state.formData} formSubmit={this.handleSubmit} btnText={"Sign Up"}
                               validate={true}/>

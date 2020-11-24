@@ -1,6 +1,7 @@
 .switchSignup:visited {
-    color:white;
+    color: white;
 }
+
 .switchToSignup {
     padding: 0;
     display: flex;
@@ -8,12 +9,22 @@
 }
 
 .switchToSignup p, .switchToSignup a {
-    padding: 0!important;
+    padding: 0 !important;
     vertical-align: middle;
-    color:white;
+    color: white;
 }
 
-.background__img{
+.background__img {
     width: 100%;
     height: auto;
+}
+
+.login-img__container {
+    margin: 20px auto 0 auto;
+    width: 100%;
+    text-align: center;
+}
+
+.login_img {
+    width: 100%;
 }
