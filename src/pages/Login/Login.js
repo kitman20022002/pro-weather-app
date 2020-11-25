@@ -89,11 +89,12 @@ class Login extends React.Component {
         }
 
         return (
-            <div>
+            <div className={"login"}>
                 {this.state.loading ? <img className={'background__img'}
                                            src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqFUoOzaBd_QpPk6HpTIOZZYXdqVUQJur72g&usqp=CAU'}
                                            alt={'bg'}/>
-                    : <DynamicWeather data={this.state.data} width={parseInt(this.state.width)} height={parseInt(this.state.height)}/>}
+                    : <DynamicWeather data={this.state.data} width={parseInt(this.state.width)}
+                                      height={parseInt(this.state.height)}/>}
                 <FormContainer text={"Sign In"}>
                     <div className={"login-img__container"}>
                         <img src={logo} alt={"weaths"} className={"login_img"}/>

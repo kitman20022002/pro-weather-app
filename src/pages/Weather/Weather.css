@@ -10,12 +10,14 @@ body {
     font-family: sans-serif;
     background-color: white;
 }
-.Weather ,.root , body{
+
+.Weather, .root, body {
     height: 100%;
 }
+
 .Weather {
     text-align: center;
-    border-top:1px solid;
+    border-top: 1px solid;
     height: 100vh;
     min-height: 800px;
     display: flex;
@@ -67,19 +69,20 @@ body {
     border-radius: 20px;
     background-color: rgba(255, 255, 255, 0.3);
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
-    margin:60px auto 0 auto;
+    margin: 60px auto 0 auto;
     min-height: 487px;
 }
-a:visited, a:focus , a:active , a{
-    text-decoration: none!important;
+
+a:visited, a:focus, a:active, a {
+    text-decoration: none !important;
 
 }
-.btn:visited{
-    color:white;
+
+.btn:visited {
+    color: white;
     text-decoration: none;
 
 }
-
 
 .loader,
 .loader:before,
@@ -90,6 +93,7 @@ a:visited, a:focus , a:active , a{
     width: 1em;
     height: 4em;
 }
+
 .loader {
     color: #ffffff;
     text-indent: -9999em;
@@ -102,23 +106,26 @@ a:visited, a:focus , a:active , a{
     -webkit-animation-delay: -0.16s;
     animation-delay: -0.16s;
 }
+
 .loader:before,
 .loader:after {
     position: absolute;
     top: 0;
     content: '';
 }
+
 .loader:before {
     left: -1.5em;
     -webkit-animation-delay: -0.32s;
     animation-delay: -0.32s;
 }
+
 .loader:after {
     left: 1.5em;
 }
 
-.Weather > .loader{
-    top:200px;
+.Weather > .loader {
+    top: 200px;
 }
 
 @-webkit-keyframes load1 {
@@ -133,6 +140,7 @@ a:visited, a:focus , a:active , a{
         height: 5em;
     }
 }
+
 @keyframes load1 {
     0%,
     80%,
@@ -146,7 +154,6 @@ a:visited, a:focus , a:active , a{
     }
 }
 
-
 @media only screen and (max-width: 1680px) {
     .detail-info-container {
         padding: 20px 0px 20px 30px;
@@ -154,6 +161,7 @@ a:visited, a:focus , a:active , a{
     }
 
 }
+
 @media only screen and (max-width: 1024px) {
     .card__main {
         width: 90%;
@@ -169,25 +177,25 @@ a:visited, a:focus , a:active , a{
 }
 
 @media only screen and (max-width: 830px) {
-    .Weather ,.root , body{
+    .Weather, .root, body {
         position: relative;
         border: 1px solid transparent;
-        min-height: 100vh;
+        min-height: 1300px;
     }
-    .Weather{
+
+    .Weather {
         padding-bottom: 30px;
         height: unset;
 
     }
-    .card__social-media, .card__weather, .card__temperature {
-        width: 100%!important;
-    }
 
+    .card__social-media, .card__weather, .card__temperature {
+        width: 100% !important;
+    }
 
     .icon {
         display: none;
     }
-
 
     .detail-info-container {
         padding: 50px 20px;
@@ -200,5 +208,11 @@ a:visited, a:focus , a:active , a{
     .App {
         padding: 50px 0 50px 0;
         position: relative;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    .Weather, .root, body {
+        min-height: 1600px;
     }
 }

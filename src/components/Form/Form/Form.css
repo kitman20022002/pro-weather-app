@@ -45,6 +45,7 @@
     border-radius: 160px;
     border: 2px solid rgba(0, 0, 0, 0);
     transition: all .25s ease-out;
+    position: relative;
 }
 
 .form--default button:hover{
@@ -59,4 +60,26 @@
 
 .form--default input.error-input{
     border: 2px solid #ff4d4f;
+}
+
+.loader-a {
+    border: 4px solid transparent; /* Light grey */
+    border-top: 4px solid #f3f3f3; /* Blue */
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    animation: spin 2s linear infinite;
+    position: absolute;
+    left:120px;
+
+}
+
+.form--default button:disabled{
+    background: #a0a0a0;
+    cursor: no-drop;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

@@ -10,7 +10,8 @@ class Form extends React.Component {
         this.state = {
             data: this.props.data,
             validated: false,
-            recaptchaToken: ''
+            recaptchaToken: '',
+            submitting: true
         };
         this.onLoadRecaptcha = this.onLoadRecaptcha.bind(this);
         this.verifyCallback = this.verifyCallback.bind(this);
@@ -92,10 +93,12 @@ class Form extends React.Component {
         this.setState({data: formData});
         if (this.props.validate) {
             if (shouldSubmit && this.state.validated) {
+                this.setState({submitting: true});
                 this.props.formSubmit(this.state.data, this.state.recaptchaToken);
             }
         } else {
             if (shouldSubmit) {
+                this.setState({submitting: true});
                 this.props.formSubmit(this.state.data, null);
             }
         }
@@ -126,6 +129,12 @@ class Form extends React.Component {
     };
 
     render() {
+
+        if (!this.props.loading && this.state.submitting) {
+            this.setState({submitting: false});
+        }
+
+        const loader = (<div className={"loader-a"}></div>);
         return (
             <form className="form--default  flex flex__column" onSubmit={this.handleSubmit}>
                 {Object.keys(this.state.data).map((element, index) => {
@@ -156,7 +165,8 @@ class Form extends React.Component {
                     verifyCallback={this.verifyCallback}
                 />}
                 <button type={"submit"} className="submit-btn login-btn"
-                        onClick={this.handleSubmit}>{this.props.btnText}</button>
+                        onClick={this.handleSubmit}
+                        disabled={this.state.submitting}>{this.state.submitting && loader}{this.props.btnText}</button>
             </form>
         );
     }
@@ -165,6 +175,7 @@ class Form extends React.Component {
 const mapStateToProps = state => {
     return {
         error: state.auth.error,
+        loading: state.auth.loading,
     };
 };
 export default connect(mapStateToProps, null)(Form);

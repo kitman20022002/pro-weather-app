@@ -8,21 +8,22 @@ class Cardheader extends React.Component {
         super(props);
         this.state = {
             elementHeight: 0,
+            elementWidth: 0
         };
     }
 
     getHeight = (element) => {
         if (element && !this.state.elementHeight) { // need to check that we haven't already set the height or we'll create an infinite render loop
-            this.setState({elementHeight: element.clientHeight + 100});
+            this.setState({elementHeight: element.clientHeight, elementWidth: element.clientWidth});
         }
-
     };
 
     render() {
 
         return (
             <section className="card__current" ref={this.getHeight}>
-                <DynamicWeather data={this.props.data} height={parseInt(this.state.elementHeight)}/>
+                <DynamicWeather data={this.props.data} height={parseInt(this.state.elementHeight)}
+                                width={parseInt(this.state.elementWidth)}/>
                 <div className="card__current-temperature">
                     <div className="center">
                         <span
@@ -41,7 +42,7 @@ class Cardheader extends React.Component {
                     </ul>
                 </div>
                 <div className="card__current-location">
-                    <p className="card__current-country">{this.props.data.timezone.split("/")[1].replace('_' , ' ')}</p>
+                    <p className="card__current-country">{this.props.data.timezone.split("/")[1].replace('_', ' ')}</p>
                 </div>
             </section>
         );

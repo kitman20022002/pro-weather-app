@@ -67,7 +67,10 @@
     z-index: -1;
     border-radius: 20px;
     position: absolute;
-    min-height: 550px;
+    min-height: 400px;
+}
+.login .canvas{
+    border-radius: 0;
 }
 
 .night{
