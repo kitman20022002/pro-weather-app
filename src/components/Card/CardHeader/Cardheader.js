@@ -41,7 +41,7 @@ class Cardheader extends React.Component {
                     </ul>
                 </div>
                 <div className="card__current-location">
-                    <p className="card__current-country">{this.props.data.timezone.split("/")[1]}</p>
+                    <p className="card__current-country">{this.props.data.timezone.split("/")[1].replace('_' , ' ')}</p>
                 </div>
             </section>
         );

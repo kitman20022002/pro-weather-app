@@ -60,19 +60,26 @@ export const auth = (email, password, isSignup, token = null) => {
         if (!isSignup) {
             url = configuation.api.backend_api + '/api/v1/users/signIn';
         }
-        axios.post(url, authData).then(response => {
-            const img = !response.data.user.profile_img ? 'https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png' : response.data.user.profile_img;
-            const expirationDate = new Date(new Date().getTime() + 10000 * 1000);
-            localStorage.setItem('token', response.data.token);
-            localStorage.setItem('userId', response.data.user._id);
-            localStorage.setItem('username', response.data.user.username);
-            localStorage.setItem('profile_img', response.data.user.profile_img);
-
-            dispatch(authSuccess(response.data.token, response.data.user._id, response.data.user.username, img));
-            //dispatch(checkAuthTimeout(expirationDate));
-        }).catch(err => {
-            dispatch(authFail(err));
-        });
+        console.log('what');
+        try {
+            axios.post(url, authData).then(response => {
+                console.log('abc');
+                const img = !response.data.user.profile_img ? 'https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png' : response.data.user.profile_img;
+                const expirationDate = new Date(new Date().getTime() + 10000 * 1000);
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('userId', response.data.user._id);
+                localStorage.setItem('username', response.data.user.username);
+                localStorage.setItem('profile_img', response.data.user.profile_img);
+                dispatch(authSuccess(response.data.token, response.data.user._id, response.data.user.username, img));
+                //dispatch(checkAuthTimeout(expirationDate));
+            }).catch(err => {
+                console.log('abcd');
+                dispatch(authFail(err));
+            });
+        }catch (e) {
+            console.log('fxxk');
+            dispatch(authFail(e));
+        }
     };
 };
 

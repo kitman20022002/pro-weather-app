@@ -112,6 +112,8 @@ class Form extends React.Component {
 
     getErrorMessage = (message) => {
         switch (message) {
+            case 204:
+                return "Incorrect Username or password";
             case 400:
                 return "Incorrect Username or password";
             case 401:

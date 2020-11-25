@@ -103,7 +103,7 @@ class Login extends React.Component {
 const mapStateToProps = state => {
     return {
         isAuth: state.auth.token !== null,
-        authFailTimes: state.auth.authFailTimes
+        authFailTimes: state.auth.authFailTimes,
     };
 };
 const mapDispatchToProps = dispatch => {
