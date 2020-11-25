@@ -63,7 +63,6 @@ class DynamicWeather extends React.Component {
             'wind': [this.spawnLeaves]
         };
         this.state = {width: 0, height: 0};
-        this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
 
     getShowTime(hours) {
@@ -81,13 +80,7 @@ class DynamicWeather extends React.Component {
     }
 
 
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.updateWindowDimensions);
-    }
 
-    updateWindowDimensions() {
-        this.setState({width: window.innerWidth, height: window.innerHeight});
-    }
 
     componentDidMount() {
         const time = this.getShowTime(moment.unix(this.props.data.currently.time).format('H'));
@@ -102,8 +95,6 @@ class DynamicWeather extends React.Component {
         });
         self.setConditionReady();
 
-        this.updateWindowDimensions();
-        window.addEventListener('resize', this.updateWindowDimensions);
     }
 
     preLoadImageAssets = (callback) => {
@@ -228,7 +219,7 @@ class DynamicWeather extends React.Component {
 
     render() {
         return (
-            <canvas ref="canvas" width={980} height={580} id="canvas"
+            <canvas ref="canvas" width={this.props.width} height={this.props.height} id="canvas"
                     className="canvas night"/>
         );
     }

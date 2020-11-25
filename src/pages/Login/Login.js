@@ -50,11 +50,18 @@ class Login extends React.Component {
                 },
             },
             data: {},
+            width: 0,
+            height: 0,
             loading: true,
         };
         this.loadDefaultData();
+        this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
 
+    componentDidMount() {
+        this.updateWindowDimensions();
+        window.addEventListener('resize', this.updateWindowDimensions);
+    }
 
     async loadDefaultData() {
         let result = await getWeather("sydney");
@@ -65,6 +72,14 @@ class Login extends React.Component {
     handleSubmit = (data, token = null) => {
         this.props.onAuth(data.email.value, data.password.value, token);
     };
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateWindowDimensions);
+    }
+
+    updateWindowDimensions() {
+        this.setState({width: window.innerWidth, height: window.innerHeight});
+    }
 
     render() {
         const {history} = this.props;
@@ -78,7 +93,7 @@ class Login extends React.Component {
                 {this.state.loading ? <img className={'background__img'}
                                            src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqFUoOzaBd_QpPk6HpTIOZZYXdqVUQJur72g&usqp=CAU'}
                                            alt={'bg'}/>
-                    : <DynamicWeather data={this.state.data} height={parseInt(1080)}/>}
+                    : <DynamicWeather data={this.state.data} width={parseInt(this.state.width)} height={parseInt(this.state.height)}/>}
                 <FormContainer text={"Sign In"}>
                     <div className={"login-img__container"}>
                         <img src={logo} alt={"weaths"} className={"login_img"}/>

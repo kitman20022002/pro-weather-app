@@ -114,6 +114,8 @@ class Form extends React.Component {
         switch (message) {
             case 204:
                 return "Incorrect Username or password";
+            case 302:
+                return "Email has been taken";
             case 400:
                 return "Incorrect Username or password";
             case 401:
