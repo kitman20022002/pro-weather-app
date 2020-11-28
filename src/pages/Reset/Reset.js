@@ -26,7 +26,8 @@ class Reset extends React.Component {
                     valid: true,
                     value: '',
                     cssClass: '',
-                    error: ''
+                    error: '',
+                    type: 'password'
                 },
                 passwordConfirm: {
                     elementConfig: {
@@ -41,20 +42,29 @@ class Reset extends React.Component {
                     valid: true,
                     value: '',
                     cssClass: '',
-                    error: ''
+                    error: '',
+                    type: 'password'
                 },
             },
             resetSuccess: false,
             data: {},
             loading: true,
+            errorMessage: '',
         };
 
     }
 
     handleSubmitReset = async (data) => {
-        let res = await resetPassword({'password': data.password.value});
-        if (res) {
-            this.setState({resetSuccess: true});
+        try {
+            let res = await resetPassword({'password': data.password.value, 't': this.props.match.params.token});
+
+            if (res) {
+                this.setState({resetSuccess: true});
+            } else {
+                this.setState({resetSuccess: false, errorMessage: 'Unauthorized '});
+            }
+        } catch (e) {
+            this.setState({resetSuccess: false, errorMessage: 'Unauthorized'});
         }
     };
 
@@ -67,6 +77,8 @@ class Reset extends React.Component {
                 <FormContainer text={"Reset Password"}>
                     {!this.state.resetSuccess ?
                         <div className="Signup-body">
+                            {this.state.errorMessage !== '' &&
+                            <p className={"color--red error-message"}>{this.state.errorMessage}</p>}
                             <Form data={this.state.formData} formSubmit={this.handleSubmitReset}
                                   btnText={"Confirm"}/>
                         </div>

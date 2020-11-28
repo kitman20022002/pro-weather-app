@@ -33,7 +33,7 @@ class Cardheader extends React.Component {
                     <ul className="card__current-details-list flex space-between list-style--disable center">
                         <li className="card__current-details">
                             <p>HUMIDITY</p>
-                            <p>{this.props.data.currently.humidity * 100}%</p>
+                            <p>{parseInt(this.props.data.currently.humidity * 100)}%</p>
                         </li>
                         <li className="card__current-details">
                             <p>WIND</p>

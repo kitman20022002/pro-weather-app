@@ -27,7 +27,7 @@ class App extends React.Component {
         return (
             <div>
                 <Route path="/" exact component={Login}/>
-                <Route path="/reset" exact component={Reset}/>
+                <Route path="/reset-password/:token" exact component={Reset}/>
                 <Route path="/forgot" exact component={Forgot}/>
                 <Route path="/sign-up" exact component={SignUp}/>
                 <ProtectedRoute path="/dashboard" exact component={Weather}/>
