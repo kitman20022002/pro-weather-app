@@ -63,7 +63,7 @@ body {
 /**************************/
 
 .card__main {
-    width: 70%;
+    width: 100%;
     max-width: 980px;
     margin: auto;
     border-radius: 20px;

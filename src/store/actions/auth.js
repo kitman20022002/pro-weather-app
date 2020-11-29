@@ -10,13 +10,14 @@ export const authStart = () => {
     };
 };
 
-export const authSuccess = (token, userId, username, profileImg) => {
+export const authSuccess = (token, userId, username, profileImg, city) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
         idToken: token,
         userId: userId,
         profileImg: profileImg,
-        username: username
+        username: username,
+        city: city
     };
 };
 
@@ -63,18 +64,22 @@ export const auth = (email, password, isSignup, token = null) => {
 
         try {
             axios.post(url, authData).then(response => {
+
                 const img = !response.data.user.profile_img ? 'https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png' : response.data.user.profile_img;
                 const expirationDate = new Date(new Date().getTime() + 10000 * 1000);
+                console.log(response.data);
+                console.log(response.data.user);
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('userId', response.data.user._id);
                 localStorage.setItem('username', response.data.user.username);
                 localStorage.setItem('profile_img', response.data.user.profile_img);
-                dispatch(authSuccess(response.data.token, response.data.user._id, response.data.user.username, img));
+                localStorage.setItem('city', response.data.user.city);
+                dispatch(authSuccess(response.data.token, response.data.user._id, response.data.user.username, img, response.data.user.city));
                 //dispatch(checkAuthTimeout(expirationDate));
             }).catch(err => {
                 dispatch(authFail(err));
             });
-        }catch (e) {
+        } catch (e) {
             dispatch(authFail(e));
         }
     };
@@ -96,7 +101,8 @@ export const authCheckState = () => {
             const userId = localStorage.getItem('userId');
             const userName = localStorage.getItem('username');
             const profileImg = localStorage.getItem('profile_img');
-            dispatch(authSuccess(token, userId, userName, profileImg));
+            const city = localStorage.getItem('city');
+            dispatch(authSuccess(token, userId, userName, profileImg, city));
             // dispatch(checkAuthTimeout(expirationDate.getTime() - new Date().getTime()));
             //}
             //dispatch(authSuccess());
@@ -107,6 +113,7 @@ export const authCheckState = () => {
 export const updateUserLocal = (data) => {
     localStorage.setItem('username', data.username);
     localStorage.setItem('profile_img', data.profile_img);
+    localStorage.setItem('city', data.city);
     return {
         type: actionTypes.UPDATE_USER_LOCAL,
         data

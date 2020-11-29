@@ -2,9 +2,11 @@ import React from 'react';
 import './Account.css';
 import '../../App.css';
 import {connect} from "react-redux";
-import {updateUser, uploadImg} from '../../api/user';
+import {deleteUser, updateUser, uploadImg} from '../../api/user';
 import Modal from "../../components/Modal/Modal";
 import {updateUserLocal} from "../../store/actions/auth";
+import Redirect from "react-router-dom/es/Redirect";
+import * as actions from "../../store/actions";
 
 class Account extends React.Component {
 
@@ -16,9 +18,11 @@ class Account extends React.Component {
             lastName: 'dd',
             username: props.profileName,
             password: props.password,
-            city: 'Sydney',
+            city: props.city,
             profile_img: props.profileImg,
-            modalShow: false
+            modalShow: false,
+            modalError: false,
+            submitting: false
         };
         this.handleChange = this.handleChange.bind(this);
         // this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,21 +40,41 @@ class Account extends React.Component {
             'city': this.state.city,
             'password': this.state.password,
             'profile_img': this.state.profile_img,
-            'token': this.props.token
+            'token': this.props.token,
         };
+        this.setState({'submitting': true});
+        await updateUser(this.props.userId, data, this.props.token);
+        this.props.updateUserLocal({
+            'profile_img': this.state.profile_img,
+            'username': this.state.username,
+            'city': this.state.city
+        });
+        this.setState({'submitting': false});
+    };
+
+    openModal = async (e) => {
+        e.preventDefault();
         this.setState({'modalShow': true});
-       await updateUser(this.props.userId, data, this.props.token);
-        this.props.updateUserLocal({'profile_img': this.state.profile_img, 'username': this.state.username});
     };
 
     deleteUser = async (e) => {
+
         e.preventDefault();
-        //show modal
-        //delete user
+        if (this.state.modalError) {
+            this.setState({'modalError': false, 'modalShow': false});
+        } else {
+            try {
+                const result = await deleteUser(this.props.userId, this.props.token);
+                this.setState({'modalShow': false, 'modalError': false});
+                this.props.onLogout();
+            } catch (e) {
+                this.setState({'modalError': true});
+            }
+        }
     };
 
     closeModal = () => {
-        this.setState({'modalShow': false});
+        this.setState({'modalShow': false, 'modalError': false});
     };
 
     removeProfileImg = async (e) => {
@@ -111,12 +135,8 @@ class Account extends React.Component {
                     <label>
                         Default City:
                     </label>
-                    <select name='value' value={this.state.value} onChange={this.handleChange}>
-                        <option value="grapefruit">Grapefruit</option>
-                        <option value="lime">Lime</option>
-                        <option value="coconut">Coconut</option>
-                        <option value="mango">Mango</option>
-                    </select>
+                    <input type="input" name='city' value={this.state.city}
+                           onChange={this.handleChange}/>
                     <div className={'full-width extra__container'}>
                         <hr className={'full-width'}/>
                         <div className={"delete-account__container"}>
@@ -124,16 +144,34 @@ class Account extends React.Component {
                                 <h3>Delete Account</h3>
                                 <p>By deleting your account you will lose all your data</p>
                             </div>
-                            <button className={"grey"} onClick={this.deleteUser}>Delete account...</button>
+                            <button className={"grey"} onClick={this.openModal}>Delete account...</button>
                         </div>
                     </div>
                     <div className={"text--right btn-container"}>
-                        <input type="submit" value="Save Value" onClick={this.updateUser}/>
+                        <button type="submit" onClick={this.updateUser} disabled={this.state.submitting}>Save Value
+                        </button>
+                        {/*<input type="submit" value="Save Value" onClick={this.updateUser} disabled={this.state.submitting}/>*/}
                     </div>
                 </form>
-                <Modal show={this.state.modalShow}>
-                    <h2>Updated</h2>
-                    <button onClick={this.closeModal}>OK</button>
+                <Modal show={this.state.modalShow} class={"modal--default"}>
+                    <div className={"content"}>
+                        <span className={"color--purple"}>JUST CHECKING</span>
+                        {!this.state.modalError ? (
+                                <div>
+                                    <h2>Delete your account ?</h2>
+                                    <p>Do you really want to delete your account? This process cannot be undone.</p>
+                                </div>
+                            ) :
+                            <div>
+                                <h2>Failed delete account</h2>
+                                <p>Please try again. If problem still happens please contact weaths@kitmanyiu.com</p>
+                            </div>
+                        }
+                    </div>
+                    <div className={"flex"}>
+                        <button onClick={this.deleteUser}>Confirm</button>
+                        <button onClick={this.closeModal}>Cancel</button>
+                    </div>
                 </Modal>
             </div>
         )
@@ -141,22 +179,24 @@ class Account extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+
     return {
         error: state.auth.error,
         isAuth: state.auth.token !== null,
         userId: state.auth.userId,
         token: state.auth.token,
         profileImg: state.auth.profileImg,
-        profileName: state.auth.profileName
+        profileName: state.auth.profileName,
+        city: state.auth.city
+
     }
 };
 
-const mapDispatchToProps = dispatch => ({
-    updateUserLocal(data) {
-        dispatch(
-            updateUserLocal(data)
-        )
-    },
-});
+const mapDispatchToProps = dispatch => {
+    return {
+        updateUserLocal: (data) => dispatch(updateUserLocal(data)),
+        onLogout: () => dispatch(actions.logout())
+    }
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account);

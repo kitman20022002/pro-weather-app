@@ -100,3 +100,7 @@ button:focus{
     color:white;
     position: fixed;
 }
+
+.color--purple{
+    color:#8650f6;
+}

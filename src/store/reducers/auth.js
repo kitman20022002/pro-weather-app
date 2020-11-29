@@ -7,6 +7,7 @@ const initialState = {
     profileName: null,
     profileImg: null,
     error: null,
+    city: null,
     loading: false,
     authRedirectPath: '/',
     authFailTimes: 0
@@ -22,6 +23,7 @@ const authSuccess = (state, action) => {
         profileName: action.username === "" ? "Kitman Yiu" : action.username,
         profileImg: action.profileImg,
         userId: action.userId,
+        city: action.city,
         error: null,
         loading: false,
         authFailTimes: 0

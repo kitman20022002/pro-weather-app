@@ -50,6 +50,22 @@ class SignUp extends React.Component {
                     error: '',
                     type: 'password'
                 },
+                city: {
+                    elementConfig: {
+                        placeholder: 'City'
+                    },
+                    validation: {
+                        required: true,
+                    },
+                    errorMessage: {
+                        required: 'City is required',
+                    },
+                    valid: true,
+                    value: '',
+                    cssClass: '',
+                    error: '',
+                    type: 'input'
+                },
             },
             checkForget: false,
             data: {},

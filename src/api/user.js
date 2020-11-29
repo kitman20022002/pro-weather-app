@@ -5,11 +5,23 @@ export const updateUser = (id, data, token) => {
     let config = {
         headers: {
             'Access-Control-Allow-Origin': '*',
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            'token': token
         }
     };
 
-    return axios.patch(configuation.api.backend_api + '/api/v1/users/me', {...data, 'token': token}, config);
+    return axios.patch(configuation.api.backend_api + '/api/v1/users/me', {...data}, config);
+};
+
+export const deleteUser = (id, token) => {
+    let config = {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            "Content-Type": "application/json",
+            "token": token,
+        }
+    };
+    return axios.delete(configuation.api.backend_api + '/api/v1/users/' + id, config);
 };
 
 export const forgotPassword = (data) => {

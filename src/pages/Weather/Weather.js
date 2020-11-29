@@ -39,7 +39,8 @@ class Weather extends React.Component {
     };
 
     async loadDefaultData() {
-        let result = await getWeather("sydney");
+        console.log(this.props.city);
+        let result = await getWeather(this.props.city);
         result.data.daily.data = result.data.daily.data.splice(0, 5);
         this.setState({data: result.data, isLoaded: true, error: false});
     }
@@ -61,7 +62,8 @@ class Weather extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        isAuthenticated: state.auth.token !== null
+        isAuthenticated: state.auth.token !== null,
+        city: state.auth.city
     };
 };
 
