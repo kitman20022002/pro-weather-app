@@ -44,6 +44,7 @@ const updateUserLocal = (state, action) => {
     return updateObject(state, {
         profileName: action.data.username === "" ? "Kitman Yiu" : action.data.username,
         profileImg: action.data.profile_img,
+        city: action.data.city,
     });
 };
 

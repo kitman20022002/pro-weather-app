@@ -78,7 +78,12 @@ class Account extends React.Component {
 
     removeProfileImg = async (e) => {
         e.preventDefault();
-        const data = {'profile_img': ''};
+        const data = {
+            'profile_img': '',
+            'username': this.state.username,
+            'city': this.state.city
+        };
+
         this.setState(data);
         this.props.updateUserLocal(data);
         await updateUser(this.props.userId, data, this.props.token);
@@ -87,7 +92,11 @@ class Account extends React.Component {
     uploadImg = async (selectorFiles) => {
         let res = await uploadImg(selectorFiles);
         this.setState({profile_img: res.data[0].location});
-        this.props.updateUserLocal({'profile_img': res.data[0].location, 'username': this.state.username});
+        this.props.updateUserLocal({
+            'profile_img': res.data[0].location,
+            'username': this.state.username,
+            'city': this.state.city
+        });
     };
 
     render() {

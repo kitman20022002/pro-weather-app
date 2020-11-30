@@ -97,18 +97,18 @@ export const authCheckState = () => {
             dispatch(logout());
         } else {
             const expirationDate = new Date(localStorage.getItem('expirationDate'));
-
+            const userId = localStorage.getItem('userId');
+            const userName = localStorage.getItem('username');
+            const profileImg = localStorage.getItem('profile_img');
+            const city = localStorage.getItem('city');
             if (expirationDate <= new Date()) {
                 dispatch(logout());
             } else {
-                const userId = localStorage.getItem('userId');
-                const userName = localStorage.getItem('username');
-                const profileImg = localStorage.getItem('profile_img');
-                const city = localStorage.getItem('city');
+
                 dispatch(authSuccess(token, userId, userName, profileImg, city));
                 dispatch(checkAuthTimeout(expirationDate.getTime() - new Date().getTime()));
             }
-            dispatch(authSuccess());
+            dispatch(authSuccess(token, userId, userName, profileImg, city));
         }
     }
 };
@@ -117,6 +117,7 @@ export const updateUserLocal = (data) => {
     localStorage.setItem('username', data.username);
     localStorage.setItem('profile_img', data.profile_img);
     localStorage.setItem('city', data.city);
+
     return {
         type: actionTypes.UPDATE_USER_LOCAL,
         data
