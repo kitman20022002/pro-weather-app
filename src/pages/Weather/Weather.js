@@ -44,7 +44,6 @@ class Weather extends React.Component {
     }
 
     render() {
-
         let data = this.state.data;
         const showCard = this.state.error ? <p className="error">ERROR NOT CITY</p> :
             <Cards data={data} isLoaded={this.state.isLoaded} searchKey={this.state.searchKey}/>;

@@ -29,6 +29,16 @@ export const authFail = (error) => {
     };
 };
 export const logout = () => {
+    const token = localStorage.getItem('token');
+    let config = {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            "Content-Type": "application/json",
+            "token": token,
+        }
+    };
+
+    axios.post(configuation.api.backend_api + '/api/v1/users/logout',{}, config);
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('username');
@@ -47,6 +57,41 @@ export const checkAuthTimeout = (expirationTime) => {
         setTimeout(() => {
             dispatch(logout());
         }, t);
+    };
+};
+export const signUp = (email, password, city, isSignup, token = null) => {
+    return dispatch => {
+        dispatch(authStart());
+        let authData = {
+            email: email,
+            password: password,
+            city: city,
+            returnSecureToken: true
+        };
+        if (token !== null) {
+            authData = {...authData, token};
+        }
+        let url = configuation.api.backend_api + '/api/v1/users/signUp';
+
+        try {
+            axios.post(url, authData).then(response => {
+                const img = !response.data.user.profile_img ? 'https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png' : response.data.user.profile_img;
+                const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
+
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('userId', response.data.user._id);
+                localStorage.setItem('username', response.data.user.username);
+                localStorage.setItem('profile_img', response.data.user.profile_img);
+                localStorage.setItem('city', response.data.user.city);
+                localStorage.setItem('expirationDate', expirationDate);
+                dispatch(authSuccess(response.data.token, response.data.user._id, response.data.user.username, img, response.data.user.city));
+                dispatch(checkAuthTimeout(response.data.expiresIn));
+            }).catch(err => {
+                dispatch(authFail(err));
+            });
+        } catch (e) {
+            dispatch(authFail(e));
+        }
     };
 };
 

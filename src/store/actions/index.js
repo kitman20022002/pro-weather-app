@@ -2,5 +2,6 @@ export {
     auth,
     logout,
     authCheckState,
-    updateUserLocal
+    updateUserLocal,
+    signUp
 }from './auth';

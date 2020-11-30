@@ -77,7 +77,7 @@ class Form extends React.Component {
         return errorMsg;
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = async  (e) => {
         e.preventDefault();
         let shouldSubmit = true;
         const formData = {...this.state.data};
@@ -94,14 +94,15 @@ class Form extends React.Component {
         if (this.props.validate) {
             if (shouldSubmit && this.state.validated) {
                 this.setState({submitting: true});
-                this.props.formSubmit(this.state.data, this.state.recaptchaToken);
+                 this.props.formSubmit(this.state.data, this.state.recaptchaToken);
             }
         } else {
             if (shouldSubmit) {
                 this.setState({submitting: true});
-                this.props.formSubmit(this.state.data, null);
+                 this.props.formSubmit(this.state.data, null);
             }
         }
+        this.setState({submitting: false});
     };
 
     onChange = (e) => {
@@ -129,7 +130,6 @@ class Form extends React.Component {
     };
 
     render() {
-
         const loader = (<div className={"loader-a"}></div>);
         return (
             <form className="form--default  flex flex__column" onSubmit={this.handleSubmit}>
@@ -162,7 +162,7 @@ class Form extends React.Component {
                 />}
                 <button type={"submit"} className="submit-btn login-btn"
                         onClick={this.handleSubmit}
-                        disabled={this.state.submitting}>{this.state.submitting && loader}{this.props.btnText}</button>
+                        disabled={this.props.loading}>{this.props.loading && loader}{this.props.btnText}</button>
             </form>
         );
     }

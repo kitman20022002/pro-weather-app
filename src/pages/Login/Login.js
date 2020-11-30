@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import './Login.css';
 import {connect} from "react-redux";
 import * as action from "../../store/actions";
@@ -62,7 +62,7 @@ class Login extends React.Component {
             maximumAge: 0
         };
 
-        navigator.geolocation.getCurrentPosition(this.success , this.error, options)
+        navigator.geolocation.getCurrentPosition(this.success, this.error, options)
     }
 
     success(pos) {
@@ -102,10 +102,9 @@ class Login extends React.Component {
     }
 
     render() {
-        const {history} = this.props;
+
         if (this.props.isAuth) {
-            history.push("/dashboard");
-            return <div/>;
+            return (<Redirect to="/dashboard"/>);
         }
 
         return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import './SignUp.css';
 import {connect} from "react-redux";
 import * as action from "../../store/actions";
@@ -69,11 +69,22 @@ class SignUp extends React.Component {
             },
             checkForget: false,
             data: {},
+            width: 0,
+            height: 0,
             loading: true,
         };
         this.loadDefaultData();
     }
 
+
+    componentDidMount() {
+        this.updateWindowDimensions();
+        window.addEventListener('resize', this.updateWindowDimensions);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateWindowDimensions);
+    }
 
     async loadDefaultData() {
         let result = await getWeather("sydney");
@@ -82,14 +93,16 @@ class SignUp extends React.Component {
     }
 
     handleSubmit = (data, token) => {
-        this.props.onAuth(data.email.value, data.password.value, token);
+        this.props.onSignUp(data.email.value, data.password.value, data.city.value, token);
     };
+    updateWindowDimensions() {
+        this.setState({width: window.innerWidth, height: window.innerHeight});
+    }
+
 
     render() {
-        const {history} = this.props;
         if (this.props.isAuth) {
-            history.push("/dashboard");
-            return <div/>;
+            return (<Redirect to="/dashboard"/>);
         }
 
         return (
@@ -97,7 +110,8 @@ class SignUp extends React.Component {
                 {this.state.loading ? <img className={'background__img'}
                                            src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqFUoOzaBd_QpPk6HpTIOZZYXdqVUQJur72g&usqp=CAU'}
                                            alt={'bg'}/>
-                    : <DynamicWeather data={this.state.data} height={parseInt(1080)}/>}
+                    : <DynamicWeather data={this.state.data} width={parseInt(this.state.width)}
+                                      height={parseInt(this.state.height)}/>}
                 <FormContainer text={"Sign Up"}>
                     <div className={"login-img__container"}>
                         <img src={logo} alt={"weaths"} className={"login_img"}/>
@@ -126,6 +140,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password, token) => dispatch(action.auth(email, password, true, token)),
+        onSignUp: (email, password, city, token) => dispatch(action.signUp(email, password, city, true, token)),
         // authFBSuccess: (user, email, images, firstName, lastName, ID, accessToken) => dispatch(action.socialFBAuth(user, email, images, firstName, lastName, ID, accessToken)),
         // authGoogleSuccess: (user, email, images, firstName, lastName, ID, accessToken) => dispatch(action.socialGoogleAuth(user, email, images, firstName, lastName, ID, accessToken)),
         // socialLogin: (user, userId, token) => dispatch(action.googleAuthLogin(user, userId, token)),
