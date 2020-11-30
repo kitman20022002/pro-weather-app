@@ -5,7 +5,6 @@ import {connect} from "react-redux";
 import {deleteUser, updateUser, uploadImg} from '../../api/user';
 import Modal from "../../components/Modal/Modal";
 import {updateUserLocal} from "../../store/actions/auth";
-import Redirect from "react-router-dom/es/Redirect";
 import * as actions from "../../store/actions";
 
 class Account extends React.Component {
@@ -64,7 +63,7 @@ class Account extends React.Component {
             this.setState({'modalError': false, 'modalShow': false});
         } else {
             try {
-                const result = await deleteUser(this.props.userId, this.props.token);
+                await deleteUser(this.props.userId, this.props.token);
                 this.setState({'modalShow': false, 'modalError': false});
                 this.props.onLogout();
             } catch (e) {

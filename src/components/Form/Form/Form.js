@@ -11,7 +11,7 @@ class Form extends React.Component {
             data: this.props.data,
             validated: false,
             recaptchaToken: '',
-            submitting: true
+            submitting: false
         };
         this.onLoadRecaptcha = this.onLoadRecaptcha.bind(this);
         this.verifyCallback = this.verifyCallback.bind(this);
@@ -129,10 +129,6 @@ class Form extends React.Component {
     };
 
     render() {
-
-        if (!this.props.loading && this.state.submitting) {
-            this.setState({submitting: false});
-        }
 
         const loader = (<div className={"loader-a"}></div>);
         return (

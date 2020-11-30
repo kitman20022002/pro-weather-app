@@ -28,7 +28,6 @@ class Weather extends React.Component {
             let q = e.target.value.toLowerCase();
             getWeather(q)
                 .then((response) => {
-                    console.log(response.data);
                     response.data.daily.data = response.data.daily.data.splice(0, 5);
                     this.setState({data: response.data, isLoaded: true, error: false, searchKey: q});
                 })
@@ -39,7 +38,6 @@ class Weather extends React.Component {
     };
 
     async loadDefaultData() {
-        console.log(this.props.city);
         let result = await getWeather(this.props.city);
         result.data.daily.data = result.data.daily.data.splice(0, 5);
         this.setState({data: result.data, isLoaded: true, error: false});
@@ -52,7 +50,7 @@ class Weather extends React.Component {
             <Cards data={data} isLoaded={this.state.isLoaded} searchKey={this.state.searchKey}/>;
         return (
             <div className="Weather">
-                <Header searchPressCallback={this.handleSearchPress} />
+                <Header searchPressCallback={this.handleSearchPress}/>
                 {!this.state.isLoaded ? <div className="loading--fixed"><LoaderWeather/></div> : showCard}
                 <BackGround/>
             </div>

@@ -7,10 +7,10 @@ const weatherMapping = {
     'clear-day': 'CLEAR_DAY',
     'partly-cloudy-day': 'PARTLY_CLOUDY_DAY',
     'cloudy': 'CLOUDY',
-    'rain' : 'RAIN',
-    'wind' : 'WIND',
-    'fog' : 'FOG',
-    'snow' : 'SNOW'
+    'rain': 'RAIN',
+    'wind': 'WIND',
+    'fog': 'FOG',
+    'snow': 'SNOW'
 };
 
 const dayMapping = {
@@ -41,8 +41,10 @@ const ForecastItem = (props) => (
             color={'#8650f6'}
             size={50}
             animate={true} className="weather color--purple"/>
-
-        <p className="card__forecast-temperature">{parseInt(props.data.temperatureMin)}°</p>
+        <div className={"flex temp"}>
+            <p className="card__forecast-temperature">{parseInt(props.data.temperatureMax)}°</p>
+            <p className="card__forecast-temperature color--low"> {parseInt(props.data.temperatureMin)}°</p>
+        </div>
     </div>
 );
 

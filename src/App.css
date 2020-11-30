@@ -87,11 +87,9 @@ button:focus{
     outline: 0;
 }
 
-
 .flex__column {
     flex-direction: column;
 }
-
 
 .loading--fixed{
     top:50%;
@@ -103,4 +101,10 @@ button:focus{
 
 .color--purple{
     color:#8650f6;
+}
+
+
+.color--low{
+    color: #545454 !important;
+    font-size: 14px!important;
 }

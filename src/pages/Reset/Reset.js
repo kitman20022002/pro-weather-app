@@ -1,9 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import './Reset.css';
-import DynamicWeather from "../../components/DynamicWeather/DynamicWeather";
-import {getWeather} from "../../api/weatherapi";
-import {forgotPassword, resetPassword} from "../../api/user";
+import {resetPassword} from "../../api/user";
 import Form from "../../components/Form/Form/Form";
 import FormContainer from "../../components/Container/FormContainer/FormContainer";
 

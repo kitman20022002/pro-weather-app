@@ -18,6 +18,7 @@ const authStart = (state, action) => {
 };
 
 const authSuccess = (state, action) => {
+
     return updateObject(state, {
         token: action.idToken,
         profileName: action.username === "" ? "Kitman Yiu" : action.username,
@@ -39,6 +40,7 @@ const authLogout = (state, action) => {
 };
 
 const updateUserLocal = (state, action) => {
+
     return updateObject(state, {
         profileName: action.data.username === "" ? "Kitman Yiu" : action.data.username,
         profileImg: action.data.profile_img,
@@ -61,6 +63,5 @@ const reducer = (state = initialState, action) => {
             return state;
     }
 };
-
 
 export default reducer;

@@ -1,8 +1,12 @@
 
-
-
 .card__forecast {
     width: 60%;
+}
+
+.card__forecast .temp {
+    max-width: 70px;
+    margin: auto;
+    justify-content: space-between;
 }
 
 .card__forecast-day {
@@ -11,7 +15,6 @@
     font-size: 18px;
     margin: 20px 0 0 0;
 }
-
 
 .forecast-container {
     margin: 20px 5px 0 5px;
@@ -26,9 +29,8 @@
     letter-spacing: 1px;
     max-width: 100%;
     text-align: left;
-    margin-bottom: 10px!important;
+    margin-bottom: 10px !important;
 }
-
 
 .card__forecast-temperature {
     font-size: 20px;
@@ -36,26 +38,31 @@
     font-weight: 400;
     text-align: center;
 }
+
 @media only screen and (max-width: 830px) {
 
     .card__forecast {
-        width: 100%!important;
+        width: 100% !important;
         margin-top: 25px;
     }
 }
+
 @media only screen and (max-width: 500px) {
 
-    .card__forecast-day{
+    .card__forecast-day {
         font-size: 20px;
     }
-    .forecast-container canvas{
+
+    .forecast-container canvas {
 
         width: 80px;
     }
-    .card__forecast-temperature{
+
+    .card__forecast-temperature {
         font-size: 15px;
     }
-    .card__forecast-summary{
+
+    .card__forecast-summary {
         font-size: 16px;
     }
 }

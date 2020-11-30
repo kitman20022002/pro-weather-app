@@ -12,6 +12,7 @@ const SlideBarMenu = (props) => {
     if (props.open) {
         attachedClass = ['open', 'navigation__items']
     }
+
     return (
         <div>
             <Backdrop show={props.open} click={props.closed}/>

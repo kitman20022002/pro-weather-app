@@ -56,8 +56,9 @@ class DynamicWeather extends React.Component {
             'snow': this.spawnSnow,
             'clear-day': [this.spawnSun],
             'partly-cloudy-day': [this.spawnSun, this.spawnCloud],
+            'partly-cloudy-night': [this.spawnSun, this.spawnCloud],
             'cloudy': [this.spawnCloud],
-            'clear-night': [this.spawnSun,this.spawnCloud],
+            'clear-night': [this.spawnSun, this.spawnCloud],
             'rain': [this.spawnRain],
             'other': [this.spawnLightning],
             'wind': [this.spawnLeaves]
@@ -78,8 +79,6 @@ class DynamicWeather extends React.Component {
             return 'night';
         }
     }
-
-
 
 
     componentDidMount() {
@@ -135,17 +134,12 @@ class DynamicWeather extends React.Component {
     setConditionReady = () => {
         // stop spawning
         this.pause();
-
-        // clear flags
-        //spawnedClouds = false;
-
         // clear assets
         for (let i = 0, n = assets.length; i < n; i++) {
             assets.splice(i, 1);
             n--;
             i--;
         }
-
         // start spawning
         this.beginSpawning();
     };
@@ -176,8 +170,8 @@ class DynamicWeather extends React.Component {
 
     spawnCloud = () => {
         assets.push(new Cloud({x: -400}, canvas, context, 1, imageAssets));
-       assets.push(new Cloud({x: 700}, canvas, context, 1, imageAssets));
-       assets.push(new Cloud({x: 1400}, canvas, context, 1, imageAssets));
+        assets.push(new Cloud({x: 700}, canvas, context, 1, imageAssets));
+        assets.push(new Cloud({x: 1400}, canvas, context, 1, imageAssets));
     };
 
     spawnLeaves = () => {
@@ -193,12 +187,13 @@ class DynamicWeather extends React.Component {
 
     beginSpawning = () => {
         this.animate();
-        // const weather = this.weatherMapping[this.props.data.currently.icon];
-        // weather.map((item) => {
-        //     {
-        //         item()
-        //     }
-        // });
+        this.spawnCloud();
+        this.spawnSun();
+
+        const weather = this.weatherMapping[this.props.data.currently.icon];
+        for (let i = 0, n = weather.length; i < n; i++) {
+            weather[i]();
+        }
     };
 
     animate = () => {
