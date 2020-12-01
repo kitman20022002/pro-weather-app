@@ -29,8 +29,7 @@
     border: 2px solid white;
 }
 
-
-.form--default button{
+.form--default button {
     width: 100%;
     box-sizing: border-box;
     white-space: nowrap;
@@ -48,17 +47,17 @@
     position: relative;
 }
 
-.form--default button:hover{
+.form--default button:hover {
     background-color: rgb(125, 222, 21);
 }
 
-.form--default .form--group{
+.form--default .form--group {
     flex-shrink: 0;
     margin: 0;
     padding: 0 0 16px;
 }
 
-.form--default input.error-input{
+.form--default input.error-input {
     border: 2px solid #ff4d4f;
 }
 
@@ -70,16 +69,25 @@
     height: 15px;
     animation: spin 2s linear infinite;
     position: absolute;
-    left:120px;
-
+    left: 35%;
 }
 
-.form--default button:disabled{
+@media only screen and (max-width: 768px) {
+    .loader-a {
+        left: 30%;
+    }
+}
+
+.form--default button:disabled {
     background: #a0a0a0;
     cursor: no-drop;
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

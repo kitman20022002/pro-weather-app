@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Route, withRouter} from 'react-router-dom';
+import {Route, withRouter,Switch} from 'react-router-dom';
 import Weather from "./pages/Weather/Weather";
 import Settings from "./pages/Settings/Settings";
 import Logout from "./containers/Auth/Logout/Logout";
@@ -13,6 +13,7 @@ import SignUp from "./pages/SignUp/SignUp";
 import Reset from "./pages/Reset/Reset";
 import ProtectedRoute from "./routes/ProtectedRoute/ProtectedRoute";
 import Forgot from "./pages/Forgot/Forgot";
+import NotFound from "./pages/NotFound/NotFound";
 
 class App extends React.Component {
     //https://rawgit.com/darkskyapp/skycons/master/skycons.js
@@ -25,7 +26,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
+            <Switch>
                 <Route path="/" exact component={Login}/>
                 <Route path="/reset-password/:token" exact component={Reset}/>
                 <Route path="/forgot" exact component={Forgot}/>
@@ -34,7 +35,8 @@ class App extends React.Component {
                 <ProtectedRoute path="/settings" exact component={Settings}/>
                 <Route path="/logout" exact component={Logout}/>
                 <Route path="/login" component={Login}/>
-            </div>
+                <Route component={NotFound} />
+            </Switch>
         );
     }
 }
