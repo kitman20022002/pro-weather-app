@@ -1,5 +1,8 @@
 
 
+.login canvas{
+    z-index: 1;
+}
 
 .me{
     margin-top: 10px;

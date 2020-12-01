@@ -106,7 +106,7 @@ class SignUp extends React.Component {
         }
 
         return (
-            <div>
+            <div className={"sign-up"}>
                 {this.state.loading ? <img className={'background__img'}
                                            src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqFUoOzaBd_QpPk6HpTIOZZYXdqVUQJur72g&usqp=CAU'}
                                            alt={'bg'}/>
