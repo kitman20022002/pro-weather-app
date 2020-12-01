@@ -79,7 +79,7 @@ class SignUp extends React.Component {
 
     componentDidMount() {
         this.updateWindowDimensions();
-        window.addEventListener('resize', this.updateWindowDimensions);
+       window.addEventListener('resize', this.updateWindowDimensions);
     }
 
     componentWillUnmount() {
@@ -141,9 +141,6 @@ const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password, token) => dispatch(action.auth(email, password, true, token)),
         onSignUp: (email, password, city, token) => dispatch(action.signUp(email, password, city, true, token)),
-        // authFBSuccess: (user, email, images, firstName, lastName, ID, accessToken) => dispatch(action.socialFBAuth(user, email, images, firstName, lastName, ID, accessToken)),
-        // authGoogleSuccess: (user, email, images, firstName, lastName, ID, accessToken) => dispatch(action.socialGoogleAuth(user, email, images, firstName, lastName, ID, accessToken)),
-        // socialLogin: (user, userId, token) => dispatch(action.googleAuthLogin(user, userId, token)),
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
