@@ -94,7 +94,7 @@ class Login extends React.Component {
     };
 
     componentWillUnmount() {
-        window.removeEventListener('resize', this.updateWindowDimensions);
+       // window.removeEventListener('resize', this.updateWindowDimensions);
     }
 
     updateWindowDimensions() {

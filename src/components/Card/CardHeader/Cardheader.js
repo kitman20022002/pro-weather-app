@@ -19,7 +19,6 @@ class Cardheader extends React.Component {
     };
 
     render() {
-
         return (
             <section className="card__current" ref={this.getHeight}>
                 <DynamicWeather data={this.props.data} height={parseInt(this.state.elementHeight)}

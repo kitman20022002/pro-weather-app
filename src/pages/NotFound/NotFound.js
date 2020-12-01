@@ -3,10 +3,6 @@ import './NotFound.css';
 import {Link} from "react-router-dom";
 
 class NotFound extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div className="not-found">
@@ -18,7 +14,6 @@ class NotFound extends React.Component {
                     </div>
                     <div className="cont_aura_1"></div>
                     <div className="cont_aura_2"></div>
-
                 </div>
             </div>
         );

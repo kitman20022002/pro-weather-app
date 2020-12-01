@@ -6,6 +6,7 @@ import {deleteUser, updateUser, uploadImg} from '../../api/user';
 import Modal from "../../components/Modal/Modal";
 import {updateUserLocal} from "../../store/actions/auth";
 import * as actions from "../../store/actions";
+import FileUploader from "../FileUploader/FileUploader";
 
 class Account extends React.Component {
 
@@ -110,9 +111,7 @@ class Account extends React.Component {
                         </label>
                         <div className={"avatar-details__container"}>
                             <img src={this.state.profile_img} alt={"profile_img"}/>
-                            <input type="file" onChange={(e) => {
-                                this.uploadImg(e.target.files)
-                            }} name={"Upload"} multiple/>
+                            <FileUploader handleFile={(e) => {this.uploadImg(e.target.files)}}/>
                             <button type="button" className={"grey"}
                                     onClick={(e) => (this.removeProfileImg(e))}>Remove
                             </button>
