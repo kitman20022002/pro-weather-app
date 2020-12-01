@@ -2,6 +2,7 @@ import randomRange from "../Utility";
 
 let rainColor = 'rgba(255, 255, 255, .4)';
 
+
 class RainDrop {
     constructor(canvas, context) {
         this.type = 'rain_drop';

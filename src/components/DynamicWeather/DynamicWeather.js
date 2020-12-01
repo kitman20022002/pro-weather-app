@@ -86,7 +86,7 @@ class DynamicWeather extends React.Component {
 
         canvas = this.refs.canvas;
         context = canvas.getContext("2d");
-        canvas.className = "canvas " + time;
+        canvas.className = "canvas " + time + " fade-in";
 
         let self = this;
         this.preLoadImageAssets(function () {
