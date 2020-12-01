@@ -211,7 +211,7 @@ a:visited, a:focus, a:active, a {
 }
 
 @media only screen and (max-width: 425px) {
-    .Weather, .root, body {
+    .Weather, .root {
         min-height: 1600px;
     }
 }
