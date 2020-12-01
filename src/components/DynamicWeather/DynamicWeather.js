@@ -3,7 +3,7 @@ import React from "react";
 import './DynamicWeather.css';
 import Lightning from "./Lighting/Lighting";
 import randomRange from "./Utility";
-import RainDrop from "./Rain/RainDrop";
+import Rain from "./Rain/Rain";
 import SnowFlake from "./Snow/Snow";
 import Cloud from "./Cloud/Cloud";
 import BlowingLeaf from "./BlowingLeaf/BlowingLeaf";
@@ -158,7 +158,7 @@ class DynamicWeather extends React.Component {
 
     spawnRain = () => {
         timers.rain = setInterval(function () {
-            assets.push(new RainDrop(canvas, context));
+            assets.push(new Rain(canvas, context));
         }, 60);
     };
 
