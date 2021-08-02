@@ -1,16 +1,11 @@
-import React from "react";
-import ForecastItem from "./ForecastItem";
+import React from 'react';
+import ForecastItem from './ForecastItem';
 
-import "./Forecast.css"
+import './Forecast.css';
 
 const Forecast = (props) => {
-
-    const daily = props.data.daily.data.map((item,i) => <ForecastItem key={i} data={item}/>);
-    return (
-        <section className="card__forecast flex space-between flex-warp">
-            {daily}
-        </section>
-    );
+  const daily = props.data.daily.data.map((item, i) => <ForecastItem key={i} data={item} />);
+  return <section className="card__forecast flex space-between flex-warp">{daily}</section>;
 };
 
 export default Forecast;

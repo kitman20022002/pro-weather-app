@@ -1,7 +1,1 @@
-export {
-    auth,
-    logout,
-    authCheckState,
-    updateUserLocal,
-    signUp
-}from './auth';
+export { auth, logout, authCheckState, updateUserLocal, signUp } from './auth';
