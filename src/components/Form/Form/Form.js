@@ -1,8 +1,10 @@
 import React from 'react';
+import uuid from 'react-uuid';
+import { ReCaptcha } from 'react-recaptcha-google';
+import { connect } from 'react-redux';
 import Input from '../Input/Input';
 import './Form.css';
-import { connect } from 'react-redux';
-import { ReCaptcha } from 'react-recaptcha-google';
+import { reCaptcha } from '../../../config/config';
 
 class Form extends React.Component {
   constructor(props) {
@@ -21,11 +23,6 @@ class Form extends React.Component {
     if (this.captchaDemo) {
       this.captchaDemo.reset();
     }
-  }
-
-  verifyCallback(recaptchaToken) {
-    // Here you will get the final recaptchaToken!!!
-    this.setState({ validated: true, recaptchaToken });
   }
 
   onLoadRecaptcha() {
@@ -55,6 +52,7 @@ class Form extends React.Component {
 
     if (rules.isEmail) {
       const pattern =
+        // eslint-disable-next-line max-len
         /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
       if (!(pattern.test(value) && isValid)) {
         errorMsg = errorMessage.email;
@@ -83,16 +81,21 @@ class Form extends React.Component {
     e.preventDefault();
     let shouldSubmit = true;
     const formData = { ...data };
-    for (const dat in formData) {
-      const errorMsg = this.checkValidity(
-        data[dat].value,
-        data[dat].validation,
-        data[dat].errorMessage,
-      );
-      formData[dat].valid = errorMsg === '';
-      formData[dat].error = errorMsg;
-      if (errorMsg !== '') {
-        shouldSubmit = false;
+
+    const keys = Object.keys(formData);
+    const values = Object.values(formData);
+    for (let i = 0; i <= keys.length; i += 1) {
+      if (Object.prototype.hasOwnProperty.call(values, i)) {
+        const errorMsg = this.checkValidity(
+          data[i].value,
+          data[i].validation,
+          data[i].errorMessage,
+        );
+        formData[i].valid = errorMsg === '';
+        formData[i].error = errorMsg;
+        if (errorMsg !== '') {
+          shouldSubmit = false;
+        }
       }
     }
 
@@ -134,15 +137,20 @@ class Form extends React.Component {
     }
   };
 
+  verifyCallback(recaptchaToken) {
+    // Here you will get the final recaptchaToken!!!
+    this.setState({ validated: true, recaptchaToken });
+  }
+
   render() {
-    const { data } = this.state;
+    const { data, submitting } = this.state;
     const { error, validate, loading, btnText } = this.props;
     const loader = <div className="loader-a" />;
     return (
       <form className="form--default  flex flex__column" onSubmit={this.handleSubmit}>
-        {Object.keys(data).map((element, index) => (
+        {Object.keys(data).map((element) => (
           <Input
-            key={index}
+            key={uuid()}
             name={element}
             label={element.charAt(0).toUpperCase() + element.slice(1)}
             type={data[element].type}
@@ -165,7 +173,7 @@ class Form extends React.Component {
             size="normal"
             data-theme="dark"
             render="explicit"
-            sitekey="6LcKzbwUAAAAACf9O0wojDUqc0EM-r4RX-xqDR5E"
+            sitekey={reCaptcha.key}
             onloadCallback={this.onLoadRecaptcha}
             verifyCallback={this.verifyCallback}
           />
@@ -176,7 +184,7 @@ class Form extends React.Component {
           onClick={this.handleSubmit}
           disabled={loading}
         >
-          {loading && loader}
+          {(loading || submitting) && loader}
           {btnText}
         </button>
       </form>

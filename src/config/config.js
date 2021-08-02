@@ -6,4 +6,7 @@ module.exports = {
     key: process.env.STRIPE_PUBLISHABLE || 'pk_test_V4hYfcXXV57TJlvhg0WISalx00bvZQy7GL',
     backend_api: process.env.PAYMENT_SERVER_URL || 'https://shield-backend.herokuapp.com',
   },
+  reCaptcha: {
+    key: '6LcKzbwUAAAAACf9O0wojDUqc0EM-r4RX-xqDR5E',
+  },
 };
