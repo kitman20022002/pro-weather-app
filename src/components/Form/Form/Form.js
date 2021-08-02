@@ -8,7 +8,7 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: this.props.data,
+      data: props.data,
       validated: false,
       recaptchaToken: '',
       submitting: false,
