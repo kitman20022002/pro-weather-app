@@ -60,25 +60,12 @@ class DynamicWeather extends React.Component {
       other: [this.spawnLightning],
       wind: [this.spawnLeaves],
     };
-    this.state = { width: 0, height: 0 };
-  }
-
-  getShowTime(hours) {
-    hours = parseInt(hours);
-    if (hours === 6) {
-      return 'sunrise';
-    }
-    if (hours === 18) {
-      return 'sunset';
-    }
-    if (hours > 6 && hours < 18) {
-      return 'day';
-    }
-    return 'night';
   }
 
   componentDidMount() {
-    const time = this.getShowTime(moment.unix(this.props.data.currently.time).format('H'));
+    const { data } = this.props;
+
+    const time = this.getShowTime(moment.unix(data.currently.time).format('H'));
 
     canvas = this.refs.canvas;
     context = canvas.getContext('2d');
@@ -89,6 +76,20 @@ class DynamicWeather extends React.Component {
       self.setConditionReady();
     });
     self.setConditionReady();
+  }
+
+  getShowTime(hours) {
+    hours = parseInt(hours, 10);
+    if (hours === 6) {
+      return 'sunrise';
+    }
+    if (hours === 18) {
+      return 'sunset';
+    }
+    if (hours > 6 && hours < 18) {
+      return 'day';
+    }
+    return 'night';
   }
 
   preLoadImageAssets = (callback) => {
@@ -102,8 +103,8 @@ class DynamicWeather extends React.Component {
       return;
     }
 
-    const loadedHandler = function () {
-      imageAssetsLoadedCount++;
+    const loadedHandler = () => {
+      imageAssetsLoadedCount += 1;
       if (imageAssetsLoadedCount === imageAssetsCount) {
         imageAssetsLoaded = true;
         if (callback) {
@@ -114,7 +115,7 @@ class DynamicWeather extends React.Component {
 
     for (const imageAssetName in imageAssets) {
       const imageAsset = imageAssets[imageAssetName];
-      imageAssetsCount++;
+      imageAssetsCount += 1;
       imageAsset.image = new Image();
       imageAsset.image.onload = loadedHandler;
       imageAsset.image.src = imageAsset.fileName;
@@ -129,8 +130,8 @@ class DynamicWeather extends React.Component {
     // clear assets
     for (let i = 0, n = assets.length; i < n; i++) {
       assets.splice(i, 1);
-      n--;
-      i--;
+      n -= 1;
+      i -= 1;
     }
     // start spawning
     this.beginSpawning();
@@ -166,7 +167,7 @@ class DynamicWeather extends React.Component {
   };
 
   spawnLeaves = () => {
-    for (let i = 0, n = randomRange(0, 3); i < n; i++) {
+    for (let i = 0, n = randomRange(0, 3); i < n; i += 1) {
       assets.push(new BlowingLeaf(canvas, context, imageAssets, 1));
     }
     timers.wind = setTimeout(this.spawnLeaves, randomRange(500, 1500));
@@ -182,7 +183,7 @@ class DynamicWeather extends React.Component {
     this.spawnSun();
 
     const weather = this.weatherMapping[this.props.data.currently.icon];
-    for (let i = 0, n = weather.length; i < n; i++) {
+    for (let i = 0, n = weather.length; i < n; i += 1) {
       weather[i]();
     }
   };
@@ -191,11 +192,11 @@ class DynamicWeather extends React.Component {
     // clear
     context.clearRect(0, 0, canvas.width, canvas.height);
     // draw each asset, if false, remove particle from assets
-    for (let i = 0, n = assets.length; i < n; i++) {
+    for (let i = 0, n = assets.length; i < n; i += 1) {
       if (!assets[i].draw()) {
         assets.splice(i, 1);
-        n--;
-        i--;
+        n -= 1;
+        i -= 1;
       }
     }
 
@@ -203,14 +204,9 @@ class DynamicWeather extends React.Component {
   };
 
   render() {
+    const { width, height } = this.props;
     return (
-      <canvas
-        ref="canvas"
-        width={this.props.width}
-        height={this.props.height}
-        id="canvas"
-        className="canvas night"
-      />
+      <canvas ref="canvas" width={width} height={height} id="canvas" className="canvas night" />
     );
   }
 }

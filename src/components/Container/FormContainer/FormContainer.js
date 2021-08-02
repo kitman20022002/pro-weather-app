@@ -1,15 +1,17 @@
 import React from 'react';
 import './FormContainer.css';
 
-const FormContainer = (props) => (
-  <div className="form-container--outer">
-    <div className="form-container--default">
-      <div className="title-box">
-        <p>{props.text}</p>
+const FormContainer = (props) => {
+  const { text, children } = props;
+  return (
+    <div className="form-container--outer">
+      <div className="form-container--default">
+        <div className="title-box">
+          <p>{text}</p>
+        </div>
+        {children}
       </div>
-      {props.children}
     </div>
-  </div>
-);
-
+  );
+};
 export default FormContainer;

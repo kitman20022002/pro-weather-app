@@ -19,7 +19,6 @@ class Form extends React.Component {
 
   componentDidMount() {
     if (this.captchaDemo) {
-      console.log('started, just a second...');
       this.captchaDemo.reset();
     }
   }
@@ -35,7 +34,7 @@ class Form extends React.Component {
     }
   }
 
-  checkValidity(value, rules, errorMessage) {
+  checkValidity = (value, rules, errorMessage) => {
     let errorMsg = '';
     const isValid = true;
     if (!rules) {
@@ -76,17 +75,19 @@ class Form extends React.Component {
     }
 
     return errorMsg;
-  }
+  };
 
   handleSubmit = async (e) => {
+    const { data, validated, recaptchaToken } = this.state;
+    const { validate, formSubmit } = this.props;
     e.preventDefault();
     let shouldSubmit = true;
-    const formData = { ...this.state.data };
+    const formData = { ...data };
     for (const dat in formData) {
       const errorMsg = this.checkValidity(
-        this.state.data[dat].value,
-        this.state.data[dat].validation,
-        this.state.data[dat].errorMessage,
+        data[dat].value,
+        data[dat].validation,
+        data[dat].errorMessage,
       );
       formData[dat].valid = errorMsg === '';
       formData[dat].error = errorMsg;
@@ -96,21 +97,22 @@ class Form extends React.Component {
     }
 
     this.setState({ data: formData });
-    if (this.props.validate) {
-      if (shouldSubmit && this.state.validated) {
+    if (validate) {
+      if (shouldSubmit && validated) {
         this.setState({ submitting: true });
-        this.props.formSubmit(this.state.data, this.state.recaptchaToken);
+        formSubmit(data, recaptchaToken);
       }
     } else if (shouldSubmit) {
       this.setState({ submitting: true });
-      this.props.formSubmit(this.state.data, null);
+      formSubmit(data, null);
     }
     this.setState({ submitting: false });
   };
 
   onChange = (e) => {
+    const { data } = this.state;
     const updatedFormElement = {
-      ...this.state.data,
+      ...data,
     };
     updatedFormElement[e.target.name].value = e.target.value;
     updatedFormElement[e.target.name].valid = true;
@@ -133,29 +135,29 @@ class Form extends React.Component {
   };
 
   render() {
+    const { data } = this.state;
+    const { error, validate, loading, btnText } = this.props;
     const loader = <div className="loader-a" />;
     return (
       <form className="form--default  flex flex__column" onSubmit={this.handleSubmit}>
-        {Object.keys(this.state.data).map((element, index) => (
+        {Object.keys(data).map((element, index) => (
           <Input
             key={index}
             name={element}
             label={element.charAt(0).toUpperCase() + element.slice(1)}
-            type={this.state.data[element].type}
-            placeholder={this.state.data[element].elementConfig.placeholder}
-            value={this.state.data[element].value}
-            cssClass={this.state.data[element].cssClass}
-            valid={this.state.data[element].valid}
-            error={this.state.data[element].error}
+            type={data[element].type}
+            placeholder={data[element].elementConfig.placeholder}
+            value={data[element].value}
+            cssClass={data[element].cssClass}
+            valid={data[element].valid}
+            error={data[element].error}
             onChange={this.onChange}
           />
         ))}
-        {!!this.props.error && (
-          <p className="color--red error-message">
-            {this.getErrorMessage(this.props.error.request.status)}
-          </p>
+        {!!error && (
+          <p className="color--red error-message">{this.getErrorMessage(error.request.status)}</p>
         )}
-        {this.props.validate && (
+        {validate && (
           <ReCaptcha
             ref={(el) => {
               this.captchaDemo = el;
@@ -172,10 +174,10 @@ class Form extends React.Component {
           type="submit"
           className="submit-btn login-btn"
           onClick={this.handleSubmit}
-          disabled={this.props.loading}
+          disabled={loading}
         >
-          {this.props.loading && loader}
-          {this.props.btnText}
+          {loading && loader}
+          {btnText}
         </button>
       </form>
     );
