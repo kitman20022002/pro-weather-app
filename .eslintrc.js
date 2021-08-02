@@ -1,5 +1,5 @@
 module.exports = {
- extends: ['airbnb', 'prettier'],
+ extends: ['react-app','airbnb', 'prettier'],
  plugins: ['prettier'],
  parser: 'babel-eslint',
  parserOptions: {
