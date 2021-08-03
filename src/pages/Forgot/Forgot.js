@@ -38,12 +38,6 @@ class Forgot extends React.Component {
     this.loadDefaultData();
   }
 
-  async loadDefaultData() {
-    const result = await getWeather('sydney');
-    result.data.daily.data = result.data.daily.data.splice(0, 5);
-    this.setState({ data: result.data, loading: true, error: false });
-  }
-
   handleSubmitForgetMessage = async (data) => {
     try {
       const res = await forgotPassword({ email: data.email.value });
@@ -51,46 +45,44 @@ class Forgot extends React.Component {
         this.setState({ checkForget: true, error: false });
       }
     } catch (e) {
-      console.log(e);
       this.setState({ error: true });
     }
   };
 
+  async loadDefaultData() {
+    const result = await getWeather('sydney');
+    result.data.daily.data = result.data.daily.data.splice(0, 5);
+    this.setState({ data: result.data, loading: true, error: false });
+  }
+
   render() {
+    const { loading, data, checkForget, formData, error } = this.state;
     return (
       <div>
-        {this.state.loading ? (
+        {loading ? (
           <img
             className="background__img"
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqFUoOzaBd_QpPk6HpTIOZZYXdqVUQJur72g&usqp=CAU"
             alt="bg"
           />
         ) : (
-          <DynamicWeather data={this.state.data} height={parseInt(1080)} />
+          <DynamicWeather data={data} height={parseInt(1080, 10)} />
         )}
         <FormContainer text="Forgot Password">
           <div className="Signup-body">
-            {this.state.checkForget ? (
+            {checkForget ? (
               <p className="color--white">We have sent an email for you to reset your passwords</p>
             ) : (
-              <Form
-                data={this.state.formData}
-                formSubmit={this.handleSubmitForgetMessage}
-                btnText="Submit"
-              />
+              <Form data={formData} formSubmit={this.handleSubmitForgetMessage} btnText="Submit" />
             )}
-            {this.state.error ? (
-              <p className="color--white">Sorry we cannot find your email address</p>
-            ) : (
-              ''
-            )}
+            {error ? <p className="color--white">Sorry we cannot find your email address</p> : ''}
             <div className="login-fotpas">
               <Link to="/login" className="switchSignup">
-                Go back ->
+                Go back &gt
               </Link>
             </div>
             <div className="switchToSignup">
-              <p>Don't have an account ?</p>
+              <p>Don&apos;t have an account ?</p>
               <Link to="/sign-up" className="switchSignup">
                 <p>Sign Up</p>
               </Link>
