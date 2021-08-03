@@ -1,6 +1,10 @@
 ### Kit Weather App
 A app that can show you weather
 
+- [ ]  CI/CD
+- [ ]  Code Standard
+
+
 ## Prerequisites
 - Node
 
