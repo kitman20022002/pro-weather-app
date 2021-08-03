@@ -4,7 +4,7 @@ import '../../App.css';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import logo from '../../img/weather_small.png';
-import { updateUserLocal } from '../../store/actions/auth';
+import { updateUserLocal } from '../../store/actions';
 import Account from '../../components/Account/Account';
 import Payment from '../../components/Payment/Payment';
 
@@ -26,6 +26,7 @@ class Settings extends React.Component {
   }
 
   render() {
+    const { selectedScreen } = this.state;
     return (
       <div className="flex settings">
         <div className="logo-bar">
@@ -38,32 +39,32 @@ class Settings extends React.Component {
             <h1 className="center header--settings">Settings</h1>
             <ul>
               <li
-                className={this.state.selectedScreen === 'account' ? 'active' : ''}
+                className={selectedScreen === 'account' ? 'active' : ''}
                 onClick={() => this.setScreen('account')}
               >
                 Account
               </li>
               <li
-                className={this.state.selectedScreen === 'connect' ? 'active' : ''}
+                className={selectedScreen === 'connect' ? 'active' : ''}
                 onClick={() => this.setScreen('account')}
               >
                 Connected App
               </li>
               <li
-                className={this.state.selectedScreen === 'payment' ? 'active' : ''}
+                className={selectedScreen === 'payment' ? 'active' : ''}
                 onClick={() => this.setScreen('payment')}
               >
                 Billing
               </li>
               <li
-                className={this.state.selectedScreen === 'email' ? 'active' : ''}
+                className={selectedScreen === 'email' ? 'active' : ''}
                 onClick={() => this.setScreen('account')}
               >
                 Email Notification
               </li>
             </ul>
           </nav>
-          <div className="setting-main">{Screen[this.state.selectedScreen]}</div>
+          <div className="setting-main">{Screen[selectedScreen]}</div>
         </div>
       </div>
     );

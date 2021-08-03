@@ -2,24 +2,24 @@ import React from 'react';
 import './NotFound.css';
 import { Link } from 'react-router-dom';
 
-class NotFound extends React.Component {
-  render() {
-    return (
-      <div className="not-found">
-        <div className="cont_principal cont_error_active">
-          <div className="cont_error">
-            <h1>Oops</h1>
-            <p>The Page you're looking for isn't here.</p>
-            <Link to="/">
-              <button className="button--default">Return</button>
-            </Link>
-          </div>
-          <div className="cont_aura_1" />
-          <div className="cont_aura_2" />
+function NotFound() {
+  return (
+    <div className="not-found">
+      <div className="cont_principal cont_error_active">
+        <div className="cont_error">
+          <h1>Oops</h1>
+          <p>The Page you&apos;re looking for isn&apos;t here.</p>
+          <Link to="/">
+            <button type="button" className="button--default">
+              Return
+            </button>
+          </Link>
         </div>
+        <div className="cont_aura_1" />
+        <div className="cont_aura_2" />
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default NotFound;

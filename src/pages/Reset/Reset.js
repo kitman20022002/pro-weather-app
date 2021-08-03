@@ -44,17 +44,16 @@ class Reset extends React.Component {
         },
       },
       resetSuccess: false,
-      data: {},
-      loading: true,
       errorMessage: '',
     };
   }
 
   handleSubmitReset = async (data) => {
+    const { match } = this.props;
     try {
       const res = await resetPassword({
         password: data.password.value,
-        t: this.props.match.params.token,
+        t: match.params.token,
       });
 
       if (res) {
@@ -68,6 +67,7 @@ class Reset extends React.Component {
   };
 
   render() {
+    const { resetSuccess, errorMessage, formData } = this.state;
     return (
       <div>
         <img
@@ -76,16 +76,10 @@ class Reset extends React.Component {
           alt="bg"
         />
         <FormContainer text="Reset Password">
-          {!this.state.resetSuccess ? (
+          {!resetSuccess ? (
             <div className="Signup-body">
-              {this.state.errorMessage !== '' && (
-                <p className="color--red error-message">{this.state.errorMessage}</p>
-              )}
-              <Form
-                data={this.state.formData}
-                formSubmit={this.handleSubmitReset}
-                btnText="Confirm"
-              />
+              {errorMessage !== '' && <p className="color--red error-message">{errorMessage}</p>}
+              <Form data={formData} formSubmit={this.handleSubmitReset} btnText="Confirm" />
             </div>
           ) : (
             <div>
