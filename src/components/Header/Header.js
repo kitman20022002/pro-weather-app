@@ -7,9 +7,12 @@ import SlideBarMenu from '../Menu/SideMenu/SlideBarMenu';
 import './Header.css';
 
 class Header extends React.Component {
-  state = {
-    showSideMenu: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      showSideMenu: false,
+    };
+  }
 
   sideMenuHandler = () => {
     this.setState({ showSideMenu: false });
@@ -20,6 +23,8 @@ class Header extends React.Component {
   };
 
   render() {
+    const { searchPressCallback } = this.props;
+    const { showSideMenu } = this.state;
     return (
       <header className="align--center fade-down">
         <div className="flex-1 menu-container">
@@ -36,7 +41,7 @@ class Header extends React.Component {
         <div className="flex-1 search-container">
           <div className="search-box-container">
             <input
-              onKeyPress={this.props.searchPressCallback}
+              onKeyPress={searchPressCallback}
               className="search-box"
               type="text"
               placeholder="Search City. . ."
@@ -44,7 +49,7 @@ class Header extends React.Component {
             />
           </div>
         </div>
-        <SlideBarMenu open={this.state.showSideMenu} closed={this.sideMenuHandler} />
+        <SlideBarMenu open={showSideMenu} closed={this.sideMenuHandler} />
       </header>
     );
   }

@@ -19,9 +19,9 @@ class App extends React.Component {
   // https://rawgit.com/darkskyapp/skycons/master/skycons.js
   // https://codepen.io/Gerwinnz/pen/RVzrRG
   componentDidMount() {
+    const { onTryAutoSignup } = this.props;
     loadReCaptcha();
-    // this.props.onTryAutoSettings();
-    this.props.onTryAutoSignup();
+    onTryAutoSignup();
   }
 
   render() {

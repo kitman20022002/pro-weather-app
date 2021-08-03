@@ -1,26 +1,23 @@
 import React from 'react';
 
 class Input extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isToggleOn: true };
-  }
-
   render() {
-    const extraAtt = this.props.type === 'password' ? 'on' : 'off';
+    const { type, name, label, placeholder, valid, onChange, error } = this.props;
+    const { value, cssClass } = this.state;
+    const extraAtt = type === 'password' ? 'on' : 'off';
     return (
       <div className="flex flex__column form--group">
-        <label htmlFor={this.props.name}>{this.props.label}: </label>
+        <label htmlFor={name}>{label}: </label>
         <input
-          name={this.props.name}
-          type={this.props.type}
-          placeholder={this.props.placeholder}
-          value={this.state.value}
-          className={[this.state.cssClass, +!this.props.valid ? 'error-input' : ''].join(' ')}
-          onChange={this.props.onChange}
+          name={name}
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          className={[cssClass, +!valid ? 'error-input' : ''].join(' ')}
+          onChange={onChange}
           autoComplete={extraAtt}
         />
-        {!this.props.valid && <p className="color--red error-message">{this.props.error}</p>}
+        {!valid && <p className="color--red error-message">{error}</p>}
       </div>
     );
   }

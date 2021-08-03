@@ -85,11 +85,12 @@ class Login extends React.Component {
   async loadDefaultData() {
     const result = await getWeather('sydney');
     result.data.daily.data = result.data.daily.data.splice(0, 5);
-    this.setState({ data: result.data, loading: false, error: false });
+    this.setState({ data: result.data, loading: false });
   }
 
   handleSubmit = (data, token = null) => {
-    this.props.onAuth(data.email.value, data.password.value, token);
+    const { onAuth } = this.props;
+    onAuth(data.email.value, data.password.value, token);
   };
 
   componentWillUnmount() {
@@ -101,20 +102,19 @@ class Login extends React.Component {
   }
 
   render() {
-    if (this.props.isAuth) {
+    const { isAuth, authFailTimes, openModal } = this.props;
+    const { loading, width, height, data, formData } = this.state;
+
+    if (isAuth) {
       return <Redirect to="/dashboard" />;
     }
 
     return (
       <div className="login">
-        {this.state.loading ? (
+        {loading ? (
           ''
         ) : (
-          <DynamicWeather
-            data={this.state.data}
-            width={parseInt(this.state.width)}
-            height={parseInt(this.state.height)}
-          />
+          <DynamicWeather data={data} width={parseInt(width, 10)} height={parseInt(height, 10)} />
         )}
         <FormContainer text="Sign In">
           <div className="login-img__container">
@@ -122,18 +122,18 @@ class Login extends React.Component {
           </div>
           <div className="Signup-body">
             <Form
-              data={this.state.formData}
+              data={formData}
               formSubmit={this.handleSubmit}
               btnText="Login"
-              validate={this.props.authFailTimes > 2}
+              validate={authFailTimes > 2}
             />
-            <div className="login-fotpas" onClick={this.props.openModal}>
+            <div className="login-fotpas" onClick={openModal}>
               <Link to="/forgot" className="switchSignup">
                 Forgot Password?
               </Link>
             </div>
             <div className="switchToSignup">
-              <p>Don't have an account ?</p>
+              <p>Don&apost have an account ?</p>
               <Link to="/sign-up" className="switchSignup">
                 <p>Sign Up</p>
               </Link>

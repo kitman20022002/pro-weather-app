@@ -5,7 +5,8 @@ import Backdrop from '../Backdrop/Backdrop';
 
 class Modal extends React.Component {
   componentDidMount() {
-    if (this.props.show) {
+    const { show } = this.props;
+    if (show) {
       document.body.style.overflow = 'hidden';
     }
   }
@@ -14,24 +15,24 @@ class Modal extends React.Component {
     document.body.style.overflow = 'unset';
   }
 
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
-    return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
+  shouldComponentUpdate(nextProps) {
+    const { show, children } = this.props;
+    return nextProps.show !== show || nextProps.children !== children;
   }
 
-  componentWillUpdate(nextProps, nextState, nextContext) {}
-
   render() {
+    const { show, modalClosed, children } = this.props;
     return (
       <>
-        <Backdrop show={this.props.show} click={this.props.modalClosed} />
+        <Backdrop show={show} click={modalClosed} />
         <div
           className={`Modal ${this.props.class}`}
           style={{
-            transform: this.props.show ? 'translateY(0)' : 'translateY(-200vh)',
-            opacity: this.props.show ? '1' : 0,
+            transform: show ? 'translateY(0)' : 'translateY(-200vh)',
+            opacity: show ? '1' : 0,
           }}
         >
-          {this.props.children}
+          {children}
         </div>
       </>
     );

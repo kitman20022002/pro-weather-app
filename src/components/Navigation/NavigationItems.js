@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 
 class NavigationItems extends React.Component {
   logout = () => {
-    this.props.onLogout();
+    const { onLogout } = this.props;
+    onLogout();
   };
 
   render() {

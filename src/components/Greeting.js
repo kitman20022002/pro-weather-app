@@ -14,7 +14,12 @@ class Greeting extends React.Component {
   }
 
   render() {
-    return <button onClick={this.printMessage}>{this.state.isToggleOn ? 'ON' : 'OFF'}</button>;
+    const { isToggleOn } = this.state;
+    return (
+      <button type="button" onClick={this.printMessage}>
+        {isToggleOn ? 'ON' : 'OFF'}
+      </button>
+    );
   }
 }
 

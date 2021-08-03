@@ -5,7 +5,8 @@ import * as actions from '../../../store/actions/index';
 
 class Logout extends React.Component {
   componentDidMount() {
-    this.props.onLogout();
+    const { onLogout } = this.props;
+    onLogout();
   }
 
   render() {

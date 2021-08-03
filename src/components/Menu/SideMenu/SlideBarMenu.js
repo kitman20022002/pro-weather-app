@@ -2,31 +2,28 @@ import React from 'react';
 import '../../../Animation.css';
 import './SlideBarMenu.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons/index';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
 import NavigationItems from '../../Navigation/NavigationItems';
 import Backdrop from '../../Backdrop/Backdrop';
 
 const SlideBarMenu = (props) => {
+  const { open, closed, profileImg, profileName } = props;
   let attachedClass = ['close', 'navigation__items'];
-  if (props.open) {
+  if (open) {
     attachedClass = ['open', 'navigation__items'];
   }
 
   return (
     <div>
-      <Backdrop show={props.open} click={props.closed} />
+      <Backdrop show={open} click={closed} />
       <nav className={attachedClass.join(' ')}>
         <div className="nav__profile flex align--center">
-          <img src={props.profileImg} alt="profile-img" />
-          <h3>{props.profileName}</h3>
+          <img src={profileImg} alt="profile-img" />
+          <h3>{profileName}</h3>
         </div>
         <NavigationItems />
-        <FontAwesomeIcon
-          onClick={props.closed}
-          icon={faTimes}
-          className="card__nav-close color--white"
-        />
+        <FontAwesomeIcon onClick={closed} icon={faTimes} className="card__nav-close color--white" />
       </nav>
     </div>
   );
