@@ -87,12 +87,12 @@ class Form extends React.Component {
     for (let i = 0; i <= keys.length; i += 1) {
       if (Object.prototype.hasOwnProperty.call(values, i)) {
         const errorMsg = this.checkValidity(
-          data[i].value,
-          data[i].validation,
-          data[i].errorMessage,
+          data[keys[i]].value,
+          data[keys[i]].validation,
+          data[keys[i]].errorMessage,
         );
-        formData[i].valid = errorMsg === '';
-        formData[i].error = errorMsg;
+        formData[keys[i]].valid = errorMsg === '';
+        formData[keys[i]].error = errorMsg;
         if (errorMsg !== '') {
           shouldSubmit = false;
         }
@@ -150,7 +150,7 @@ class Form extends React.Component {
       <form className="form--default  flex flex__column" onSubmit={this.handleSubmit}>
         {Object.keys(data).map((element) => (
           <Input
-            key={uuid()}
+            key={element}
             name={element}
             label={element.charAt(0).toUpperCase() + element.slice(1)}
             type={data[element].type}

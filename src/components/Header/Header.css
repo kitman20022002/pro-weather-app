@@ -3,7 +3,7 @@ header {
     position: absolute;
     top: 0;
     width: 100%;
-    height: 40px;
+    height: 50px;
     display: flex;
 }
 
@@ -52,9 +52,9 @@ header h3 {
     content: "";
     background: white;
     width: 4px;
-    height: 12px;
+    height: 15px;
     position: absolute;
-    top: 31px;
+    top: 38px;
     right: 27px;
     transform: rotate(135deg);
 }
@@ -65,7 +65,7 @@ header h3 {
     background: transparent;
     width: 5px;
     height: 5px;
-    padding: 5px;
+    padding: 10px;
     border: solid 3px white;
     outline: none;
     border-radius: 35px;
